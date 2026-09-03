@@ -1,0 +1,14 @@
+{
+  "000990_2025_business_report": {
+    "source_file_hash": "1723b3f653d2000b7a831bef8dc703ee",
+    "indexed_at": "2026-09-02T09:27:45.216185"
+  },
+  "000990_2025_governance_report": {
+    "source_file_hash": "5437fe8ad3d72b7a76ad4c7f56cde1d6",
+    "indexed_at": "2026-09-02T09:28:49.029654"
+  },
+  "000990_2025_sustainability_report": {
+    "source_file_hash": "336bf16239808e1a26a02d364470c2b5",
+    "indexed_at": "2026-09-02T09:44:33.445624"
+  }
+}
