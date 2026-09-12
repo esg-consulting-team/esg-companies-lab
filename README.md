@@ -17,3 +17,22 @@ Docs/                 # 기획서, WBS 등 팀 공용 문서 (+ 팀원별 개인
 - `Docs`: 기획서, WBS, 등급표 등 팀 공용 문서.
 
 추후 회차가 진행되며 각 폴더에 작업물이 계속 추가될 예정입니다.
+
+## 작업 방식 (Workflow)
+
+1. 작업 시작 전 `main`을 최신화합니다.
+   ```
+   git checkout main
+   git pull
+   ```
+2. 본인 작업 내용에 맞는 새 브랜치를 만듭니다. (`main`에서 직접 작업/커밋하지 않습니다)
+   ```
+   git checkout -b <prefix>/<작업-내용>
+   ```
+3. 작업 후 커밋합니다. **커밋 메시지에 AI 도구가 자동으로 붙이는 attribution(예: `Co-Authored-By: Claude`, `Claude-Session:` 등 AI 관련 트레일러)을 포함하지 않습니다.** AI 코딩 도구를 사용했다면 커밋 전에 해당 트레일러를 제거하고 커밋해 주세요.
+4. 브랜치를 push하고, `main`을 대상으로 PR을 생성해 병합합니다.
+   ```
+   git push -u origin <브랜치명>
+   ```
+
+AI 코딩 어시스턴트(Claude Code 등)를 사용하는 경우 저장소 루트의 `CLAUDE.md`를 참고하세요.
