@@ -12,7 +12,9 @@
 Docs/                 # 기획서, WBS 등 팀 공용 문서 (+ 팀원별 개인 문서 하위폴더)
 ```
 
-- `1stEDA` ~ `4thEDA`: 회차별 EDA(탐색적 데이터 분석) 결과물. 3rd/4thEDA는 향후 작업이 채워질 폴더입니다.
+- `1stEDA` ~ `4thEDA`: 회차별 EDA(탐색적 데이터 분석) 결과물.
+  - `3rdEDA`: 채점표 문항과 ESG 등급 간의 상관관계 검증 (작업: fastsloth226, hewonjin)
+  - `4thEDA`: 컨설팅 고객 세그먼트 기준 확정 및 컨설팅 대상 기업 선정 (작업: hyc6028, minjukim22, hewonjin)
 - `1stRAG`: ESG 채점을 위한 RAG 파이프라인 관련 작업(파싱, 인덱싱, 채점 모델 등).
 - `Docs`: 기획서, WBS, 등급표 등 팀 공용 문서.
 
