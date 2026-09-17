@@ -106,48 +106,89 @@ export default function L3ItemDetail() {
               </div>
             )}
 
-            <div className="field-block">
-              <div className="field-label">확인근거</div>
-              <div className="field-body">
-                {detail.evidence.confirmed_basis || "확인된 근거 텍스트가 없습니다."}
-              </div>
-              {detail.evidence.reference_pages && (
-                <div style={{ fontSize: 11.5, color: "var(--ink-3)", marginTop: 6 }}>
-                  근거페이지: {detail.evidence.reference_pages}
-                </div>
-              )}
-            </div>
-
-            {detail.evidence.deduction_note && (
+            {detail.narrative ? (
               <div className="field-block">
-                <div className="field-label">감점사유 / 검수 메모</div>
-                <div className="field-body">{detail.evidence.deduction_note}</div>
+                <div className="field-label">진단 결과 서술</div>
+                {detail.narrative.fulfilled_level_text && (
+                  <div className="narrative-fulfilled">{detail.narrative.fulfilled_level_text}</div>
+                )}
+                <div className="narrative-grid">
+                  <div>
+                    <div className="narrative-card-label">현황</div>
+                    <div className="field-body" style={{ fontSize: 12.5 }}>
+                      {detail.narrative.status || "—"}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="narrative-card-label">개선방향</div>
+                    <div className="field-body" style={{ fontSize: 12.5 }}>
+                      {detail.narrative.improvement || "—"}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="narrative-card-label">후속액션</div>
+                    <div className="field-body" style={{ fontSize: 12.5 }}>
+                      {detail.narrative.followup || "—"}
+                    </div>
+                  </div>
+                </div>
+                {detail.narrative.benchmark_case && (
+                  <details style={{ marginTop: 14 }}>
+                    <summary style={{ cursor: "pointer", fontSize: 12.5, color: "var(--navy)" }}>
+                      벤치마킹 사례 비교 보기
+                    </summary>
+                    <div className="field-body" style={{ fontSize: 12.5, marginTop: 8 }}>
+                      {detail.narrative.benchmark_case}
+                    </div>
+                  </details>
+                )}
               </div>
-            )}
+            ) : (
+              <>
+                <div className="field-block">
+                  <div className="field-label">확인근거</div>
+                  <div className="field-body">
+                    {detail.evidence.confirmed_basis || "확인된 근거 텍스트가 없습니다."}
+                  </div>
+                  {detail.evidence.reference_pages && (
+                    <div style={{ fontSize: 11.5, color: "var(--ink-3)", marginTop: 6 }}>
+                      근거페이지: {detail.evidence.reference_pages}
+                    </div>
+                  )}
+                </div>
 
-            <div className="field-block">
-              <div className="field-label">해결방안</div>
-              <div className="solution-grid">
-                <div>
-                  <div className="solution-col-label">현재 문제점</div>
-                  <div className="field-body" style={{ fontSize: 12.5 }}>
-                    {detail.solution.current_problem || "—"}
+                {detail.evidence.deduction_note && (
+                  <div className="field-block">
+                    <div className="field-label">감점사유 / 검수 메모</div>
+                    <div className="field-body">{detail.evidence.deduction_note}</div>
+                  </div>
+                )}
+
+                <div className="field-block">
+                  <div className="field-label">해결방안</div>
+                  <div className="solution-grid">
+                    <div>
+                      <div className="solution-col-label">현재 문제점</div>
+                      <div className="field-body" style={{ fontSize: 12.5 }}>
+                        {detail.solution.current_problem || "—"}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="solution-col-label">개선방향</div>
+                      <div className="field-body" style={{ fontSize: 12.5 }}>
+                        {detail.solution.direction || "—"}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="solution-col-label">필요 근거</div>
+                      <div className="field-body" style={{ fontSize: 12.5 }}>
+                        {detail.solution.required_evidence || "—"}
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div>
-                  <div className="solution-col-label">개선방향</div>
-                  <div className="field-body" style={{ fontSize: 12.5 }}>
-                    {detail.solution.direction || "—"}
-                  </div>
-                </div>
-                <div>
-                  <div className="solution-col-label">필요 근거</div>
-                  <div className="field-body" style={{ fontSize: 12.5 }}>
-                    {detail.solution.required_evidence || "—"}
-                  </div>
-                </div>
-              </div>
-            </div>
+              </>
+            )}
 
             {detail.audit_question && (
               <div className="field-block">

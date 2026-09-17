@@ -331,6 +331,10 @@ button {
   padding: 1px 7px;
   border: 1px solid transparent;
 }
+.urgency-tag-wrap {
+  display: inline-flex;
+  align-items: center;
+}
 .urgency-tag.u-즉시 {
   color: var(--crit);
   background: var(--crit-bg);
@@ -879,6 +883,259 @@ table.plain tbody tr:hover {
   margin-bottom: 16px;
 }
 
+/* ---------- Tooltip ---------- */
+
+.tooltip-wrap {
+  position: relative;
+  display: inline-block;
+  cursor: help;
+  border-bottom: 1px dotted var(--ink-3);
+}
+.tooltip-bubble {
+  position: absolute;
+  z-index: 20;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 11.5px;
+  line-height: 1.5;
+  padding: 8px 10px;
+  white-space: pre-line;
+  pointer-events: none;
+}
+.tooltip-bubble::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--ink);
+}
+
+/* ---------- Urgency help popover ---------- */
+
+.urgency-help {
+  position: relative;
+  display: inline-block;
+  margin-left: 4px;
+}
+.urgency-help-btn {
+  width: 15px;
+  height: 15px;
+  border-radius: 999px;
+  border: 1px solid var(--ink-3);
+  background: var(--paper);
+  color: var(--ink-3);
+  font-size: 10px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+.urgency-help-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 19;
+}
+.urgency-help-popover {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 280px;
+  background: var(--paper);
+  border: 1px solid var(--rule-mid);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  padding: 10px 12px;
+  font-size: 12px;
+}
+.urgency-help-title {
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.urgency-help-body {
+  color: var(--ink-2);
+  white-space: pre-line;
+  line-height: 1.6;
+}
+
+/* ---------- E/S/G mini chips ---------- */
+
+.mini-egs {
+  display: inline-flex;
+  gap: 4px;
+  margin-left: 8px;
+}
+.mini-chip {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9.5px;
+  padding: 1px 5px;
+  border: 1px solid var(--rule-mid);
+  color: var(--ink-2);
+}
+.mini-chip-s {
+  color: var(--ink-3);
+  background: var(--shell);
+}
+
+/* ---------- Donut gauge (L1 KPI①) ---------- */
+
+.donut-gauge {
+  position: relative;
+  display: inline-block;
+}
+.donut-gauge-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Noto Serif KR", serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+/* ---------- Urgency donut (L1 Exhibit4) ---------- */
+
+.urgency-donut {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.urgency-donut-chart {
+  position: relative;
+}
+.urgency-donut-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 13px;
+  font-weight: 600;
+}
+.urgency-donut-legend-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  padding: 3px 0;
+}
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+}
+
+/* ---------- Grade matrix (Exhibit2 redesign) ---------- */
+
+.grade-matrix th.year-header {
+  text-align: center;
+  border-bottom: 1px solid var(--rule);
+}
+.grade-matrix th.sub-overall {
+  font-weight: 600;
+}
+.grade-matrix th.sub-esg {
+  font-weight: 400;
+  color: var(--ink-3);
+  font-size: 10.5px;
+}
+.grade-matrix td.cell-overall {
+  font-size: 14px;
+}
+.grade-matrix td.cell-esg {
+  font-size: 10.5px;
+  color: var(--ink-3);
+}
+.grade-matrix td.cell-esg.cell-s {
+  background: var(--shell);
+}
+
+/* ---------- Exhibit scroll + sticky footer total ---------- */
+
+.exhibit-scroll {
+  max-height: 420px;
+  overflow-y: auto;
+}
+.exhibit-scroll table.plain tfoot td {
+  position: sticky;
+  bottom: 0;
+  background: var(--paper);
+}
+
+/* ---------- Benchmark company cards (L4) ---------- */
+
+.benchmark-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+.benchmark-card {
+  border: 1px solid var(--rule-mid);
+  padding: 10px 12px;
+  cursor: help;
+}
+.benchmark-card-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  font-weight: 600;
+}
+.benchmark-card-industry {
+  font-size: 10.5px;
+  color: var(--ink-3);
+  margin: 4px 0;
+  white-space: pre-line;
+}
+
+/* ---------- L3 narrative cards ---------- */
+
+.narrative-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.narrative-card-label {
+  font-size: 11px;
+  color: var(--ink-3);
+  margin-bottom: 6px;
+}
+.narrative-fulfilled {
+  font-size: 12px;
+  color: var(--ink-2);
+  margin-bottom: 10px;
+  white-space: pre-line;
+}
+
+/* ---------- L5 roadmap plan badges ---------- */
+
+.plan-stage-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0 6px;
+  border-bottom: 1px solid var(--rule);
+  font-family: "Noto Serif KR", serif;
+  font-weight: 600;
+}
+.plan-task-row {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 12.5px;
+}
+.plan-task-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.plan-task-deliverables {
+  color: var(--ink-3);
+  font-size: 11.5px;
+  margin-top: 3px;
+}
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1080px) {
@@ -923,7 +1180,8 @@ table.plain tbody tr:hover {
   .solution-grid,
   .exhibit-grid-2,
   .axis-row,
-  .report-layout {
+  .report-layout,
+  .narrative-grid {
     grid-template-columns: 1fr;
   }
   .gantt-row,

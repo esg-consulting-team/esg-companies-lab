@@ -103,7 +103,7 @@ export default function L2DomainDiagnosis() {
           number={6}
           title={`${data.label} 항목 히트맵`}
           subtitle={`${data.items.length}개 항목 · 득점 ${data.achieved.toFixed(0)} / ${data.max_possible.toFixed(0)}. 0점 항목은 배경을 강조 표시합니다.`}
-          source="esg_diagnosis · 셀 클릭 시 항목 상세로 이동"
+          source="2026년 채점 결과 기준 · 셀 클릭 시 항목 상세로 이동"
         >
           {filteredItems.length === 0 ? (
             <div className="empty-state">조건에 맞는 항목이 없습니다.</div>

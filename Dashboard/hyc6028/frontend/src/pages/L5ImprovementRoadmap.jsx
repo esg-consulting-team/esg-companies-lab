@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { api } from "../api/client";
+import { UrgencyTag } from "../components/Badges";
 import ExhibitCard from "../components/ExhibitCard";
+import Tooltip from "../components/Tooltip";
 import { useCompany } from "../state/CompanyContext";
 
 const TIMELINE_START = new Date(2026, 0, 1);
@@ -136,7 +138,7 @@ function Simulator({ company, tasks }) {
     <div className="exhibit">
       <div className="exhibit-title serif">점수 시뮬레이터</div>
       <div className="exhibit-subtitle">
-        과제를 선택하면 서버에서 총점·달성률·예산·기간을 다시 계산합니다. (F4-04)
+        과제를 선택하면 서버에서 총점·달성률·예산·기간을 다시 계산합니다. (F4-04) · 예상치
       </div>
       <hr className="exhibit-rule" />
       <div>
@@ -176,6 +178,69 @@ function Simulator({ company, tasks }) {
   );
 }
 
+function codeBreakdownText(codeUrgencies) {
+  if (!codeUrgencies || codeUrgencies.length === 0) return "연결된 채점 항목 없음";
+  return codeUrgencies.map((c) => `${c.code}(${c.urgency})`).join(" · ");
+}
+
+function RoadmapPlanStages({ company }) {
+  const [plan, setPlan] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!company) return;
+    setPlan(null);
+    setError(null);
+    api
+      .roadmapPlan(company)
+      .then(setPlan)
+      .catch((err) => setError(err.message));
+  }, [company]);
+
+  return (
+    <ExhibitCard
+      number={11}
+      title="단계별 로드맵 과제"
+      subtitle="과제 배지는 연결된 항목들 중 가장 시급한 단계를 보여줍니다. 배지에 마우스를 올리면 항목별 시급성을 볼 수 있습니다."
+      source="컨설팅보고서 로드맵 원문 + 2026년 채점 결과의 시급성 조인"
+    >
+      {error && <div className="empty-note">불러오기 실패: {error}</div>}
+      {!plan && !error && <div className="loading">불러오는 중…</div>}
+      {plan && (
+        <div>
+          {plan.stages.map((stage) => (
+            <div key={stage.stage_no}>
+              <div className="plan-stage-header">
+                {stage.year && <span className="mono">{stage.year}</span>}
+                <span>
+                  {stage.stage_no}단계 · {stage.stage_name}
+                </span>
+                {stage.urgency_level && <UrgencyTag urgency={stage.urgency_level.split("~")[0]} withHelp={false} />}
+              </div>
+              {stage.tasks.map((t, i) => (
+                <div className="plan-task-row" key={i}>
+                  <div className="plan-task-name">
+                    {t.worst_urgency && (
+                      <Tooltip content={codeBreakdownText(t.code_urgencies)}>
+                        <UrgencyTag urgency={t.worst_urgency} withHelp={false} />
+                      </Tooltip>
+                    )}
+                    <span>{t.task_name}</span>
+                  </div>
+                  <div className="plan-task-deliverables">
+                    산출물: {t.deliverables || "—"} · 연결 항목:{" "}
+                    {t.related_item_codes.join(", ") || "—"}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
+    </ExhibitCard>
+  );
+}
+
 export default function L5ImprovementRoadmap() {
   const { company } = useCompany();
   const [roadmap, setRoadmap] = useState(null);
@@ -197,6 +262,8 @@ export default function L5ImprovementRoadmap() {
 
   return (
     <div>
+      <RoadmapPlanStages company={company} />
+
       <ExhibitCard
         number={12}
         title="4개년 실행 로드맵"
@@ -205,7 +272,11 @@ export default function L5ImprovementRoadmap() {
             ? `즉시/중기/장기 과제 ${roadmap.tasks.length}건 · 합계 예상 +${gain.toFixed(0)}점`
             : `큐레이션된 일정·비용 데이터가 없어 실데이터(시급성·손실점수) 기준으로 자동 구성했습니다 · 합계 예상 +${gain.toFixed(0)}점`
         }
-        source={roadmap.has_curated_data ? "roadmap_tasks (컨설턴트 큐레이션)" : "esg_diagnosis 자동 추출 · 예상치"}
+        source={
+          roadmap.has_curated_data
+            ? "컨설턴트가 큐레이션한 실행 일정·비용 계획"
+            : "2026년 채점 결과 기준 자동 구성 · 예상치"
+        }
       >
         <Gantt tasks={roadmap.tasks} />
       </ExhibitCard>
@@ -214,7 +285,7 @@ export default function L5ImprovementRoadmap() {
         number={13}
         title="ROI 우선순위"
         subtitle="점당 비용 = 예산 ÷ 예상 상승점. 낮을수록 효율이 높습니다."
-        source="roadmap_tasks (비용 등록된 과제만)"
+        source="비용이 등록된 과제만 집계"
       >
         <RoiTable rows={roi} />
       </ExhibitCard>

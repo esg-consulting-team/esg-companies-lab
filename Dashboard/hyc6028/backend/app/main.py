@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import get_settings
-from app.routers import comparison, companies, dashboard, documents, domains, items, reports, roadmap
+from app.routers import comparison, companies, dashboard, documents, domains, enrichment, items, reports, roadmap
 
 settings = get_settings()
 
@@ -24,6 +24,7 @@ app.include_router(comparison.router)
 app.include_router(roadmap.router)
 app.include_router(documents.router)
 app.include_router(reports.router)
+app.include_router(enrichment.router)
 
 
 @app.get("/api/health")

@@ -1,3 +1,5 @@
+import UrgencyHelp from "./UrgencyHelp";
+
 export function GradeChip({ grade }) {
   if (!grade) return <span className="grade-chip grade-mid mono">미확인</span>;
   const cls = ["A", "A+"].includes(grade)
@@ -13,9 +15,14 @@ export function EvidenceBadge({ level }) {
   return <span className={`evidence-badge ev-${safe}`}>{safe}</span>;
 }
 
-export function UrgencyTag({ urgency }) {
+export function UrgencyTag({ urgency, withHelp = true }) {
   if (!urgency) return null;
-  return <span className={`urgency-tag u-${urgency}`}>{urgency}</span>;
+  return (
+    <span className="urgency-tag-wrap">
+      <span className={`urgency-tag u-${urgency}`}>{urgency}</span>
+      {withHelp && <UrgencyHelp level={urgency} />}
+    </span>
+  );
 }
 
 export function ProvisionalBadge() {

@@ -45,10 +45,11 @@ test.describe("L2 영역별 진단", () => {
 });
 
 test.describe("L3 항목 상세", () => {
-  test("항목 헤더와 해결방안 3분할이 보인다", async ({ page }) => {
+  test("항목 헤더와 해결방안(또는 서술형 narrative) 블록이 보인다", async ({ page }) => {
     await page.goto("/l3");
     await expect(page.locator(".item-header")).toBeVisible({ timeout: 15000 });
-    await expect(page.getByText("해결방안")).toBeVisible();
+    // narrative 데이터가 있는 항목은 "진단 결과 서술" 3분할 카드로, 없으면 기존 "해결방안" 3분할로 표시된다.
+    await expect(page.getByText(/진단 결과 서술|해결방안/).first()).toBeVisible();
   });
 });
 

@@ -29,7 +29,7 @@ export default function L6EvidenceDataRoom() {
         number={14}
         title={data.documents.length > 0 ? "적재 문서 현황" : "적재 문서 없음"}
         subtitle="파싱 완료 문서만 챗봇 검색 대상에 포함됩니다."
-        source="documents · 등록된 회사만 표시"
+        source="증빙 데이터룸 등록 현황 · 등록된 회사만 표시"
       >
         {data.documents.length === 0 ? (
           <div className="empty-note">이 회사에 대해 등록된 문서가 없습니다.</div>
@@ -65,7 +65,7 @@ export default function L6EvidenceDataRoom() {
         number={15}
         title="데이터 갭 리스트"
         subtitle="근거가 불충분·부분적인 항목의 필요 증빙을 항목별로 역집계했습니다."
-        source="esg_diagnosis 해결방안 필드에서 자동 추출"
+        source="2026년 채점 결과의 해결방안 필드에서 자동 추출"
       >
         {data.data_gaps.length === 0 ? (
           <div className="empty-note">모든 항목의 근거가 충분합니다.</div>

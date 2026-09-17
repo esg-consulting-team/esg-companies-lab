@@ -30,6 +30,14 @@ export const api = {
   simulate: (company, taskIds) =>
     postJson(`/api/companies/${encodeURIComponent(company)}/simulations`, { task_ids: taskIds }),
   documents: (company) => request(`/api/companies/${encodeURIComponent(company)}/documents`),
+  profile: (company) => request(`/api/companies/${encodeURIComponent(company)}/profile`),
+  disclosureDeadline: (company) =>
+    request(`/api/companies/${encodeURIComponent(company)}/disclosure-deadline`),
+  benchmarkCompanies: (company) =>
+    request(`/api/companies/${encodeURIComponent(company)}/benchmark-companies`),
+  urgencyCriteria: (company) =>
+    request(`/api/companies/${encodeURIComponent(company)}/urgency-criteria`),
+  roadmapPlan: (company) => request(`/api/companies/${encodeURIComponent(company)}/roadmap-plan`),
   reportConfig: (company) => request(`/api/companies/${encodeURIComponent(company)}/report/config`),
   exportReport: async (company, format, sectionNos) => {
     const res = await fetch(

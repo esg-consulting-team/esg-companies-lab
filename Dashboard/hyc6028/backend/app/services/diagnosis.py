@@ -8,14 +8,15 @@ from app.schemas import (
     DomainSummary,
     EvidenceBlock,
     GapItem,
-    GradeTrendRow,
     ImmediateTask,
     ItemDetail,
     ItemHeatCell,
     KpiSummary,
+    NarrativeBlock,
     SolutionBlock,
     UrgencyCounts,
 )
+from app.services import enrichment
 
 DOMAIN_LABELS = {
     "disclosure": "정보공시",
@@ -164,7 +165,7 @@ def build_dashboard_summary(company: str) -> DashboardSummary | None:
         if u in urgency_counts:
             urgency_counts[u] += 1
 
-    immediate = [r for r in ranked_by_loss if r.get("urgency") == "즉시"][:5]
+    immediate = [r for r in ranked_by_loss if r.get("urgency") == "즉시"]
     immediate_tasks = []
     for r in immediate:
         sol = parse_solution(r.get("solution"))
@@ -183,24 +184,8 @@ def build_dashboard_summary(company: str) -> DashboardSummary | None:
     meta_row = meta_res.data[0] if meta_res.data else {"company": company}
     company_meta = CompanyMeta(**meta_row)
 
-    grade_res = (
-        supabase.table("kcgs_grades").select("*").eq("company", company).order("year").execute()
-    )
-    grade_trend: list[GradeTrendRow] = []
-    official_grade = None
-    if grade_res.data:
-        grades = {str(r["year"]): r["grade"] for r in grade_res.data}
-        grade_trend.append(GradeTrendRow(alias="자사", self_company=True, grades=grades))
-        official_grade = grade_res.data[-1]["grade"]
-
-        bench_grade_res = (
-            supabase.table("benchmark_grades").select("*").eq("company", company).execute()
-        )
-        by_alias: dict[str, dict[str, str]] = {}
-        for r in bench_grade_res.data or []:
-            by_alias.setdefault(r["alias"], {})[str(r["year"])] = r["grade"]
-        for alias, g in sorted(by_alias.items()):
-            grade_trend.append(GradeTrendRow(alias=alias, self_company=False, grades=g))
+    grade_trend, official_grade = enrichment.get_kcgs_grade_trend(company)
+    dday = enrichment.compute_dday(company)
 
     doc_res = (
         supabase.table("documents").select("id", count="exact").eq("company", company).execute()
@@ -226,6 +211,7 @@ def build_dashboard_summary(company: str) -> DashboardSummary | None:
         urgency_counts=UrgencyCounts(**urgency_counts),
         immediate_tasks=immediate_tasks,
         documents_count=documents_count,
+        dday=dday,
     )
 
 
@@ -280,6 +266,20 @@ def build_item_detail(company: str, item_code: str) -> ItemDetail | None:
     ev = parse_evidence(r.get("note_scoring_model"))
     ev.deduction_note = r.get("note_ai_scoring")
     sol = parse_solution(r.get("solution"))
+
+    narrative_row = enrichment.get_item_narrative(company, item_code)
+    narrative = (
+        NarrativeBlock(
+            fulfilled_level_text=narrative_row.get("fulfilled_level_text"),
+            status=narrative_row.get("status"),
+            improvement=narrative_row.get("improvement"),
+            followup=narrative_row.get("followup"),
+            benchmark_case=narrative_row.get("benchmark_case"),
+        )
+        if narrative_row
+        else None
+    )
+
     return ItemDetail(
         item_code=r["category_code"],
         item_name=r["item_name"],
@@ -299,4 +299,5 @@ def build_item_detail(company: str, item_code: str) -> ItemDetail | None:
         kssb_status=r.get("kssb_status"),
         kssb_reference=r.get("kssb_reference"),
         other_reference_standards=r.get("other_reference_standards"),
+        narrative=narrative,
     )

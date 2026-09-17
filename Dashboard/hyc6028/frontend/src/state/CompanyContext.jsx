@@ -8,6 +8,7 @@ export function CompanyProvider({ children }) {
   const [company, setCompany] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [urgencyCriteria, setUrgencyCriteria] = useState({});
 
   useEffect(() => {
     api
@@ -20,8 +21,18 @@ export function CompanyProvider({ children }) {
       .finally(() => setLoading(false));
   }, []);
 
+  useEffect(() => {
+    if (!company) return;
+    api
+      .urgencyCriteria(company)
+      .then((res) => setUrgencyCriteria(res.criteria || {}))
+      .catch(() => setUrgencyCriteria({}));
+  }, [company]);
+
   return (
-    <CompanyContext.Provider value={{ companies, company, setCompany, loading, error }}>
+    <CompanyContext.Provider
+      value={{ companies, company, setCompany, loading, error, urgencyCriteria }}
+    >
       {children}
     </CompanyContext.Provider>
   );
