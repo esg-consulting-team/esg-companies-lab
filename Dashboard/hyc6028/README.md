@@ -8,37 +8,66 @@ Python(FastAPI) 백엔드입니다. 데이터는 Supabase(`esg_diagnosis` 테이
 
 ```
 backend/    FastAPI 서버 (Python) — Supabase에서 데이터를 읽어 대시보드용 API로 가공
-frontend/   React(Vite) 앱 — 사양서 §13 디자인 시스템 토큰 적용
+frontend/   React(Vite) 앱 — 사양서 §13 디자인 시스템 토큰 적용, e2e 테스트(Playwright) 포함
 data/       원본 xlsx/사양서
+start-backend.bat   백엔드만 실행 (Windows)
+start-frontend.bat  프론트엔드만 실행 (Windows)
+start-all.bat       위 둘을 각각 새 창으로 동시에 실행 (Windows)
 ```
 
-## 실행 방법
+## 실행 방법 (Windows)
 
-### 1) 백엔드
+가장 쉬운 방법: 탐색기에서 **`start-all.bat`을 더블클릭**하세요. 새 창 2개가 뜨면서
+백엔드(:8000)·프론트엔드(:5173)가 함께 실행됩니다. 개별 실행은 `start-backend.bat` /
+`start-frontend.bat`을 각각 더블클릭하면 됩니다.
+
+이 배치파일들은 **`venv`/`node_modules`가 없으면 자동으로 만들고 의존성을 설치**합니다.
+그래서 다른 컴퓨터로 옮길 때는 `backend/venv`와 `frontend/node_modules`를 빼고 복사해도
+됩니다 (용량이 크고 어차피 재설치되는 폴더입니다). 새 컴퓨터에는 미리 설치해둘 것만 있으면 됩니다:
+
+- **Node.js** (LTS) — https://nodejs.org/ 에서 설치 (npm 포함)
+- **Python 3.11+** — https://www.python.org/downloads/ 에서 설치. 설치 중
+  **"Add python.exe to PATH" 체크 필수** — 체크하지 않으면 Windows의 Microsoft Store
+  python 별칭이 대신 잡혀서 실행이 안 됩니다 (`start-backend.bat`이 이 상황을 자동으로 우회
+  하려고 시도하긴 하지만, 처음부터 PATH에 잡혀 있는 쪽이 가장 안전합니다).
+
+### 수동 실행 (참고용)
 
 ```bash
+# 백엔드
 cd backend
 python -m venv venv
 venv\Scripts\pip install -r requirements.txt   # Windows
-# venv/bin/pip install -r requirements.txt      # macOS/Linux
-
 venv\Scripts\python -m uvicorn app.main:app --port 8000
-```
 
-- `.env`에 이미 Supabase URL과 anon key가 들어 있습니다 (RLS로 읽기 전용만 허용).
-- **주의**: 이 프로젝트가 OneDrive 동기화 폴더 안에 있으면 `--reload` 옵션이 `venv/` 내 수천 개 파일을
-  변경으로 오인해 무한 재시작 루프에 빠질 수 있습니다. 개발 중 자동 재시작이 필요하면
-  `--reload --reload-dir app` 처럼 감시 대상을 `app/` 폴더로 좁혀서 실행하세요.
-
-### 2) 프론트엔드
-
-```bash
+# 프론트엔드
 cd frontend
 npm install
 npm run dev
 ```
 
-- `http://localhost:5173` 접속. `.env`의 `VITE_API_BASE_URL`이 백엔드 주소(`http://127.0.0.1:8000`)를 가리킵니다.
+- `backend/.env`에 이미 Supabase URL과 anon key가 들어 있습니다 (RLS로 읽기 전용만 허용).
+- `frontend/.env`의 `VITE_API_BASE_URL`이 백엔드 주소(`http://127.0.0.1:8000`)를 가리킵니다.
+- **주의**: 이 프로젝트가 OneDrive 동기화 폴더 안에 있으면 uvicorn `--reload` 옵션이 `venv/` 내
+  수천 개 파일을 변경으로 오인해 무한 재시작 루프에 빠질 수 있습니다 (배치파일은 이 문제를 피하려고
+  `--reload`를 쓰지 않습니다). 개발 중 자동 재시작이 필요하면 `--reload --reload-dir app`처럼
+  감시 대상을 `app/` 폴더로 좁혀서 실행하세요.
+
+## 테스트 (Playwright e2e)
+
+`frontend/tests/dashboard.spec.js`에 L1~L7 화면을 실제 브라우저로 구동해 검증하는 e2e 테스트가
+있습니다 (콘솔 에러 체크, 화면 간 이동, 기업 전환, 시뮬레이터 서버 재계산, XLSX 다운로드까지 확인).
+
+```bash
+cd frontend
+npm install
+npx playwright install chromium   # 브라우저 바이너리는 최초 1회만 설치하면 됨
+npm run test:e2e                  # 헤드리스 실행
+npm run test:e2e:ui               # Playwright UI 모드로 단계별 확인
+```
+
+백엔드·프론트엔드가 이미 떠 있으면 그 서버를 그대로 재사용하고, 안 떠 있으면
+`playwright.config.js`의 `webServer` 설정이 알아서 둘 다 띄운 뒤 테스트를 실행합니다.
 
 ## 구현 범위
 

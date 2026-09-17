@@ -39,7 +39,11 @@ export default function AppShell() {
         <div className="app-topbar-left">
           <span className="app-topbar-brand">ESG 진단 콘솔</span>
           {!loading && (
-            <select value={company || ""} onChange={(e) => setCompany(e.target.value)}>
+            <select
+              data-testid="company-select"
+              value={company || ""}
+              onChange={(e) => setCompany(e.target.value)}
+            >
               {companies.map((c) => (
                 <option key={c.company} value={c.company}>
                   {c.company} {c.stock_code ? `${c.stock_code}` : ""}

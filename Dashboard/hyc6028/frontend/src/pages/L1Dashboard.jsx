@@ -184,7 +184,11 @@ export default function L1Dashboard() {
           </thead>
           <tbody>
             {gap_top.map((g) => (
-              <tr key={g.item_code} onClick={() => navigate(`/l3?item=${g.item_code}`)}>
+              <tr
+                key={g.item_code}
+                data-testid="gap-top-row"
+                onClick={() => navigate(`/l3?item=${g.item_code}`)}
+              >
                 <td className="mono">{g.item_code}</td>
                 <td>{g.item_name}</td>
                 <td className="num mono" style={{ color: "var(--crit)" }}>
