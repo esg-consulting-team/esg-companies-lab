@@ -1,0 +1,75 @@
+:root {
+  /* 표면 */
+  --paper: #ffffff;
+  --shell: #f5f6f8;
+  --shell-2: #fafbfc;
+  /* 텍스트 */
+  --ink: #111820;
+  --ink-2: #4b5560;
+  --ink-3: #7b848e;
+  /* 선 */
+  --rule: #e1e5ea;
+  --rule-mid: #c9cfd6;
+  --rule-strong: #9aa3ac;
+  /* 네이비 계열 — 데이터 시각화 전용 */
+  --navy: #12325c;
+  --navy-2: #2e5384;
+  --navy-3: #5b7fa8;
+  --navy-4: #9db2c9;
+  --navy-5: #dce3eb;
+  /* 의미색 3종 */
+  --crit: #9e2f27;
+  --crit-bg: #f6eae8;
+  --warn: #8a6412;
+  --warn-bg: #f7f0de;
+  --good: #1d6046;
+  --good-bg: #e6f0eb;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0f1318;
+    --shell: #151a21;
+    --shell-2: #1a2027;
+    --ink: #e9ecf0;
+    --ink-2: #a6afb9;
+    --ink-3: #7b848e;
+    --rule: #252c34;
+    --rule-mid: #39424c;
+    --rule-strong: #5a646f;
+    --navy: #88aedc;
+    --navy-2: #6e95c4;
+    --navy-3: #557aa6;
+    --navy-4: #3c5878;
+    --navy-5: #22334a;
+    --crit: #de8b82;
+    --crit-bg: #2e1a17;
+    --warn: #d2ac55;
+    --warn-bg: #2b2310;
+    --good: #6fbe99;
+    --good-bg: #132b21;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: #0f1318;
+  --shell: #151a21;
+  --shell-2: #1a2027;
+  --ink: #e9ecf0;
+  --ink-2: #a6afb9;
+  --ink-3: #7b848e;
+  --rule: #252c34;
+  --rule-mid: #39424c;
+  --rule-strong: #5a646f;
+  --navy: #88aedc;
+  --navy-2: #6e95c4;
+  --navy-3: #557aa6;
+  --navy-4: #3c5878;
+  --navy-5: #22334a;
+  --crit: #de8b82;
+  --crit-bg: #2e1a17;
+  --warn: #d2ac55;
+  --warn-bg: #2b2310;
+  --good: #6fbe99;
+  --good-bg: #132b21;
+}
