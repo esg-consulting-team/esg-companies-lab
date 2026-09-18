@@ -1,0 +1,1246 @@
+/* 컴포넌트 규칙 6가지(§13.5, 개정): 코너는 부드럽게 · 표면 밝기로 깊이 표현, 액션 타이틀,
+   Exhibit 번호+출처, 네이비 단색 데이터, §13.2 팔레트 전용, 표는 가로줄만. */
+
+/* ── 기업 프로필 한 줄 (L1 상단) ──────────────────────── */
+.company-profile-line {
+  font-size: 13px;
+  color: var(--ink-2);
+  margin: 0;
+}
+
+/* ── 핵심 문제 3장 (L1 상단, Exhibit 1 위) — §13 표면 위계만 사용 ──── */
+.key-issues-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.key-issue-card {
+  background: var(--shell-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+}
+.key-issue-card__title {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+.key-issue-card__body {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin: 0;
+}
+@media (max-width: 1079px) {
+  .key-issues-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Exhibit 카드 (elevation 1, §13.3) ───────────────────── */
+.exhibit {
+  background: var(--shell-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.exhibit__eyebrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-3);
+}
+
+.exhibit__eyebrow strong {
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.exhibit__title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.4;
+  /* --domain-heading-color: L2 도메인 탭 전용 오버라이드. 다른 화면에서는 미설정 상태라 --ink로 폴백. */
+  color: var(--domain-heading-color, var(--ink));
+}
+
+.exhibit__subtitle {
+  font-weight: 400;
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+
+.exhibit__rule {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 2px 0;
+}
+
+.exhibit__body {
+  flex: 1;
+}
+
+.exhibit__source {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--ink-3);
+}
+
+/* ── 칩 / 배지 ─────────────────────────────────────────── */
+.grade-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  padding: 2px 7px;
+  font-weight: 700;
+  font-size: 12px;
+  border: 1px solid;
+  border-radius: var(--radius-chip);
+}
+/* 색 매핑은 §13.2.1 텍스트 규칙에 따라 GradeChip 컴포넌트에서 인라인으로 지정한다. */
+.grade-chip--none {
+  color: var(--ink-3);
+  border-color: var(--rule-mid);
+  background: transparent;
+}
+
+.evidence-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  padding: 2px 7px;
+  border: 1px solid;
+  border-radius: var(--radius-md);
+}
+.evidence-badge--충분 {
+  color: var(--good);
+  border-color: var(--good);
+  background: var(--good-bg);
+}
+.evidence-badge--부분 {
+  color: var(--warn);
+  border-color: var(--warn);
+  background: var(--warn-bg);
+}
+.evidence-badge--불충분 {
+  color: var(--crit);
+  border-color: var(--crit);
+  background: var(--crit-bg);
+}
+.evidence-badge--none {
+  color: var(--ink-3);
+  border-color: var(--rule-mid);
+}
+
+.urgency-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10.5px;
+  padding: 2px 6px;
+  letter-spacing: 0.04em;
+  border-radius: var(--radius-md);
+}
+.urgency-tag--즉시 {
+  color: var(--crit);
+  background: var(--crit-bg);
+}
+.urgency-tag--중기 {
+  color: var(--warn);
+  background: var(--warn-bg);
+}
+.urgency-tag--장기 {
+  color: var(--ink-2);
+  background: var(--shell-3);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  padding: 2px 8px;
+  border: 1px solid var(--rule-mid);
+  color: var(--ink-2);
+  background: var(--shell-3);
+  border-radius: var(--radius-md);
+}
+
+.mock-badge {
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--warn);
+  border: 1px solid var(--warn);
+  background: var(--warn-bg);
+  padding: 1px 6px;
+  border-radius: var(--radius-md);
+}
+
+/* ── KPI 4분할 (elevation 1) ─────────────────────────────── */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: var(--shell-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.kpi-cell {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-left: 1px solid var(--rule);
+}
+.kpi-cell:first-child {
+  border-left: none;
+}
+
+.kpi-cell__label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--ink-3);
+}
+
+.kpi-cell__value-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.kpi-cell__value {
+  font-weight: 700;
+  font-size: 32px;
+  font-variant-numeric: tabular-nums;
+}
+
+.kpi-cell__sub {
+  font-size: 11.5px;
+  color: var(--ink-2);
+}
+.kpi-cell__sub--good {
+  color: var(--good);
+}
+.kpi-cell__sub--crit {
+  color: var(--crit);
+}
+
+@media (max-width: 1079px) {
+  .kpi-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .kpi-cell:nth-child(3) {
+    border-left: none;
+  }
+}
+@media (max-width: 599px) {
+  .kpi-row {
+    grid-template-columns: 1fr;
+  }
+  .kpi-cell {
+    border-left: none;
+    border-top: 1px solid var(--rule);
+  }
+  .kpi-cell:first-child {
+    border-top: none;
+  }
+}
+
+/* ── 표: 가로줄만 ─────────────────────────────────────── */
+.data-table {
+  font-size: 13px;
+}
+.data-table th {
+  text-align: left;
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--ink-3);
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--rule-mid);
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+.data-table tr:last-child td {
+  border-bottom: none;
+}
+.data-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.data-table tr.total-row td {
+  border-top: 2px solid var(--ink);
+  font-weight: 700;
+}
+.data-table tr.clickable {
+  cursor: pointer;
+  transition: background var(--motion);
+}
+.data-table tr.clickable:hover {
+  background: var(--shell-3);
+}
+
+/* ── 심각도 마커 — 색 하나에만 기대지 않고 크기·굵기를 함께 쓴다(색맹 접근성) ──── */
+.severity-marker {
+  display: inline-block;
+  border-radius: 50%;
+  background: var(--crit);
+  margin-right: 8px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+/* ── 자사 vs 벤치마킹군 (L4 Exhibit 12) ───────────────── */
+.bench-group + .bench-group {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+}
+.bench-group__label {
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+.bench-row {
+  display: grid;
+  grid-template-columns: 160px 1fr 56px;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 0;
+}
+.bench-row__label {
+  font-size: 12px;
+  color: var(--ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bench-row__label--self {
+  font-weight: 700;
+  color: var(--ink);
+}
+.bench-row__track {
+  position: relative;
+  height: 12px;
+  background: var(--navy-5);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.bench-row__fill {
+  position: absolute;
+  inset: 0;
+  width: 0%;
+}
+.bench-row__meta {
+  font-size: 11.5px;
+  text-align: right;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 바 차트 (Exhibit1: 영역별 달성률) ───────────────── */
+.hbar-row {
+  display: grid;
+  grid-template-columns: 90px 1fr 130px;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+}
+.hbar-row__label {
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.hbar-row__track {
+  position: relative;
+  height: 14px;
+  background: var(--navy-5);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.hbar-row__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--navy);
+  width: 0%;
+}
+.hbar-row__bench {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 0;
+  border-left: 2px solid var(--ink-3);
+}
+.hbar-row__bench::after {
+  content: "▼";
+  position: absolute;
+  top: -13px;
+  left: -6px;
+  font-size: 9px;
+  color: var(--ink-3);
+}
+.hbar-row__meta {
+  font-size: 11.5px;
+  text-align: right;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.hbar-row--disabled {
+  opacity: 0.4;
+}
+.hbar-row--disabled .hbar-row__track {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--shell-3),
+    var(--shell-3) 4px,
+    var(--rule-mid) 4px,
+    var(--rule-mid) 8px
+  );
+}
+
+/* ── 등급 매트릭스 (Exhibit2) ────────────────────────── */
+.grade-matrix {
+  font-size: 13px;
+}
+.grade-matrix th,
+.grade-matrix td {
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--rule);
+  text-align: center;
+}
+.grade-matrix th {
+  font-size: 11px;
+  color: var(--ink-3);
+  font-weight: 700;
+}
+.grade-matrix td:first-child,
+.grade-matrix th:first-child {
+  text-align: left;
+}
+.grade-matrix tr--self td:first-child {
+  font-weight: 700;
+}
+
+/* ── 등급 세그먼트 타임라인 (L1 Exhibit 2) ────────────── */
+.grade-segments {
+  display: flex;
+  gap: 3px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.grade-segment {
+  flex: 1;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 13px;
+}
+.grade-segment--empty {
+  border: 1px dashed var(--rule-mid);
+  background: var(--shell-3);
+  color: var(--ink-3);
+  font-weight: 400;
+  font-size: 12px;
+}
+
+/* ── 도넛 게이지 ─────────────────────────────────────── */
+.donut-gauge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.donut-gauge__figure {
+  flex-shrink: 0;
+}
+.donut-gauge__center {
+  font-size: 11px;
+  font-weight: 700;
+  fill: var(--ink);
+}
+
+/* ── 다이버징 바 ─────────────────────────────────────── */
+.diverge-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 50px;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 12.5px;
+}
+.diverge-row__label {
+  color: var(--ink-2);
+}
+.diverge-row__track {
+  position: relative;
+  height: 12px;
+  background: var(--shell-3);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.diverge-row__center {
+  position: absolute;
+  left: 50%;
+  top: -3px;
+  bottom: -3px;
+  width: 1px;
+  background: var(--rule-strong);
+}
+.diverge-row__bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+.diverge-row__bar--neg {
+  background: var(--change-down);
+  right: 50%;
+}
+.diverge-row__bar--pos {
+  background: var(--change-up);
+  left: 50%;
+}
+.diverge-row__value {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 시뮬레이션 박스 ─────────────────────────────────── */
+.sim-box {
+  border-top: 2px solid var(--navy);
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sim-box__headline {
+  font-weight: 700;
+  font-size: 17px;
+}
+.sim-box__meta {
+  font-size: 12px;
+  color: var(--ink-2);
+}
+.sim-box__estimate-note {
+  font-size: 10.5px;
+  color: var(--warn);
+}
+
+/* ── 시급성 3레인 미니 바 ────────────────────────────── */
+.urgency-lanes {
+  display: flex;
+  gap: 14px;
+}
+.urgency-lane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.urgency-lane__count {
+  font-weight: 700;
+  font-size: 15px;
+}
+.urgency-lane__bar {
+  height: 6px;
+  background: var(--shell-3);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.urgency-lane__bar-fill {
+  height: 100%;
+}
+.urgency-lane__bar-fill--즉시 {
+  background: var(--crit);
+}
+.urgency-lane__bar-fill--중기 {
+  background: var(--warn);
+}
+.urgency-lane__bar-fill--장기 {
+  background: var(--stage-3);
+}
+
+/* ── 히트맵 (L2) — 도메인 컬러 6단계 스케일, §13.4 규칙 색만 교체 ─────── */
+.heatmap {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.heatmap__cell {
+  background: var(--shell-2);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  min-height: 96px;
+  transition: filter var(--motion);
+}
+.heatmap__cell:hover {
+  filter: brightness(1.15);
+}
+
+/* 도메인 컬러 6단계 명도 스케일 — --domain-color는 L2DomainDiagnosis.tsx가 활성 탭별로
+   ExhibitCard의 style prop을 통해 주입한다. color-mix()로 계산하므로 톤 자체를 하드코딩하지
+   않는다. Exhibit 6(히트맵)·7(단계 진행)에서만 쓰고, 다른 L2 요소(배지류)에는 쓰지 않는다. */
+.domain-tier-0 {
+  background: color-mix(in srgb, var(--domain-color, var(--navy)) 12%, white);
+}
+.domain-tier-1 {
+  background: color-mix(in srgb, var(--domain-color, var(--navy)) 30%, white);
+}
+.domain-tier-2 {
+  background: color-mix(in srgb, var(--domain-color, var(--navy)) 50%, white);
+}
+.domain-tier-3 {
+  background: color-mix(in srgb, var(--domain-color, var(--navy)) 70%, white);
+}
+.domain-tier-4 {
+  background: color-mix(in srgb, var(--domain-color, var(--navy)) 100%, white);
+}
+.domain-tier-5 {
+  background: color-mix(in srgb, var(--domain-color, var(--navy)) 85%, black);
+}
+
+.heatmap__cell--zero {
+  background: var(--crit-bg) !important;
+}
+/* 득점률 50% 이상 = navy-5→navy 그라데이션의 어두운 쪽 — 고정 밝은 텍스트 필요 (§13.4) */
+.heatmap__cell--inverse .heatmap__code,
+.heatmap__cell--inverse .heatmap__name,
+.heatmap__cell--inverse .heatmap__score {
+  color: var(--ink-on-dark);
+}
+.heatmap__code {
+  font-size: 11px;
+  color: var(--ink-2);
+}
+.heatmap__name {
+  font-size: 12px;
+  line-height: 1.4;
+  flex: 1;
+}
+.heatmap__score {
+  font-size: 11px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 1079px) {
+  .heatmap {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 599px) {
+  .heatmap {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ── 단계형 진행 셀 (L2 Exhibit 7) — domain-tier-* 클래스와 함께 쓴다 ──── */
+.stage-progress__cell {
+  display: inline-block;
+  width: 14px;
+  height: 10px;
+  margin-right: 2px;
+  border-radius: 2px;
+}
+
+/* ── 필터 칩 ──────────────────────────────────────────── */
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.filter-chip {
+  border: 1px solid var(--rule-mid);
+  background: var(--shell-2);
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--ink-2);
+  border-radius: var(--radius-sm);
+  transition: background var(--motion), color var(--motion), border-color var(--motion);
+}
+.filter-chip--active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--ink-on-dark);
+}
+.filter-chip[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── 탭 ───────────────────────────────────────────────── */
+.tab-row {
+  display: flex;
+  gap: 2px;
+  border-bottom: 1px solid var(--rule-mid);
+}
+.tab {
+  padding: 9px 16px;
+  font-size: 13px;
+  color: var(--ink-2);
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color var(--motion), border-color var(--motion);
+}
+.tab--active {
+  color: var(--ink);
+  font-weight: 700;
+  border-bottom-color: var(--navy);
+}
+.tab[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── 경고 배너 ────────────────────────────────────────── */
+.warning-banner {
+  border-left: 3px solid var(--crit);
+  background: var(--crit-bg);
+  padding: 10px 14px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink);
+  border-radius: var(--radius-md);
+}
+.warning-banner strong {
+  color: var(--crit);
+}
+.warning-banner--warn {
+  border-left-color: var(--warn);
+  background: var(--warn-bg);
+}
+.warning-banner--warn strong {
+  color: var(--warn);
+}
+
+.pending-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 6px;
+  letter-spacing: 0.04em;
+  border-radius: var(--radius-md);
+  color: var(--warn);
+  background: var(--warn-bg);
+}
+
+/* ── 선례 카드 (L4) ───────────────────────────────────── */
+.precedent-card {
+  background: var(--shell-3);
+  border: 1px solid var(--rule-mid);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.precedent-card + .precedent-card {
+  margin-top: 12px;
+}
+.precedent-card__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.precedent-card__alias {
+  font-weight: 700;
+  font-size: 13.5px;
+}
+.precedent-card__duration {
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+.precedent-card__jump {
+  font-weight: 700;
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+}
+.precedent-card__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.precedent-card__note {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+/* ── 인용 블록 / 원문 인용 ───────────────────────────── */
+.quote-block {
+  border-left: 2px solid var(--navy);
+  padding: 4px 0 4px 10px;
+  font-size: 12.5px;
+  color: var(--ink-2);
+  white-space: pre-wrap;
+}
+
+/* ── L3 레이아웃 ──────────────────────────────────────── */
+.item-detail-layout {
+  display: grid;
+  grid-template-columns: 216px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.item-list {
+  background: var(--shell-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+.item-list__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 12px;
+  border-bottom: 1px solid var(--rule);
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--ink-2);
+  transition: background var(--motion), border-color var(--motion);
+}
+.item-list__row:hover {
+  background: var(--shell-3);
+}
+.item-list__row--active {
+  background: var(--navy-5);
+  border-left-color: var(--navy);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.item-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.item-header__code {
+  font-size: 13px;
+  color: var(--ink-3);
+}
+.item-header__title {
+  font-weight: 700;
+  font-size: 18px;
+}
+.item-header__tags {
+  display: flex;
+  gap: 6px;
+}
+.item-header__scores {
+  display: flex;
+  gap: 18px;
+  margin-left: auto;
+}
+.item-header__score-cell {
+  text-align: right;
+}
+.item-header__score-cell .label {
+  display: block;
+  font-size: 10px;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.item-header__score-cell .value {
+  font-size: 16px;
+  font-weight: 700;
+}
+.item-header__score-cell .value--zero {
+  color: var(--crit);
+}
+.item-header__score-cell .value--gain {
+  color: var(--good);
+}
+
+.field-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.field-block:last-child {
+  border-bottom: none;
+}
+.evidence-source-caption {
+  font-size: 11px;
+  color: var(--ink-3);
+  margin: 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--rule);
+}
+.field-block__label {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--navy);
+}
+.field-block__value {
+  font-size: 13px;
+  color: var(--ink);
+  white-space: pre-wrap;
+  line-height: 1.7;
+}
+
+.solution-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.solution-grid__col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.solution-grid__col-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink-3);
+  letter-spacing: 0.08em;
+}
+.solution-grid__col-body {
+  font-size: 12.5px;
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+
+@media (max-width: 1079px) {
+  .item-detail-layout {
+    grid-template-columns: 1fr;
+  }
+  .item-list {
+    max-height: 240px;
+  }
+}
+@media (max-width: 599px) {
+  .solution-grid {
+    grid-template-columns: 1fr;
+  }
+  .item-header__scores {
+    margin-left: 0;
+  }
+}
+
+/* ── 상태 메시지 ──────────────────────────────────────── */
+.state-message {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--ink-3);
+  font-size: 13px;
+}
+.state-message--error {
+  color: var(--crit);
+}
+
+/* ── L5 개선 로드맵 ───────────────────────────────────── */
+.roadmap-dday {
+  border-left: 3px solid var(--navy);
+  background: var(--navy-5);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+}
+.roadmap-dday__note {
+  font-size: 11px;
+  color: var(--ink-3);
+}
+.roadmap-dday__caveat {
+  font-size: 11px;
+  color: var(--warn);
+}
+
+.roadmap-stages {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+@media (max-width: 1079px) {
+  .roadmap-stages {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 599px) {
+  .roadmap-stages {
+    grid-template-columns: 1fr;
+  }
+}
+
+.roadmap-stage-card {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  background: var(--shell-2);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.roadmap-stage-card__head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.roadmap-stage-card__year {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--navy);
+  font-variant-numeric: tabular-nums;
+}
+.roadmap-stage-card__name {
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.roadmap-stage-card__caption {
+  font-size: 10.5px;
+  color: var(--ink-3);
+  flex-basis: 100%;
+}
+
+.roadmap-task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.roadmap-task {
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.roadmap-task:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+.roadmap-task__name {
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.roadmap-task__deliverables {
+  font-size: 11px;
+  color: var(--ink-3);
+}
+.roadmap-task__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.roadmap-chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10.5px;
+  padding: 2px 7px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--rule-mid);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+.roadmap-chip--item {
+  color: var(--navy);
+  background: var(--navy-5);
+  cursor: pointer;
+  transition: filter var(--motion);
+}
+.roadmap-chip--item:hover {
+  filter: brightness(0.92);
+}
+.roadmap-chip--domain {
+  color: var(--navy);
+  background: #fff;
+  border-color: var(--navy-3);
+  cursor: pointer;
+  font-weight: 700;
+}
+.roadmap-chip--domain:hover {
+  background: var(--navy-5);
+}
+.roadmap-chip--non_scoring {
+  color: var(--ink-3);
+  background: var(--shell-3);
+  border-color: var(--rule-mid);
+  cursor: default;
+}
+
+.roadmap-criteria-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+@media (max-width: 799px) {
+  .roadmap-criteria-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.roadmap-criteria-card {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  font-size: 12px;
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+.roadmap-criteria-card__level {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.roadmap-supply-note {
+  font-size: 12px;
+  color: var(--ink-2);
+  border-left: 2px solid var(--rule-strong);
+  padding-left: 10px;
+}
+
+/* ── L6 증빙 데이터룸 ─────────────────────────────────── */
+.hbar-row--muted .hbar-row__fill {
+  background: var(--ink-3);
+}
+.hbar-row--muted .hbar-row__label {
+  color: var(--ink-3);
+}
+.evidence-doc-summary {
+  font-size: 11.5px;
+  color: var(--ink-2);
+  margin-top: 6px;
+}
+
+/* ── L7 리포트 ────────────────────────────────────────── */
+.l7-toc {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  background: var(--shell-2);
+}
+.l7-toc__title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.l7-toc__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+
+.l7-format-row {
+  display: flex;
+  gap: 8px;
+}
+.l7-format-btn {
+  font-size: 12.5px;
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--rule-mid);
+  background: var(--shell-2);
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.l7-format-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.l7-format-btn--primary {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+  font-weight: 600;
+}
+
+.l7-cover__headline {
+  font-size: 16px;
+  font-weight: 700;
+}
+.l7-cover__sector {
+  font-weight: 400;
+  color: var(--ink-2);
+  font-size: 13px;
+}
+.field-block-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0 20px;
+}
+@media (max-width: 799px) {
+  .field-block-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .topbar,
+  .rail,
+  .consult,
+  .consult__strip,
+  .criteria-panel,
+  .criteria-backdrop {
+    display: none !important;
+  }
+  .app-body {
+    display: block;
+  }
+  .main {
+    padding: 0;
+    overflow: visible;
+  }
+  .exhibit {
+    break-inside: avoid;
+  }
+}
