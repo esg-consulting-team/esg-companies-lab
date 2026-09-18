@@ -134,3 +134,44 @@ class ReportConfigResponse(BaseModel):
 class ExportRequest(BaseModel):
     format: str  # xlsx/pdf/pptx
     section_nos: list[str]
+
+
+class CompanyProfile(BaseModel):
+    stock_code: Optional[str] = None
+    founded_year: Optional[str] = None
+    listing: Optional[str] = None
+    main_business: Optional[str] = None
+    total_assets: Optional[str] = None
+    industry_class: Optional[str] = None
+    employees: Optional[str] = None
+
+
+class BenchmarkCompany(BaseModel):
+    benchmark_label: str
+    industry: Optional[str] = None
+    grade_2025: Optional[str] = None
+    rationale: Optional[str] = None
+
+
+class UrgencyCriteriaResponse(BaseModel):
+    criteria: dict[str, str]  # level(즉시/중기/장기) -> criteria text, {} if none registered
+
+
+class RoadmapTaskV2(BaseModel):
+    task_name: str
+    related_item_codes: list[str]
+    deliverables: Optional[str] = None
+    code_urgencies: list[dict]  # [{code, urgency}] for codes that matched a real scored item
+    worst_urgency: Optional[str] = None  # 즉시 > 중기 > 장기 among matched codes
+
+
+class RoadmapStageV2(BaseModel):
+    stage_no: str
+    year: Optional[int] = None
+    stage_name: Optional[str] = None
+    urgency_level: Optional[str] = None
+    tasks: list[RoadmapTaskV2]
+
+
+class RoadmapPlanResponse(BaseModel):
+    stages: list[RoadmapStageV2]

@@ -1,0 +1,51 @@
+[
+  {
+    "company": "하나마이크론",
+    "benchmark_label": "A사",
+    "industry": "C261 / 반도체 소자 제조업",
+    "grade_2025": "A",
+    "rationale": "메모리 반도체 생산과 국내외 다수 생산거점을 운영해 초순수·과불화탄소 등 반도체 특화 환경지표의 비교 기준이 된다"
+  },
+  {
+    "company": "하나마이크론",
+    "benchmark_label": "B사",
+    "industry": "C26 / 전자·반도체 제조업",
+    "grade_2025": "A",
+    "rationale": "반도체를 포함한 대규모 전자 제조기업으로 이사회·위원회·주주권 제도의 상위 운영 사례를 보여준다"
+  },
+  {
+    "company": "하나마이크론",
+    "benchmark_label": "C사",
+    "industry": "C262 / 전자부품·패키지 기판 제조업",
+    "grade_2025": "A",
+    "rationale": "반도체 후공정과 인접한 부품을 해외 다수 법인에서 생산해 해외사업장 환경데이터 관리 구조가 유사하다"
+  },
+  {
+    "company": "DN오토모티브",
+    "benchmark_label": "A사",
+    "industry": "C281\n전기·전자 제조업",
+    "grade_2025": "A+",
+    "rationale": "다수 생산 사업장을 운영하면서 환경 정량지표와 거버넌스 공시를 함께 관리하는 사업장 단위 데이터 체계의 참고 모델"
+  },
+  {
+    "company": "DN오토모티브",
+    "benchmark_label": "B사",
+    "industry": "C281\n전기·전자 제조업",
+    "grade_2025": "A",
+    "rationale": "제품 포트폴리오와 사업장 운영 구조가 유사해 환경·지배구조 항목을 직접 대응시켜 비교 가능"
+  },
+  {
+    "company": "DN오토모티브",
+    "benchmark_label": "C사",
+    "industry": "C282\n이차전지 소재 제조업",
+    "grade_2025": "A",
+    "rationale": "고객사의 축전지 사업과 배터리 밸류체인상 인접하고 글로벌 고객 대응을 위한 공시 수준이 높음"
+  },
+  {
+    "company": "DN오토모티브",
+    "benchmark_label": "D사",
+    "industry": "C283\n전선·케이블 제조업",
+    "grade_2025": "A",
+    "rationale": "전통 제조업 기반에서 A등급을 확보한 사례로 레거시 제조기업의 등급 개선 경로를 보여주는 대조군"
+  }
+]
