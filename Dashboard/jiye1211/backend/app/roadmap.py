@@ -6,6 +6,7 @@
 """
 from typing import Any, Optional
 
+from .cache_utils import ttl_cache
 from .repository import compute_disclosure_roadmap, fetch_latest_total_assets, fetch_rows
 from .supabase_client import get_supabase
 
@@ -21,6 +22,7 @@ _URGENCY_ORDER = {"즉시": 0, "중기": 1, "장기": 2}
 _LETTER_TO_BUCKET = {"P": "disclosure", "E": "environment", "G": "governance"}
 
 
+@ttl_cache()
 def _fetch_esg_company_id(company: str) -> Optional[int]:
     sb = get_supabase()
     res = sb.table(ESG_COMPANIES_TABLE).select("id").eq("name", company).limit(1).execute()
@@ -71,6 +73,7 @@ def classify_related_codes(raw_codes: list[str]) -> list[dict[str, Any]]:
     return chips
 
 
+@ttl_cache()
 def fetch_urgency_criteria(company: str) -> list[dict[str, Any]]:
     company_id = _fetch_esg_company_id(company)
     if company_id is None:
@@ -82,6 +85,7 @@ def fetch_urgency_criteria(company: str) -> list[dict[str, Any]]:
     return [{"level": r["level"], "criteria": r["criteria"]} for r in rows]
 
 
+@ttl_cache()
 def fetch_disclosure_deadline(company: str) -> Optional[dict[str, str]]:
     company_id = _fetch_esg_company_id(company)
     if company_id is None:

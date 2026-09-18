@@ -2,12 +2,14 @@
 계산·가공 로직 없음(필드명만 camelCase로 옮긴다)."""
 from typing import Any, Optional
 
+from .cache_utils import ttl_cache
 from .supabase_client import get_supabase
 
 ESG_COMPANIES_TABLE = "esg_companies"  # 주의: repository.COMPANIES_TABLE("companies")와는 다른 테이블
 ESG_COMPANY_PROFILE_TABLE = "esg_company_profile"
 
 
+@ttl_cache()
 def _fetch_esg_company_id(company: str) -> Optional[int]:
     sb = get_supabase()
     res = sb.table(ESG_COMPANIES_TABLE).select("id").eq("name", company).limit(1).execute()
@@ -15,6 +17,7 @@ def _fetch_esg_company_id(company: str) -> Optional[int]:
     return rows[0]["id"] if rows else None
 
 
+@ttl_cache()
 def fetch_company_profile_card(company: str) -> Optional[dict[str, Any]]:
     company_id = _fetch_esg_company_id(company)
     if company_id is None:

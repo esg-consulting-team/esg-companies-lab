@@ -50,7 +50,7 @@ export function AppShell() {
     <CriteriaPanelContext.Provider value={{ open: () => setCriteriaOpen(true) }}>
       <div className="app-shell">
         <header className="topbar">
-          <span className="topbar__brand">ESG 진단 콘솔</span>
+          <span className="topbar__brand">ESG 통합 진단 센터</span>
           <select
             className="topbar__select"
             value={company}
@@ -67,7 +67,6 @@ export function AppShell() {
           </button>
           <span className="topbar__badge">평가연도 2026</span>
           <span className="topbar__badge">K-ESG v2.0</span>
-          <span className="topbar__badge topbar__badge--warn">가채점</span>
           <div className="topbar__spacer" />
           <span className="topbar__user">환경안전팀</span>
         </header>

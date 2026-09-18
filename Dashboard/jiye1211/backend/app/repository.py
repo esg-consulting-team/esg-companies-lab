@@ -2,6 +2,7 @@
 from typing import Any, Optional
 
 from .benchmark_config import BENCHMARK_MAP
+from .cache_utils import ttl_cache
 from .mock_data import INDUSTRY_NAMES, get_company_profile
 from .parsing import DOMAIN_BUCKETS, bucket_of, evidence_level, extract_evidence_sources, parse_scoring_note, parse_solution
 from .report_data import get_pending_item, get_report_comparison
@@ -22,6 +23,7 @@ def _to_float(value: Optional[str]) -> Optional[float]:
         return None
 
 
+@ttl_cache()
 def fetch_companies() -> list[str]:
     sb = get_supabase()
     res = sb.table(TABLE).select("company").execute()
@@ -33,6 +35,7 @@ def fetch_companies() -> list[str]:
     return seen
 
 
+@ttl_cache()
 def fetch_rows(company: str) -> list[dict[str, Any]]:
     sb = get_supabase()
     res = (
@@ -45,6 +48,7 @@ def fetch_rows(company: str) -> list[dict[str, Any]]:
     return res.data or []
 
 
+@ttl_cache()
 def fetch_company_code(company: str) -> Optional[str]:
     """앱에서 쓰는 회사명(esg_diagnosis.company 값)으로 companies.기업코드를 찾는다."""
     sb = get_supabase()
@@ -53,6 +57,7 @@ def fetch_company_code(company: str) -> Optional[str]:
     return rows[0]["기업코드"] if rows else None
 
 
+@ttl_cache()
 def fetch_grade_history(company: str) -> list[dict[str, Any]]:
     """company_esg_yearly에서 이 회사의 최근 3개년 KCGS 공식등급을 연도 오름차순으로 가져온다.
     해당 연도 행이 없으면(신규 상장 등) 등급을 전부 null로 채워 자리만 유지한다 — 이전 연도 값으로
@@ -91,6 +96,7 @@ def fetch_grade_history(company: str) -> list[dict[str, Any]]:
     return history
 
 
+@ttl_cache()
 def fetch_latest_domain_scores(company: str) -> Optional[dict[str, Any]]:
     """company_esg_yearly에서 이 회사의 최신 연도 도메인별 채점값을 가져온다.
     반도체 회사·비반도체 회사 구분 없이 동일한 컬럼(채점평균/채점공시/채점환경/채점지배구조)을 쓴다
@@ -145,6 +151,7 @@ def compute_official_grade(grade_history: list[dict[str, Any]]) -> Optional[dict
 ASSET_TRILLION = 1_000_000_000_000  # 1조원
 
 
+@ttl_cache()
 def fetch_latest_total_assets(company: str) -> Optional[float]:
     """company_esg_yearly에서 이 회사의 '최신 연도' 행 자산총액을 그대로 가져온다.
     다른 연도로 대체하거나 보간하지 않는다 — 최신 연도 행 자체에 값이 없으면 None."""
@@ -166,6 +173,7 @@ def fetch_latest_total_assets(company: str) -> Optional[float]:
     return float(rows[0]["자산총액"])
 
 
+@ttl_cache()
 def build_industry_profile(company: str) -> dict[str, Any]:
     """L1 상단 기업 프로필 한 줄 — companies(시장구분·산업코드) + company_esg_yearly 최신 연도
     (자산총액·자산기준군)를 조합한다. 업종명은 mock_data.INDUSTRY_NAMES에 확인된 코드만 채운다."""

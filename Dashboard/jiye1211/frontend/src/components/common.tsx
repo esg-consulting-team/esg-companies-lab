@@ -67,6 +67,16 @@ export function EvidenceBadge({ level }: { level: EvidenceLevel }) {
   return <span className={`evidence-badge ${cls}`}>{label}</span>;
 }
 
+/** 점수 기준 근거충분성 — L2 히트맵/L3 항목 헤더 전용. 80점 이상 충분 · 40점 이상 부분 ·
+ * 그 미만 불충분. (근거충분성 필터 칩·집계는 여전히 서버의 텍스트 파싱 기준을 그대로 쓴다 —
+ * 이 함수는 두 화면의 배지 표시에만 쓰인다.) */
+export function evidenceLevelFromScore(score: number | null): EvidenceLevel {
+  if (score === null) return null;
+  if (score >= 80) return "충분";
+  if (score >= 40) return "부분";
+  return "불충분";
+}
+
 export function UrgencyTag({ urgency }: { urgency: Urgency }) {
   if (!urgency) return null;
   return <span className={`urgency-tag urgency-tag--${urgency}`}>{urgency}</span>;

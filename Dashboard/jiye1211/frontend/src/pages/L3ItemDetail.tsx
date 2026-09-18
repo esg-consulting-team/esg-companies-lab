@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../api/client";
 import { useFetch } from "../hooks/useFetch";
-import { EvidenceBadge, PendingBadge, StateMessage, UrgencyTag, formatNum } from "../components/common";
+import { EvidenceBadge, PendingBadge, StateMessage, UrgencyTag, evidenceLevelFromScore, formatNum } from "../components/common";
 
 export function L3ItemDetail() {
   const { company = "", code } = useParams();
@@ -33,6 +33,7 @@ export function L3ItemDetail() {
           <div
             key={it.code}
             className={`item-list__row ${it.code === code ? "item-list__row--active" : ""}`}
+            style={it.code === code ? undefined : { borderLeft: `2px solid var(--domain-${it.domainBucket}, transparent)` }}
             onClick={() => goItem(it.code)}
           >
             <span className="item-list__code">{it.code}</span>
@@ -69,7 +70,7 @@ export function L3ItemDetail() {
                   <div className="item-header__score-cell">
                     <span className="label">근거충분성</span>
                     <span className="value">
-                      <EvidenceBadge level={detail.evidence} />
+                      <EvidenceBadge level={evidenceLevelFromScore(detail.score)} />
                     </span>
                   </div>
                   {detail.applicable && detail.score !== null && detail.score < 100 && (

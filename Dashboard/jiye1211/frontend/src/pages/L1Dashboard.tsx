@@ -1,8 +1,8 @@
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { api } from "../api/client";
 import { useFetch } from "../hooks/useFetch";
 import { DonutGauge } from "../components/DonutGauge";
-import { useCriteriaPanel } from "../context/CriteriaPanelContext";
 import {
   ExhibitCard,
   GRADE_RANK,
@@ -14,13 +14,31 @@ import {
   formatPct,
   gradeStyle,
 } from "../components/common";
-import type { GradeHistoryYear, IndustryProfile } from "../types";
+import type { DomainBucketKey, GradeHistoryYear, IndustryProfile } from "../types";
 
 const GRADE_TREND_LABELS: Record<Exclude<keyof GradeHistoryYear, "year" | "overall">, string> = {
   environment: "환경 E",
   social: "사회 S",
   governance: "지배구조 G",
 };
+
+/** L2 영역별 진단의 도메인 아이덴티티 컬러와 동일한 값 — Exhibit 1 막대색에도 그대로 반영한다.
+ * §13.2의 --domain-* CSS 변수를 참조한다(hex 직접 기입 금지) — 톤 재조정 시 tokens.css만
+ * 고치면 이 화면도 자동으로 같이 바뀐다. */
+const DOMAIN_BAR_COLORS: Partial<Record<DomainBucketKey, string>> = {
+  disclosure: "var(--domain-disclosure)",
+  environment: "var(--domain-environment)",
+  governance: "var(--domain-governance)",
+  sector: "var(--domain-sector)",
+};
+
+/** Scope 3 의무공시 유예 안내 아코디언 — 회사와 무관한 고정 문구(원문 그대로), 3개 구간 중
+ * 현재 화면 회사의 disclosureStartYear와 일치하는 구간만 강조 표시한다. */
+const SCOPE3_TIERS: { startYear: number; label: string; disclosureStart: string; scope3Start: string }[] = [
+  { startYear: 2028, label: "연결자산총액 10조 원 이상 코스피 상장사", disclosureStart: "2028년 (FY27)", scope3Start: "2031년부터 (3년 유예)" },
+  { startYear: 2029, label: "연결자산총액 5조 원 이상 코스피 상장사", disclosureStart: "2029년", scope3Start: "2032년부터 (3년 유예)" },
+  { startYear: 2030, label: "연결자산총액 2조 원 이상 코스피 상장사", disclosureStart: "2030년", scope3Start: "2033년부터 (3년 유예)" },
+];
 
 /** 실제 값만으로 액션 타이틀을 구성한다 — 등급 없는 연도가 있으면 추세를 단정하지 않는다. */
 function gradeTrendTitle(history: GradeHistoryYear[]): string {
@@ -69,13 +87,13 @@ function formatIndustryLine(company: string, profile: IndustryProfile): string {
 export function L1Dashboard() {
   const { company = "" } = useParams();
   const navigate = useNavigate();
-  const criteriaPanel = useCriteriaPanel();
+  const [scope3Open, setScope3Open] = useState(false);
   const { data, loading, error } = useFetch(() => api.getSummary(company), [company]);
 
   if (loading) return <StateMessage>불러오는 중…</StateMessage>;
   if (error || !data) return <StateMessage error>{error ?? "데이터를 불러오지 못했습니다."}</StateMessage>;
 
-  const { assessment, officialGrade, domains, gradeHistory, evidenceCounts, urgencyCounts, lossTop5, immediateTasks, simulation, keyIssues, companyMeta } =
+  const { assessment, officialGrade, domains, gradeHistory, evidenceCounts, urgencyCounts, lossTop5, immediateTasks, simulation, companyMeta } =
     { ...data, companyMeta: data.company };
 
   const goItem = (code: string) => navigate(`/companies/${encodeURIComponent(company)}/l3/${encodeURIComponent(code)}`);
@@ -89,28 +107,56 @@ export function L1Dashboard() {
     <div className="main__grid">
       <p className="company-profile-line">{formatIndustryLine(company, companyMeta.industryProfile)}</p>
 
-      <button className="criteria-banner" onClick={criteriaPanel.open}>
-        환경·지배구조 중심 진단 · 사회(S) 제외 근거 보기
-      </button>
-
       {/* ① D-day 밴드 */}
       <section
         className="exhibit"
-        style={{ borderLeft: "3px solid var(--navy)", flexDirection: "row", alignItems: "center", gap: 16, flexWrap: "wrap" }}
+        style={{ borderLeft: "3px solid var(--crit)", flexDirection: "row", alignItems: "center", gap: 16, flexWrap: "wrap" }}
       >
         {roadmap.status === "applicable" && dday !== null ? (
           <>
-            <div className="mono" style={{ fontSize: 20, fontWeight: 700, color: "var(--crit)" }}>
+            <div className="mono" style={{ fontSize: 44, fontWeight: 700, lineHeight: 1, color: "var(--crit)" }}>
               D{dday >= 0 ? `-${dday}` : `+${-dday}`}
             </div>
             <div style={{ flex: 1, minWidth: 240, fontSize: 13 }}>
-              착수 기한 <strong>{roadmap.deadlineDate}</strong> — 연결자산총액 {formatTrillion(roadmap.totalAssets)} 기준{" "}
-              {roadmap.disclosureStartYear}년 의무공시 대상. 3개년 추세 확보를 위해 데이터 축적을 지금 시작해야 합니다.
-              Scope 3 배출량은 {roadmap.scope3GraceYear}년까지 유예됩니다.
+              착수 기한 <strong>{roadmap.deadlineDate}</strong>
+              <br />
+              연결자산총액 {formatTrillion(roadmap.totalAssets)} 기준{" "}
+              {roadmap.disclosureStartYear}년 의무공시 대상.{" "}
+              <button className="scope3-toggle" onClick={() => setScope3Open((v) => !v)} aria-expanded={scope3Open}>
+                Scope 3 배출량은 {roadmap.scope3GraceYear}년까지 유예됩니다.
+              </button>
             </div>
-            {companyMeta.disclosureRoadmapCaveat && (
-              <div style={{ flexBasis: "100%", fontSize: 11, color: "var(--ink-3)" }}>※ {companyMeta.disclosureRoadmapCaveat}</div>
+            {scope3Open && (
+              <div className="scope3-accordion" style={{ flexBasis: "100%" }}>
+                <p>
+                  가치사슬 전반의 온실가스 배출량을 뜻하는 스코프 3(Scope 3) 공시는 기업들의 준비 기간을 고려해 각 공시
+                  대상별로 3년씩 유예 기간이 적용됩니다. 따라서 최초로 공시 의무화가 시작되는 자산 규모별 적용 시기에
+                  따라 스코프 3 의무 공시 연도도 순차적으로 달라집니다.
+                </p>
+                <p>최종안에 따른 자산 규모별 스코프 3 적용 일정은 다음과 같습니다.</p>
+                <div className="scope3-accordion__list">
+                  {SCOPE3_TIERS.map((tier, i) => (
+                    <div
+                      key={tier.startYear}
+                      className={`scope3-accordion__tier ${roadmap.disclosureStartYear === tier.startYear ? "scope3-accordion__tier--active" : ""}`}
+                    >
+                      <div>
+                        {i + 1}. {tier.label}
+                      </div>
+                      <div>일반 지속가능성 공시 시작: {tier.disclosureStart}</div>
+                      <div>스코프 3 의무 공시 적용: {tier.scope3Start}</div>
+                    </div>
+                  ))}
+                </div>
+                <p>
+                  이처럼 본래의 ESG 공시 의무화 시점보다 정확히 3년 뒤에 스코프 3 배출량 공시가 의무화되므로, 기업의
+                  자산 규모(적용 시기)에 따라 스코프 3 도입 연도 역시 차등 적용됩니다.
+                </p>
+              </div>
             )}
+            {/* disclosureRoadmapCaveat(예: 하나마이크론 "컨설팅 보고서는 FY2029로 기재…")는
+                고객사 화면 단순화를 위해 UI에서는 숨김 — 데이터는 백엔드/타입에 그대로 보존됨
+                (README "알려진 한계" 참고). companyMeta.disclosureRoadmapCaveat 자체는 지우지 않음. */}
             <div style={{ flexBasis: "100%", fontSize: 11, color: "var(--ink-3)" }}>
               출처: 금융위원회 지속가능성 공시 제도화 방안(최종안), 2026.7 확정 로드맵
             </div>
@@ -132,14 +178,18 @@ export function L1Dashboard() {
       {/* ② KPI 4종 */}
       <div className="kpi-row">
         <div className="kpi-cell">
-          <span className="kpi-cell__label">가채점 총점</span>
-          <div className="kpi-cell__value-row">
-            <DonutGauge rate={assessment.rate} size={56} />
-            <span className="kpi-cell__value tabular-nums">
-              {formatNum(assessment.totalScore)} / {formatNum(assessment.maxScore)}
-            </span>
+          <span className="kpi-cell__label" style={{ fontSize: 9 }}>
+            가채점 총점
+          </span>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <DonutGauge
+              rate={assessment.rate}
+              size={170}
+              r={62}
+              strokeWidth={16}
+              centerContent={{ label: "달성률", value: formatPct(assessment.rate) }}
+            />
           </div>
-          <span className="kpi-cell__sub">달성률 {formatPct(assessment.rate)} · 항목당 100점 정규화 기준</span>
         </div>
         <div className="kpi-cell">
           <span className="kpi-cell__label">KCGS 공식등급</span>
@@ -171,27 +221,12 @@ export function L1Dashboard() {
         </div>
       </div>
 
-      {keyIssues.length > 0 && (
-        <div className="key-issues-row">
-          {keyIssues.map((issue) => (
-            <div className="key-issue-card" key={issue.title}>
-              <div className="key-issue-card__title">{issue.title}</div>
-              <p className="key-issue-card__body">{issue.body}</p>
-            </div>
-          ))}
-        </div>
-      )}
-
       <div className="grid-2">
         {/* Exhibit 1 */}
         <ExhibitCard
           number={1}
           eyebrow="영역별 달성률"
-          title={
-            domains.some((d) => d.rate !== null && d.benchmarkAvg !== null && d.rate < d.benchmarkAvg - 0.3)
-              ? "네 영역 모두 벤치마킹 평균에 크게 미달"
-              : "영역별 달성률 현황"
-          }
+          title="모든 영역 벤치마킹 대비 평균 미달"
           eyebrowRight={<span>적용 {assessment.totalItems}개 항목</span>}
           source="esg_diagnosis (K-ESG v2.0) · 벤치마킹 평균은 샘플 값"
         >
@@ -199,7 +234,10 @@ export function L1Dashboard() {
             <div key={d.key} className={`hbar-row ${d.rate === null ? "hbar-row--disabled" : ""}`}>
               <span className="hbar-row__label">{d.label}</span>
               <div className="hbar-row__track">
-                <div className="hbar-row__fill" style={{ width: `${(d.rate ?? 0) * 100}%` }} />
+                <div
+                  className="hbar-row__fill"
+                  style={{ width: `${(d.rate ?? 0) * 100}%`, background: DOMAIN_BAR_COLORS[d.key] }}
+                />
                 {d.benchmarkAvg !== null && (
                   <div className="hbar-row__bench" style={{ left: `${d.benchmarkAvg * 100}%` }} />
                 )}
@@ -261,6 +299,9 @@ export function L1Dashboard() {
               </div>
               <p style={{ fontSize: 11, color: "var(--ink-3)", marginTop: 6 }}>
                 공식 평가는 사회(S) 영역을 포함하지만, 자체 진단(K-ESG)은 정보공시·환경·지배구조(P/E/G)만 다룹니다.
+              </p>
+              <p style={{ fontSize: 11, color: "var(--ink-3)", marginTop: 2 }}>
+                등급 칩 색상은 KCGS 공식 색상 대비 톤(명도·채도)이 조정되었습니다 — 등급 판정 자체는 동일합니다.
               </p>
             </>
           ) : (
