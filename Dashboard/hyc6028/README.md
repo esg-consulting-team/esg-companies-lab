@@ -1,18 +1,24 @@
 # ESG 진단 콘솔
 
-`data/ESG_대시보드_전체화면_사양서.md` 사양서의 화면 7개(L1~L7) 전체를 구현한 React(Vite) 프론트엔드 +
-Python(FastAPI) 백엔드입니다. 데이터는 Supabase(`esg_diagnosis` 테이블, 하나마이크론/DN오토모티브 각
-42개 항목)를 사용합니다.
+`data/v1.1 ESG_대시보드_전체화면_사양서.md` 사양서의 화면 7개(L1~L7) 전체를 구현한 React(Vite)
+프론트엔드 + Python(FastAPI) 백엔드입니다. 진단 채점 데이터는 Supabase의 정규화된
+`esg_diagnostic_items`(항목 마스터, 42개) + `esg_diagnostic_scores`(회사별 채점, 하나마이크론/
+DN오토모티브 각 42개 항목) 테이블을 조인해서 사용합니다 (원래는 평면 테이블 `esg_diagnosis` 하나였고,
+그 테이블은 백업용으로 남아있습니다 — 자세한 내용은 사양서 §15.1 참고).
 
 ## 구조
 
 ```
 backend/    FastAPI 서버 (Python) — Supabase에서 데이터를 읽어 대시보드용 API로 가공
 frontend/   React(Vite) 앱 — 사양서 §13 디자인 시스템 토큰 적용, e2e 테스트(Playwright) 포함
+frontend-design-preview/         디자인 시안 사본 — 팀 공유 DESIGN.md 반영 (원본 frontend는 미변경)
+frontend-design-preview-wanted/  디자인 시안 사본 — 원티드/몽타주 디자인 시스템 반영 (원본 미변경)
 data/       원본 xlsx/사양서
 start-backend.bat   백엔드만 실행 (Windows)
 start-frontend.bat  프론트엔드만 실행 (Windows)
 start-all.bat       위 둘을 각각 새 창으로 동시에 실행 (Windows)
+start-frontend-design-preview.bat         디자인 시안(DESIGN.md판) 실행, :5174
+start-frontend-design-preview-wanted.bat  디자인 시안(원티드판) 실행, :5175
 ```
 
 ## 실행 방법 (Windows)
@@ -20,6 +26,10 @@ start-all.bat       위 둘을 각각 새 창으로 동시에 실행 (Windows)
 가장 쉬운 방법: 탐색기에서 **`start-all.bat`을 더블클릭**하세요. 새 창 2개가 뜨면서
 백엔드(:8000)·프론트엔드(:5173)가 함께 실행됩니다. 개별 실행은 `start-backend.bat` /
 `start-frontend.bat`을 각각 더블클릭하면 됩니다.
+
+디자인 시안을 보려면 `start-frontend-design-preview.bat`(:5174) 또는
+`start-frontend-design-preview-wanted.bat`(:5175)을 백엔드와 함께 띄우면 됩니다. 기존
+`frontend`(:5173)와 포트가 겹치지 않아 세 개를 동시에 띄워 나란히 비교할 수 있습니다.
 
 이 배치파일들은 **`venv`/`node_modules`가 없으면 자동으로 만들고 의존성을 설치**합니다.
 그래서 다른 컴퓨터로 옮길 때는 `backend/venv`와 `frontend/node_modules`를 빼고 복사해도
@@ -124,10 +134,24 @@ npm run test:e2e:ui               # Playwright UI 모드로 단계별 확인
   기준으로 작성돼 있었습니다. 데이터(json 8개)만 가져와 이 프로젝트의 실제 구조에 맞게 새로 구현했고,
   파일 경로·컴포넌트명은 그 문서와 다릅니다.
 
+## 3차 고도화 (진단 스키마 정규화 + 디자인 시안 2종)
+
+- **`esg_diagnosis` → `esg_diagnostic_items`/`esg_diagnostic_scores` 마이그레이션**: 진단 채점의
+  실제 소스가 평면 테이블 `esg_diagnosis`(84행) 하나였던 것을, 항목 마스터(`esg_diagnostic_items`,
+  42행)와 회사별 채점(`esg_diagnostic_scores`, 84행)으로 정규화해 옮겼습니다. 두 테이블 다 PK/FK가
+  없던 상태라 `esg_companies.id` PK, `esg_diagnostic_items.item_code` PK, `esg_diagnostic_scores`에
+  identity PK + FK + `unique(company_id, item_code)`를 새로 추가했습니다. `backend/app/services/
+  diagnosis.py`의 `fetch_items()`/`build_item_detail()`, `enrichment.py`의 `get_roadmap_plan()`이
+  이 조인 쿼리를 쓰도록 바뀌었고, 반환 필드명은 기존과 동일하게 맞춰서 다른 서비스(roadmap/documents/
+  reports)는 건드릴 필요가 없었습니다. 옛 `esg_diagnosis`는 백업용으로 남겨뒀습니다. 자세한 배경은
+  `data/v1.1 ESG_대시보드_전체화면_사양서.md` §15.1 참고.
+- **디자인 시안 2종(사본, 원본 미변경)**: `frontend-design-preview/`(팀 공유 DESIGN.md 반영),
+  `frontend-design-preview-wanted/`(원티드/몽타주 디자인 시스템 반영). 위 "구조"/"실행 방법" 참고.
+
 ## 데이터에 대한 중요한 참고사항
 
 - 원본 xlsx는 K-ESG 91개 항목 중 **E(환경)+G(지배구조) 42개 항목만** 채점되어 있습니다 (S/사회 제외).
-- `esg_diagnosis` 외에 사양서 §10 목데이터를 옮겨 담은 보조 테이블(`company_meta`, `kcgs_grades`,
+- `esg_diagnostic_items`/`esg_diagnostic_scores` 외에 사양서 §10 목데이터를 옮겨 담은 보조 테이블(`company_meta`, `kcgs_grades`,
   `benchmark_grades`, `domain_benchmarks`, `documents`, `intensity_trends`,
   `sector_distribution_buckets`, `roadmap_tasks`, `report_exports`)을 만들었습니다. **KCGS 공식등급·
   벤치마킹 A~D사 비교·의무공시 D-day·환경 원단위 추이·업종 분포·로드맵 비용/일정은 DN오토모티브만
@@ -137,8 +161,8 @@ npm run test:e2e:ui               # Playwright UI 모드로 단계별 확인
 - L4의 "영역별 벤치마킹 갭"은 항목 단위 벤치마킹 데이터가 없어 `domain_benchmarks`(영역 평균)를
   기준으로 계산한 근사치입니다. 사양서 원문의 항목 단위 갭(G-3-2 −100 등)과는 다른 수치입니다.
 - L5 로드맵은 `roadmap_tasks`에 큐레이션 데이터가 있으면 그 값(비용·일정·담당자 포함)을 쓰고,
-  없으면(하나마이크론) `esg_diagnosis`의 시급성·손실점수·해결방안에서 자동 생성합니다 — 이 경우
-  비용/일정/담당자는 "미정"으로 표시됩니다.
+  없으면(하나마이크론) `esg_diagnostic_scores`/`esg_diagnostic_items`의 시급성·손실점수·해결방안에서
+  자동 생성합니다 — 이 경우 비용/일정/담당자는 "미정"으로 표시됩니다.
 - L7 XLSX 내보내기는 항목별 채점 데이터 전체를 실제로 내려받습니다. 사양서의 "마스터 채점표 수식
   셀 보존"은 구현하지 않았고(현재 셀 값만), PDF/PPTX는 아직 지원하지 않습니다.
 - 항목 상세의 "확인근거/감점사유/해결방안" 텍스트는 xlsx의 `비고-채점모델`, `비고-손채점+AI채점`,
