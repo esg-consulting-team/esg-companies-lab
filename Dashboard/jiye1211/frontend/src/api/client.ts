@@ -1,5 +1,4 @@
 import type {
-  ChatResponse,
   CompanyProfileCard,
   CompanyRef,
   CompanySummary,
@@ -13,9 +12,11 @@ import type {
   RoadmapResponse,
 } from "../types";
 
-const API_BASE = import.meta.env.VITE_API_BASE ?? "http://127.0.0.1:8000";
+// chat/api.ts(AI 상담 챗봇 전용 API 함수)가 재사용할 수 있도록 export한다 — 챗봇 쪽에서
+// fetch 로직을 따로 구현하지 않고 이 request/post/ApiError를 그대로 쓴다.
+export const API_BASE = import.meta.env.VITE_API_BASE ?? "http://127.0.0.1:8000";
 
-class ApiError extends Error {
+export class ApiError extends Error {
   status: number;
   constructor(status: number, message: string) {
     super(message);
@@ -23,7 +24,7 @@ class ApiError extends Error {
   }
 }
 
-async function request<T>(path: string): Promise<T> {
+export async function request<T>(path: string): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`);
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
@@ -32,7 +33,7 @@ async function request<T>(path: string): Promise<T> {
   return res.json() as Promise<T>;
 }
 
-async function post<T>(path: string, body: unknown): Promise<T> {
+export async function post<T>(path: string, body: unknown): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -71,13 +72,4 @@ export const api = {
     request<EvidenceGapItem[]>(`/api/companies/${encodeURIComponent(company)}/evidence-gaps`),
   getProfileCard: (company: string) =>
     request<CompanyProfileCard>(`/api/companies/${encodeURIComponent(company)}/profile-card`),
-  chat: (
-    company: string,
-    question: string,
-    itemCode?: string,
-    history?: { question: string; conclusion: string }[]
-  ) =>
-    post<ChatResponse>("/api/chat", { company, question, itemCode: itemCode ?? null, history: history ?? null }),
 };
-
-export { ApiError };

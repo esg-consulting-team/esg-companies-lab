@@ -1,10 +1,27 @@
 # -*- coding: utf-8 -*-
 """db/chroma_db_migrated의 원문 청크를 다시 임베딩해 backend/data/rag_index.sqlite3로 옮긴다.
 
-원본 chroma_db_migrated는 HNSW 벡터 인덱스(실제 float 벡터)가 마이그레이션 과정에서 유실되어
-그대로는 유사도 검색을 할 수 없다 (원문 텍스트·메타데이터는 sqlite에 온전히 남아 있음).
-그래서 대상 회사(DN오토모티브 007340 · 하나마이크론 067310)의 청크만 골라 Gemini
-임베딩(gemini-embedding-001, 768차원)으로 다시 벡터화한다. 재실행해도 이미 처리한 id는 건너뛴다.
+Gemini API로 다시 임베딩하는 이유(중요 — 과거 진단을 실측으로 바로잡음):
+애초 "원본 chroma_db_migrated는 HNSW 벡터 인덱스가 마이그레이션 과정에서 유실됐다"고 봤으나
+이는 틀렸다 — chromadb.PersistentClient로 직접 열어 자기-유사도 쿼리(distance=0.0)까지
+확인했고, 원본 벡터가 gemini-embedding-001의 네이티브 3072차원 출력이며 앞 768개만 잘라
+재정규화하면 API에 output_dimensionality=768로 직접 요청한 값과 코사인 유사도
+0.9999999999999999(사실상 동일)임도 실측으로 확인했다. 즉 원본 벡터를 재사용하는 것이
+수학적으로는 완전히 타당하다.
+
+다만 실제로 재사용을 시도해보니, 이 legacy 포맷 인덱스를 훨씬 최신 버전인 chromadb(1.5.9,
+Rust 코어)로 열어 `collection.get(..., include=["embeddings"])`를 반복 호출하면 같은 id로도
+"Error loading hnsw index"가 간헐적으로(때로는 성공, 때로는 연속 실패) 발생했다 — 버전 불일치나
+백그라운드 compactor/backfill 프로세스와의 경합으로 추정된다. db/chroma_db_migrated는 git에
+커밋돼 있지 않아 복구 수단이 없으므로, 원인을 더 파고들며 반복 접근해 원본을 불안정하게
+만들기보다 이미 안정적으로 검증된 Gemini API 재임베딩으로 되돌렸다(참고로 Gemini 텍스트
+임베딩은 무료라 API를 다시 타는 것 자체의 비용 문제는 없다). 재실행해도 이미 처리한 id는
+건너뛴다.
+
+COMPANY_CODES는 자사 2곳(DN오토모티브·하나마이크론)에 app/benchmark_config.BENCHMARK_MAP의
+벤치마킹 대상 회사 7곳을 더한 목록이다 — 챗봇이 "벤치마킹사는 어떻게 하고 있어?" 같은 질문에서
+벤치마킹 대상 회사의 문서까지 검색하려면(rag._resolve_doc_search_companies) 그 회사들도 여기
+포함돼 임베딩까지 끝나 있어야 한다.
 
 실행: backend 디렉터리에서
     .venv\\Scripts\\python.exe scripts\\build_rag_index.py
@@ -20,9 +37,19 @@ import numpy as np  # noqa: E402
 
 from app.gemini_client import embed_texts  # noqa: E402
 
-SOURCE_DB = r"D:\ESG\db\chroma_db_migrated\chroma.sqlite3"
+SOURCE_DB = str(Path(__file__).resolve().parents[2] / "db" / "chroma_db_migrated" / "chroma.sqlite3")
 TARGET_DB = str(Path(__file__).resolve().parent.parent / "data" / "rag_index.sqlite3")
-COMPANY_CODES = ["007340", "067310"]  # DN오토모티브, 하나마이크론
+COMPANY_CODES = [
+    "007340",  # DN오토모티브
+    "067310",  # 하나마이크론
+    "267260",  # HD현대일렉트릭 (DN오토모티브 벤치마킹)
+    "010120",  # 엘에스일렉트릭 (DN오토모티브 벤치마킹)
+    "361610",  # SK아이이테크놀로지 (DN오토모티브 벤치마킹)
+    "001440",  # 대한전선 (DN오토모티브 벤치마킹)
+    "009150",  # 삼성전기 (하나마이크론 벤치마킹)
+    "000660",  # SK하이닉스 (하나마이크론 벤치마킹)
+    "005930",  # 삼성전자 (하나마이크론 벤치마킹)
+]
 BATCH_SIZE = 80
 EMBED_DIM = 768
 

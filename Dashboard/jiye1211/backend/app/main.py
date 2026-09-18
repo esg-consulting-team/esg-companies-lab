@@ -2,14 +2,14 @@
 
 사양서: db/ESG_대시보드_전체화면_사양서_v2.md
 데이터: Supabase `esg_diagnosis` 테이블 (DN오토모티브 · 하나마이크론, 각 42개 항목)
-"""
-from typing import Optional
 
+AI 상담 챗봇(/api/chat, /api/rag/status) 라우트는 chat_routes.py에 별도로 분리돼 있다 —
+대시보드 화면(L1~L7) 라우트를 작업할 때 이 파일과 겹치지 않도록 하기 위함이다.
+"""
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
 
-from . import company_profile, evidence_docs, rag, repository, roadmap
+from . import chat_routes, company_profile, evidence_docs, repository, roadmap
 from .config import get_settings
 from .parsing import DOMAIN_BUCKETS
 
@@ -26,6 +26,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.include_router(chat_routes.router)
 
 
 @app.get("/api/health")
@@ -138,48 +139,3 @@ def company_profile_card(company: str) -> dict:
     if card is None:
         raise HTTPException(status_code=404, detail=f"'{company}'에 대한 프로필 데이터가 없습니다.")
     return card
-
-
-class ChatHistoryTurn(BaseModel):
-    question: str
-    conclusion: str
-
-
-class ChatRequest(BaseModel):
-    company: str
-    question: str
-    itemCode: Optional[str] = None
-    history: Optional[list[ChatHistoryTurn]] = None
-
-
-_ITEM_CONTEXT_FIELDS = [
-    "code",
-    "name",
-    "category",
-    "domainLabel",
-    "score",
-    "evidence",
-    "urgency",
-    "criteriaDetail",
-    "dataSource",
-    "scoringNote",
-    "solutionSplit",
-]
-
-
-@app.post("/api/chat")
-def chat(req: ChatRequest) -> dict:
-    if not req.question.strip():
-        raise HTTPException(status_code=400, detail="질문이 비어 있습니다.")
-    item_ctx = None
-    if req.itemCode:
-        detail = repository.build_item_detail(req.company, req.itemCode)
-        if detail:
-            item_ctx = {k: detail.get(k) for k in _ITEM_CONTEXT_FIELDS}
-    history = [h.model_dump() for h in req.history] if req.history else None
-    return rag.answer_question(req.company, req.question, item_context=item_ctx, history=history)
-
-
-@app.get("/api/rag/status")
-def rag_status() -> dict:
-    return rag.index_status()

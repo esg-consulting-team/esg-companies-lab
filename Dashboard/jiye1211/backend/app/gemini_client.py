@@ -48,18 +48,20 @@ def embed_query(text: str, output_dimensionality: int = 768, model: Optional[str
     return embed_texts([text], task_type="RETRIEVAL_QUERY", output_dimensionality=output_dimensionality, model=model)[0]
 
 
-def generate_grounded(
+def generate_with_functions(
     system_instruction: str,
     user_content: str,
+    function_declarations: list[dict[str, Any]],
     model: Optional[str] = None,
-    temperature: float = 0.2,
+    temperature: float = 0.1,
 ) -> dict[str, Any]:
-    """Google 검색 그라운딩을 켠 generateContent 호출.
+    """functionDeclarations를 준 상태로 generateContent를 호출해, 모델이 고른 함수 호출을 모두 모아 반환한다.
 
-    구조화 출력(responseSchema)과 검색 그라운딩 도구를 같은 요청에 함께 쓰면 API가 에러 없이
-    응답은 주지만 실제로는 검색을 타지 않는다(grounding metadata가 비어 있음) — 확인된 API 동작이라
-    여기서는 순수 텍스트 응답 + groundingMetadata만 받는다. 인용은 모델이 본문에 적은 텍스트가
-    아니라 이 groundingMetadata.groundingChunks(실제 검색된 출처)에서만 가져와야 한다.
+    질문 라우팅 전용 — 구조화 출력(responseSchema)과 함수 선언은 같은 요청에 함께 쓸 수 없어
+    (Gemini API 제약), 최종 답변 생성(generate_json)과는 별도의 호출로 분리한다. Gemini는 질문에
+    소주제가 여러 개면 한 응답에 functionCall part를 여러 개 담아 반환할 수 있어(병렬 함수 호출),
+    첫 번째만 보지 않고 전부 모은다. 실행은 하지 않는다 — 실행은 호출한 쪽이 신뢰할 수 있는
+    코드에서 한다.
     """
     settings = get_settings()
     mdl = model or settings.gemini_chat_model
@@ -67,7 +69,8 @@ def generate_grounded(
     body = {
         "systemInstruction": {"parts": [{"text": system_instruction}]},
         "contents": [{"role": "user", "parts": [{"text": user_content}]}],
-        "tools": [{"google_search": {}}],
+        "tools": [{"functionDeclarations": function_declarations}],
+        "toolConfig": {"functionCallingConfig": {"mode": "AUTO"}},
         "generationConfig": {"temperature": temperature},
     }
     with httpx.Client(timeout=_TIMEOUT) as client:
@@ -77,28 +80,19 @@ def generate_grounded(
 
     candidates = data.get("candidates") or []
     if not candidates:
-        return {"text": "", "sources": [], "queries": []}
+        return {"functionCalls": [], "text": ""}
 
-    cand = candidates[0]
-    parts = cand.get("content", {}).get("parts", [])
+    parts = candidates[0].get("content", {}).get("parts", [])
+    function_calls = [
+        {"name": p["functionCall"].get("name"), "args": p["functionCall"].get("args") or {}}
+        for p in parts
+        if p.get("functionCall")
+    ]
+    if function_calls:
+        return {"functionCalls": function_calls, "text": ""}
+
     text = "".join(p.get("text", "") for p in parts if "text" in p)
-
-    grounding = cand.get("groundingMetadata") or {}
-    sources = []
-    seen_uris: set[str] = set()
-    for chunk in grounding.get("groundingChunks", []):
-        web = chunk.get("web") or {}
-        uri = web.get("uri")
-        if not uri or uri in seen_uris:
-            continue
-        seen_uris.add(uri)
-        sources.append({"title": web.get("title") or uri, "uri": uri})
-
-    return {
-        "text": text.strip(),
-        "sources": sources,
-        "queries": grounding.get("webSearchQueries", []),
-    }
+    return {"functionCalls": [], "text": text.strip()}
 
 
 def generate_json(

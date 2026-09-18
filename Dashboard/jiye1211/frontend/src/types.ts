@@ -199,28 +199,6 @@ export interface SolutionSplit {
   evidence?: string;
 }
 
-export interface ChatCitation {
-  n: number;
-  doc: string;
-  page?: number | null;
-  snippet?: string;
-  score?: number;
-  /** 근거가 표 청크일 때만 내려오는, 서버에서 만든 안전한 <table> 마크업 (셀 텍스트는 이스케이프됨). */
-  tableHtml?: string;
-  /** 웹 검색 근거일 때만: 실제 출처 URL. 있으면 doc/snippet 대신 링크로 렌더링한다. */
-  url?: string;
-  source?: "doc" | "web";
-}
-
-export interface ChatResponse {
-  conclusion: string;
-  citations: ChatCitation[];
-  nextAction: string;
-  insufficientEvidence: boolean;
-  /** true면 사내 문서로 답이 안 돼 Google 검색으로 보충한 답변. */
-  viaWebSearch?: boolean;
-}
-
 export interface PendingReview {
   itemCode: string;
   currentScore: number;

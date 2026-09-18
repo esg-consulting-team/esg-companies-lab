@@ -1,6 +1,8 @@
-import { useState } from "react";
-import { api, ApiError } from "../api/client";
-import type { ChatResponse } from "../types";
+import { useEffect, useRef, useState } from "react";
+import { ApiError } from "../api/client";
+import { chatApi } from "../chat/api";
+import type { ChatResponse } from "../chat/types";
+import "../chat/consult.css";
 
 interface ChatTurn {
   question: string;
@@ -32,6 +34,17 @@ export function ConsultPanel({
 }) {
   const [draft, setDraft] = useState("");
   const [turns, setTurns] = useState<ChatTurn[]>([]);
+  const messagesRef = useRef<HTMLDivElement>(null);
+
+  // 메시지가 추가되거나(질문 전송, 로딩→응답 전환) 갱신될 때마다 채팅창 내부만 맨 아래로
+  // 스크롤한다 — scrollIntoView 대신 컨테이너의 scrollTop을 직접 옮겨서 좌측 대시보드 본문
+  // 스크롤에는 영향을 주지 않는다.
+  useEffect(() => {
+    const el = messagesRef.current;
+    if (el) {
+      el.scrollTop = el.scrollHeight;
+    }
+  }, [turns]);
 
   if (!open) {
     return (
@@ -48,7 +61,7 @@ export function ConsultPanel({
       .map((t) => ({ question: t.question, conclusion: t.response!.conclusion }));
     setTurns((prev) => [...prev, { question, loading: true }]);
     try {
-      const response = await api.chat(company, question, itemCode, history);
+      const response = await chatApi.ask(company, question, itemCode, history);
       setTurns((prev) => prev.map((t) => (t.question === question && t.loading ? { ...t, loading: false, response } : t)));
     } catch (e) {
       const msg = e instanceof ApiError ? e.message : "답변을 가져오지 못했습니다.";
@@ -67,7 +80,7 @@ export function ConsultPanel({
         </div>
         <span className="consult__context-badge">{contextLabel}</span>
 
-        <div style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: 16 }}>
+        <div className="consult__messages" ref={messagesRef}>
           {turns.length === 0 && (
             <p className="consult__conclusion" style={{ color: "var(--ink-3)" }}>
               이 화면·항목에 대해 궁금한 점을 물어보세요. 답변은 이 회사의 사업보고서·지배구조보고서·
@@ -94,14 +107,7 @@ export function ConsultPanel({
               {t.response && (
                 <>
                   <div>
-                    <div className="consult__block-label">
-                      결론
-                      {t.response.viaWebSearch && (
-                        <span className="pill" style={{ marginLeft: 6, color: "var(--warn)", borderColor: "var(--warn)" }}>
-                          웹 검색 근거
-                        </span>
-                      )}
-                    </div>
+                    <div className="consult__block-label">결론</div>
                     <p className="consult__conclusion">
                       {t.response.conclusion}
                       {t.response.insufficientEvidence && (
@@ -114,25 +120,14 @@ export function ConsultPanel({
 
                   {t.response.citations.length > 0 && (
                     <div>
-                      <div className="consult__block-label">근거{t.response.viaWebSearch ? " (웹)" : ""}</div>
+                      <div className="consult__block-label">근거</div>
                       {t.response.citations.map((c) => (
                         <div className="citation-card" key={c.n}>
                           <div className="citation-card__source">
-                            [{c.n}]{" "}
-                            {c.url ? (
-                              <a href={c.url} target="_blank" rel="noopener noreferrer">
-                                {c.doc}
-                              </a>
-                            ) : (
-                              c.doc
-                            )}
+                            [{c.n}] {c.doc}
                             {c.page ? ` · p.${c.page}` : ""}
                           </div>
-                          {c.tableHtml ? (
-                            <div className="citation-table-scroll" dangerouslySetInnerHTML={{ __html: c.tableHtml }} />
-                          ) : c.snippet ? (
-                            <div>{c.snippet}</div>
-                          ) : null}
+                          {c.snippet ? <div>{c.snippet}</div> : null}
                         </div>
                       ))}
                     </div>
@@ -151,7 +146,7 @@ export function ConsultPanel({
         </div>
 
         <form
-          style={{ display: "flex", gap: 6 }}
+          className="consult__form"
           onSubmit={(e) => {
             e.preventDefault();
             const q = draft.trim();
