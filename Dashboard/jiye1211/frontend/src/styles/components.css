@@ -4,7 +4,8 @@
 /* ── 기업 프로필 한 줄 (L1 상단) ──────────────────────── */
 .company-profile-line {
   font-size: 13px;
-  color: var(--ink-2);
+  color: var(--navy);
+  font-weight: 700;
   margin: 0;
 }
 
@@ -463,6 +464,39 @@
   font-size: 12px;
 }
 
+/* ── 레이더 차트 (L4) — §13.4 비교 계열 네이비 명도 단계만 사용 ────── */
+.radar-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0 4px;
+}
+.radar-chart__axis-label {
+  font-size: 11px;
+  fill: var(--ink-2);
+  font-weight: 700;
+}
+.radar-chart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+.radar-chart__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+.radar-chart__legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
 /* ── 도넛 게이지 ─────────────────────────────────────── */
 .donut-gauge {
   display: flex;
@@ -474,6 +508,16 @@
 }
 .donut-gauge__center {
   font-size: 11px;
+  font-weight: 700;
+  fill: var(--ink);
+}
+.donut-gauge__center-label {
+  font-size: 13px;
+  font-weight: 400;
+  fill: var(--ink-2);
+}
+.donut-gauge__center-value {
+  font-size: 26px;
   font-weight: 700;
   fill: var(--ink);
 }
@@ -670,6 +714,26 @@
 }
 
 /* ── 필터 칩 ──────────────────────────────────────────── */
+.filter-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.filter-group__label {
+  flex-shrink: 0;
+  width: 68px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--ink-3);
+}
 .filter-row {
   display: flex;
   flex-wrap: wrap;
@@ -720,6 +784,49 @@
 .tab[disabled] {
   opacity: 0.4;
   cursor: not-allowed;
+}
+
+/* 사회(S) 탭 — 이동 불가, hover/focus 시 제외 근거 링크를 담은 팝오버를 펼친다 */
+.tab-social {
+  position: relative;
+  display: inline-flex;
+}
+.tab-social__label {
+  opacity: 0.4;
+  cursor: default;
+}
+.tab-social__popover {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 5;
+  margin-top: 4px;
+  min-width: 280px;
+  padding: 10px 12px;
+  background: var(--shell-3);
+  border: 1px solid var(--rule-mid);
+  border-radius: var(--radius-md);
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity var(--motion), transform var(--motion), visibility var(--motion);
+}
+.tab-social:hover .tab-social__popover,
+.tab-social:focus-within .tab-social__popover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.tab-social__popover .criteria-banner {
+  font-size: 12.5px;
+  white-space: normal;
+}
+.tab-social__popover-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
 }
 
 /* ── 경고 배너 ────────────────────────────────────────── */
@@ -1036,6 +1143,43 @@
   font-size: 10.5px;
   color: var(--ink-3);
   flex-basis: 100%;
+}
+
+.roadmap-urgency-boxes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.roadmap-urgency-box {
+  background: var(--shell-3);
+  border: 1px solid var(--rule);
+  border-left: 3px solid transparent;
+  border-radius: var(--radius-md);
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.roadmap-urgency-box__level {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--ink-3);
+}
+.roadmap-urgency-box__count {
+  font-size: 20px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.roadmap-urgency-box--즉시 {
+  border-left-color: var(--crit);
+}
+.roadmap-urgency-box--중기 {
+  border-left-color: var(--warn);
+}
+.roadmap-urgency-box--장기 {
+  border-left-color: var(--stage-3);
 }
 
 .roadmap-task-list {

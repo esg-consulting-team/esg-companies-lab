@@ -1,4 +1,4 @@
-"""ESG 진단 콘솔 API (L1~L3 MVP).
+"""ESG 통합 진단 센터 API (L1~L3 MVP).
 
 사양서: db/ESG_대시보드_전체화면_사양서_v2.md
 데이터: Supabase `esg_diagnosis` 테이블 (DN오토모티브 · 하나마이크론, 각 42개 항목)
@@ -10,10 +10,11 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 from . import chat_routes, company_profile, evidence_docs, repository, roadmap
+from .cache_utils import clear_all_caches
 from .config import get_settings
 from .parsing import DOMAIN_BUCKETS
 
-app = FastAPI(title="ESG 진단 콘솔 API", version="0.1.0")
+app = FastAPI(title="ESG 통합 진단 센터 API", version="0.1.0")
 
 settings = get_settings()
 app.add_middleware(
@@ -32,6 +33,14 @@ app.include_router(chat_routes.router)
 @app.get("/api/health")
 def health() -> dict:
     return {"status": "ok"}
+
+
+@app.post("/api/admin/clear-cache")
+def clear_cache() -> dict:
+    """개발용 — 인증 없음, 로컬 전용. Supabase 데이터를 직접 고친 뒤 TTL(기본 5분)을
+    기다리지 않고 바로 반영하고 싶을 때 호출한다(backend/app/cache_utils.py 참고)."""
+    cleared = clear_all_caches()
+    return {"status": "ok", "clearedEntries": cleared}
 
 
 @app.get("/api/companies")

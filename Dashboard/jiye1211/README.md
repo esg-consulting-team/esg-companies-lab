@@ -1,4 +1,4 @@
-# ESG 진단 콘솔
+# ESG 통합 진단 센터
 
 `db/ESG_대시보드_전체화면_사양서_v2.md` 사양서를 바탕으로, Supabase에 적재된 실제 진단 데이터(`esg_diagnosis`
 테이블 — DN오토모티브 · 하나마이크론, 각 42개 항목)로 동작하는 웹 앱입니다.
@@ -170,3 +170,6 @@ db/                   # 사양서 원본 .md
 - `db/chroma_db_migrated`(2GB, 원본 청크 236,691건, DN오토모티브·하나마이크론 외 38개사 포함)는
   그대로 두었습니다. 다른 회사를 화면에 추가하려면 Supabase에 해당 회사의 `esg_diagnosis` 데이터를
   먼저 넣고, `build_rag_index.py`의 대상 회사 코드에도 추가해야 합니다.
+- 기업코드·진단 항목 등 정적 참조 데이터는 백엔드가 TTL 5분짜리 캐시(`backend/app/cache_utils.py`)를
+  쓰므로, Supabase 데이터를 직접 수정한 경우 최대 5분 후 자동 반영되거나 `POST /api/admin/clear-cache`
+  호출로 즉시 반영할 수 있습니다(인증 없음, 로컬 개발 전용).

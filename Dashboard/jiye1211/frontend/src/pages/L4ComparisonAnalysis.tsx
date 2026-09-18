@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../api/client";
 import { useFetch } from "../hooks/useFetch";
 import { ExhibitCard, NoData, StateMessage, formatNum } from "../components/common";
+import { RadarChart } from "../components/RadarChart";
 import type { DomainBenchmarkCompany, GroupedTrendGroup, PrecedentCase } from "../types";
 
 function gapColor(gap: number): string {
@@ -115,7 +116,8 @@ function PrecedentCardView({ c, onGoItem }: { c: PrecedentCase; onGoItem: (code:
 }
 
 // ── Exhibit 12: 자사 vs 벤치마킹군 (company_esg_yearly · 도메인별 채점값) ──
-// 벤치마킹 매핑 자체는 backend/app/benchmark_config.py에서 관리한다(회사명 기준, 실명 그대로).
+// 벤치마킹 매핑 자체는 backend/app/benchmark_config.py에서 관리한다(회사명 기준, 실명 그대로) —
+// 다만 이 Exhibit 화면 표시는 아래 BENCHMARK_ANONYMOUS_LABELS로 실명을 가려서 보여준다.
 const BENCH_DOMAINS: { key: "disclosure" | "environment" | "governance"; label: string }[] = [
   { key: "disclosure", label: "정보공시" },
   { key: "environment", label: "환경" },
@@ -124,6 +126,18 @@ const BENCH_DOMAINS: { key: "disclosure" | "environment" | "governance"; label: 
 
 // 자사=--navy, 벤치마킹사는 순서대로 옅어지는 navy 계열로만 구분(무지개색 금지).
 const NAVY_SHADES = ["var(--navy)", "var(--navy-2)", "var(--navy-3)", "var(--navy-4)", "var(--navy-5)"];
+
+// 이 Exhibit 전용 익명 라벨 — backend/app/benchmark_config.py BENCHMARK_MAP의 리스트 순서에
+// 기대지 않고, 회사별 실명→익명 라벨을 여기 명시적으로 고정한다. 범례·막대 라벨·툴팁 어디에도
+// 실명이 노출되지 않도록 반드시 이 매핑을 거쳐서만 표시한다.
+const BENCHMARK_ANONYMOUS_LABELS: Record<string, Record<string, string>> = {
+  하나마이크론: { SK하이닉스: "A사", 삼성전자: "B사", 삼성전기: "C사" },
+  DN오토모티브: { HD현대일렉트릭: "A사", 엘에스일렉트릭: "B사", SK아이이테크놀로지: "C사", 대한전선: "D사" },
+};
+
+function anonymizeBenchmarkPeer(clientCompany: string, peerRealName: string): string {
+  return BENCHMARK_ANONYMOUS_LABELS[clientCompany]?.[peerRealName] ?? peerRealName;
+}
 
 function SelfVsBenchmarkGroupExhibit({ company }: { company: string }) {
   const { data, loading, error } = useFetch(() => api.getDomainBenchmark(company), [company]);
@@ -139,13 +153,29 @@ function SelfVsBenchmarkGroupExhibit({ company }: { company: string }) {
       eyebrow="자사 vs 벤치마킹군"
       title={hasData ? "벤치마킹군과 도메인별 채점값을 나란히 비교" : "벤치마킹 데이터 없음"}
       subtitle="정보공시·환경·지배구조만 비교합니다 — company_esg_yearly에는 업종특화/반도체특화 도메인의 별도 채점 컬럼이 없어 항목 단위 비교와 함께 제외했습니다."
-      source="company_esg_yearly · 벤치마킹사 개별 채점값(팀 채점표 기준)"
+      source="company_esg_yearly · 벤치마킹사 개별 채점값(팀 채점표 기준) · 벤치마킹사는 익명 처리됨"
     >
       {loading && <StateMessage>불러오는 중…</StateMessage>}
       {error && <StateMessage error>{error}</StateMessage>}
       {data && !hasData && <NoData>해당 데이터 없음</NoData>}
       {data && hasData && (
         <>
+          <RadarChart
+            axes={BENCH_DOMAINS.map((d) => ({ key: d.key, label: d.label }))}
+            series={[
+              {
+                label: `자사 · ${data.self!.company}`,
+                color: "var(--navy)",
+                emphasize: true,
+                values: data.self! as unknown as Record<string, number | null>,
+              },
+              ...data.peers.map((p, i) => ({
+                label: anonymizeBenchmarkPeer(company, p.company),
+                color: NAVY_SHADES[i + 1] ?? "var(--navy-5)",
+                values: p as unknown as Record<string, number | null>,
+              })),
+            ]}
+          />
           {BENCH_DOMAINS.map(({ key, label }) => {
             const rows: (DomainBenchmarkCompany & { isSelf: boolean })[] = [
               { ...data.self!, isSelf: true },
@@ -159,7 +189,7 @@ function SelfVsBenchmarkGroupExhibit({ company }: { company: string }) {
                   return (
                     <div className="bench-row" key={r.company}>
                       <span className={`bench-row__label ${r.isSelf ? "bench-row__label--self" : ""}`}>
-                        {r.isSelf ? `자사 · ${r.company}` : r.company}
+                        {r.isSelf ? `자사 · ${r.company}` : anonymizeBenchmarkPeer(company, r.company)}
                       </span>
                       <div className="bench-row__track">
                         {value !== null && (
@@ -199,7 +229,8 @@ function SelfVsBenchmarkGroupExhibit({ company }: { company: string }) {
             </tbody>
           </table>
           <p style={{ fontSize: 11, color: "var(--ink-3)", marginTop: 8 }}>
-            반도체특화 벤치마킹은 보고서 원문의 익명 라벨(A/B/C)이며, 위 실명 벤치마킹사와 순서가 대응한다고 확인되지 않았으므로 별도로 표시함
+            반도체특화 벤치마킹은 보고서 원문 자체의 익명 라벨(A/B/C)이며, 위 표의 A사/B사/C사(company_esg_yearly 기준
+            익명 라벨)와 같은 글자를 쓰더라도 실제로 같은 대상인지 확인되지 않았으므로 별도로 표시함
           </p>
         </>
       )}
@@ -300,6 +331,8 @@ export function L4ComparisonAnalysis() {
         )}
       </ExhibitCard>
 
+      {/* Exhibit 10 · KCGS 등급 상관도 — 화면에서 제거(하나마이크론 전용 기능이라 DN오토모티브는
+          어차피 note_kcgsCorrelation만 보였음). 완전 삭제하지 않고 주석 처리만 함 — 부활 요청 대비.
       <ExhibitCard
         number={10}
         eyebrow="KCGS 등급 상관도"
@@ -349,6 +382,7 @@ export function L4ComparisonAnalysis() {
           <NoData>{data.note_kcgsCorrelation ?? "해당 데이터 없음"}</NoData>
         )}
       </ExhibitCard>
+      */}
 
       <ExhibitCard
         number={11}

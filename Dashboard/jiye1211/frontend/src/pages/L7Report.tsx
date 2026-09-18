@@ -182,14 +182,22 @@ export function L7Report() {
         >
           <div className="kpi-row">
             <div className="kpi-cell">
-              <span className="kpi-cell__label">가채점 총점</span>
-              <div className="kpi-cell__value-row">
-                <DonutGauge rate={summary.assessment.rate} size={56} />
-                <span className="kpi-cell__value tabular-nums">
-                  {formatNum(summary.assessment.totalScore)} / {formatNum(summary.assessment.maxScore)}
-                </span>
+              <span className="kpi-cell__label" style={{ fontSize: 9 }}>
+                가채점 총점
+              </span>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <DonutGauge
+                  rate={summary.assessment.rate}
+                  size={140}
+                  r={54}
+                  strokeWidth={12}
+                  centerContent={{ label: "달성률", value: formatPct(summary.assessment.rate) }}
+                />
               </div>
-              <span className="kpi-cell__sub">달성률 {formatPct(summary.assessment.rate)}</span>
+              <span className="tabular-nums" style={{ fontSize: 11, color: "var(--ink-3)", textAlign: "center" }}>
+                {formatNum(summary.assessment.totalScore)} / {formatNum(summary.assessment.maxScore)}점 · 항목당 100점
+                정규화 기준
+              </span>
             </div>
             <div className="kpi-cell">
               <span className="kpi-cell__label">KCGS 공식등급</span>

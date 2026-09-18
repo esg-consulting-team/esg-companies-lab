@@ -1,8 +1,23 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { api } from "../api/client";
 import { useFetch } from "../hooks/useFetch";
-import { ExhibitCard, StateMessage, UrgencyDistribution } from "../components/common";
-import type { RoadmapChip as RoadmapChipData } from "../types";
+import { ExhibitCard, StateMessage } from "../components/common";
+import type { RoadmapChip as RoadmapChipData, UrgencyCounts } from "../types";
+
+/** 로드맵 탭 전용 시급성 표시 — L1의 통합 미니바(UrgencyDistribution) 대신, 단계 카드 안에서
+ * 즉시·중기·장기를 박스 3개로 나눠 한눈에 보이게 한다(L1 Exhibit 4는 건드리지 않는다). */
+function UrgencyBoxes({ counts }: { counts: UrgencyCounts }) {
+  return (
+    <div className="roadmap-urgency-boxes">
+      {(["즉시", "중기", "장기"] as const).map((level) => (
+        <div className={`roadmap-urgency-box roadmap-urgency-box--${level}`} key={level}>
+          <span className="roadmap-urgency-box__level">{level}</span>
+          <span className="roadmap-urgency-box__count">{counts[level]}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 function RoadmapChip({
   chip,
@@ -76,7 +91,7 @@ export function L5RoadmapImprovement() {
                 <span className="roadmap-stage-card__name">{stage.stageName}</span>
                 {stage.urgencyLevel && <span className="roadmap-stage-card__caption">원문: {stage.urgencyLevel}</span>}
               </div>
-              <UrgencyDistribution counts={stage.urgencyDistribution} />
+              <UrgencyBoxes counts={stage.urgencyDistribution} />
               <ul className="roadmap-task-list">
                 {stage.tasks.map((task) => (
                   <li className="roadmap-task" key={task.taskName}>
