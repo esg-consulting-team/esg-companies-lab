@@ -1,0 +1,128 @@
+:root {
+  /* ============================================================
+     디자인 시안 — wanted.md ("원티드/몽타주" 디자인 시스템) 반영
+     - 색상은 원문 OKLCH 값을 그대로 사용 (semantic alias 기준)
+     - dual-neutral(gray/neutral) 중 UI 표면은 neutral(쿨톤) 램프만 사용
+     ============================================================ */
+
+  /* 표면 */
+  --paper: oklch(1 0 0); /* bg-surface */
+  --shell: oklch(0.972 0.002 286); /* bg-subtle (neutral-50), 페이지 배경 */
+  --shell-2: oklch(0.961 0.002 286); /* bg-muted (neutral-75), hover fill */
+
+  /* 텍스트 — neutral-875/825 위 알파 배수 구조를 흰 배경 위에서 근사 */
+  --ink: oklch(0.148 0.004 277); /* fg-strong */
+  --ink-2: oklch(0.298 0.010 273 / 0.61); /* fg-secondary */
+  --ink-3: oklch(0.298 0.010 273 / 0.43); /* fg-tertiary */
+
+  /* 보더 — neutral-700 위 알파 배수 */
+  --rule: oklch(0.521 0.018 273 / 0.08); /* border-subtle */
+  --rule-mid: oklch(0.521 0.018 273 / 0.22); /* border-default */
+  --rule-strong: oklch(0.521 0.018 273 / 0.35); /* border-strong */
+
+  /* 브랜드(navy 슬롯에 매핑) — Wanted Blue 단일 primary */
+  --navy: oklch(0.563 0.241 261); /* blue-800, brand */
+  --navy-2: oklch(0.484 0.205 258); /* blue-900, hover(darken) */
+  --navy-3: oklch(0.607 0.225 257); /* blue-700 */
+  --navy-4: oklch(0.954 0.022 250); /* blue-100, bg-brand-subtle */
+  --navy-5: oklch(0.985 0.012 247); /* blue-50, 가장 옅은 브랜드 틴트 */
+
+  /* 시맨틱 signal — Status(Positive/Cautionary/Negative) */
+  --crit: oklch(0.546 0.220 27); /* red-700, fg-danger */
+  --crit-bg: oklch(0.951 0.018 18); /* red-100, bg-danger-subtle */
+  --warn: oklch(0.625 0.148 56); /* orange-700, fg-warning */
+  --warn-bg: oklch(0.967 0.030 81); /* orange-100, bg-warning-subtle */
+  --good: oklch(0.673 0.211 144); /* green-600, fg-success */
+  --good-bg: oklch(0.968 0.052 154); /* green-100, bg-success-subtle */
+
+  /* 브랜드 그라디언트 — avatar 등 문서화된 4곳에서만 사용 */
+  --gradient-brand: linear-gradient(
+    135deg,
+    oklch(0.563 0.241 261) 0%,
+    oklch(0.709 0.232 346) 50%,
+    oklch(0.686 0.210 41) 100%
+  );
+
+  /* ── 서체 (wanted.md §Typography) ───────────────────────────── */
+  --font-sans: "Pretendard JP", "Pretendard Variable", Pretendard,
+    -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo",
+    "Noto Sans KR", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, Consolas,
+    "Courier New", monospace;
+
+  /* ── 타입 스케일 (19 named styles 중 대시보드에 쓰는 부분집합) ──── */
+  --fs-display1: 56px;
+  --fs-title1: 32px;
+  --fs-title3: 24px;
+  --fs-heading1: 22px;
+  --fs-heading2: 20px;
+  --fs-headline1: 18px;
+  --fs-headline2: 17px;
+  --fs-body1: 16px;
+  --fs-body2: 15px;
+  --fs-label1: 14px;
+  --fs-label2: 13px;
+  --fs-caption1: 12px;
+  --fs-caption2: 11px;
+
+  /* ── 형태 (§Rounded — 대부분 8/12, pill은 full, 카드는 16) ───── */
+  --radius-control: 8px; /* 버튼 xs/sm, input 기본 */
+  --radius-card: 16px; /* {component.card} */
+  --radius-panel: 12px; /* dropdown-menu, alert, segmented 트랙 */
+  --radius-badge: 6px; /* {component.badge} — chip/tag보다 조밀 */
+  --radius-full: 9999px; /* chip, tag, filter-pill, avatar */
+
+  /* ── Elevation (플로팅 표면 전용 — 카드에는 적용하지 않음) ───── */
+  --shadow-1: 0 1px 2px oklch(0.155 0 0 / 0.06), 0 1px 3px oklch(0 0 0 / 0.05);
+  --shadow-3: 0 6px 16px oklch(0 0 0 / 0.08), 0 2px 4px oklch(0.155 0 0 / 0.06);
+  --shadow-pop: 0 8px 24px oklch(0 0 0 / 0.12);
+}
+
+/* wanted.md §Semantic alias — Dark (공식 다크 값 우선 반영) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: oklch(0.166 0.005 271); /* dark-bg-surface (neutral-950) */
+    --shell: oklch(0.148 0.004 277); /* dark-bg-canvas (neutral-960) */
+    --shell-2: oklch(0.196 0.008 273); /* dark-bg-muted (neutral-925) */
+    --ink: oklch(1 0 0);
+    --ink-2: oklch(1 0 0 / 0.61);
+    --ink-3: oklch(1 0 0 / 0.43);
+    --rule: oklch(1 0 0 / 0.08);
+    --rule-mid: oklch(1 0 0 / 0.22);
+    --rule-strong: oklch(1 0 0 / 0.35);
+    --navy: oklch(0.633 0.198 259); /* 공식 다크 primary-normal #3385FF */
+    --navy-2: oklch(0.715 0.155 255);
+    --navy-3: oklch(0.607 0.225 257);
+    --navy-4: oklch(0.149 0.069 257); /* dark-bg-brand-subtle */
+    --navy-5: oklch(0.196 0.008 273);
+    --crit: #ff6363; /* 공식 다크 status-negative */
+    --crit-bg: oklch(0.7 0.191 23 / 0.08);
+    --warn: #ffa938; /* 공식 다크 status-cautionary */
+    --warn-bg: oklch(0.79 0.16 70 / 0.08);
+    --good: #1ed45a; /* 공식 다크 status-positive */
+    --good-bg: oklch(0.761 0.214 148 / 0.08);
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: oklch(0.166 0.005 271);
+  --shell: oklch(0.148 0.004 277);
+  --shell-2: oklch(0.196 0.008 273);
+  --ink: oklch(1 0 0);
+  --ink-2: oklch(1 0 0 / 0.61);
+  --ink-3: oklch(1 0 0 / 0.43);
+  --rule: oklch(1 0 0 / 0.08);
+  --rule-mid: oklch(1 0 0 / 0.22);
+  --rule-strong: oklch(1 0 0 / 0.35);
+  --navy: oklch(0.633 0.198 259);
+  --navy-2: oklch(0.715 0.155 255);
+  --navy-3: oklch(0.607 0.225 257);
+  --navy-4: oklch(0.149 0.069 257);
+  --navy-5: oklch(0.196 0.008 273);
+  --crit: #ff6363;
+  --crit-bg: oklch(0.7 0.191 23 / 0.08);
+  --warn: #ffa938;
+  --warn-bg: oklch(0.79 0.16 70 / 0.08);
+  --good: #1ed45a;
+  --good-bg: oklch(0.761 0.214 148 / 0.08);
+}

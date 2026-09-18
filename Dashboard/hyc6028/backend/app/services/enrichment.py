@@ -19,6 +19,17 @@ _APPLY_YEAR_RE = re.compile(r"(\d{4})년\(FY\d+\)부터\s*적용")
 _PREP_RANGE_RE = re.compile(r"체계\s*구축\s*기간은\s*(\d{4})~(\d{4})년\s*(\d+)년")
 _FIRST_DISCLOSURE_RE = re.compile(r"(\d{4})년이\s*첫\s*공시\s*대상")
 
+_CODE_SPLIT_RE = re.compile(r"[·,]")
+
+
+def expand_related_codes(raw_codes: list[str] | None) -> list[str]:
+    """related_item_codes 항목은 코드 여러 개가 한 문자열에 묶여 있을 수 있다
+    (예: '반도체-E-1·E-2·E-4·E-5') 혹은 코드가 아닐 수 있다('비채점과제', 'P 영역 전체')."""
+    out: list[str] = []
+    for c in raw_codes or []:
+        out.extend(p.strip() for p in _CODE_SPLIT_RE.split(c) if p.strip())
+    return out
+
 
 def get_company_id(company: str) -> int | None:
     supabase = get_supabase()
@@ -193,7 +204,7 @@ def get_kcgs_grade_trend(company: str) -> tuple[list[GradeTrendRow], str | None]
 
 def get_roadmap_plan(company: str) -> RoadmapPlanResponse | None:
     """esg_roadmap_stages + esg_roadmap_tasks를 조립하고, 각 과제의 related_item_codes를
-    esg_diagnosis.urgency와 조인해 개별 코드별 시급성과 '최고 시급성' 배지 값을 계산한다."""
+    esg_diagnostic_scores.urgency와 조인해 개별 코드별 시급성과 '최고 시급성' 배지 값을 계산한다."""
     company_id = get_company_id(company)
     if company_id is None:
         return None
@@ -218,16 +229,16 @@ def get_roadmap_plan(company: str) -> RoadmapPlanResponse | None:
 
     # 실제 채점 항목의 urgency 맵 (item_code -> urgency)
     diag_res = (
-        supabase.table("esg_diagnosis")
-        .select("category_code, urgency")
-        .eq("company", company)
+        supabase.table("esg_diagnostic_scores")
+        .select("item_code, urgency")
+        .eq("company_id", company_id)
         .execute()
     )
-    urgency_by_code = {r["category_code"]: r["urgency"] for r in (diag_res.data or []) if r.get("urgency")}
+    urgency_by_code = {r["item_code"]: r["urgency"] for r in (diag_res.data or []) if r.get("urgency")}
 
     tasks_by_stage: dict[str, list[RoadmapTaskV2]] = {}
     for t in task_res.data or []:
-        codes = t.get("related_item_codes") or []
+        codes = expand_related_codes(t.get("related_item_codes"))
         code_urgencies = []
         for code in codes:
             u = urgency_by_code.get(code)
@@ -238,7 +249,7 @@ def get_roadmap_plan(company: str) -> RoadmapPlanResponse | None:
             worst = min((c["urgency"] for c in code_urgencies), key=lambda u: URGENCY_RANK.get(u, 9))
         task = RoadmapTaskV2(
             task_name=t["task_name"],
-            related_item_codes=codes,
+            related_item_codes=t.get("related_item_codes") or [],
             deliverables=t.get("deliverables"),
             code_urgencies=code_urgencies,
             worst_urgency=worst,

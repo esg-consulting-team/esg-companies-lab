@@ -30,9 +30,11 @@ _SOLUTION_MARKER_RE = re.compile(r"\[(26년\s*현황|개선방향|필요\s*근�
 
 
 def map_domain_key(row: dict) -> str:
-    """항목의 도메인 분류. '반도체-' 코드 항목은 업종특화로 별도 분리한다."""
+    """항목의 도메인 분류. apply_type에 '업종특화'가 포함되거나 '반도체-' 코드인 항목은
+    업종특화로 별도 분리한다 (esg_diagnostic_items.apply_type 기준)."""
     code = row.get("category_code") or ""
-    if code.startswith("반도체"):
+    apply_type = row.get("apply_type") or ""
+    if "업종특화" in apply_type or code.startswith("반도체"):
         return "sector"
     domain = row.get("domain")
     if domain == "정보공시":
@@ -79,15 +81,54 @@ def parse_solution(text: str | None) -> SolutionBlock:
 
 
 def fetch_items(company: str) -> list[dict]:
+    """esg_diagnostic_scores를 esg_diagnostic_items와 조인해 조회한다
+    (구 평면 테이블 esg_diagnosis 대신 ESG_handoff와 동일한 정규화 스키마 사용).
+
+    반환 dict의 키 이름은 이 모듈과 하위 서비스(roadmap/documents/reports)가 기대하는
+    기존 필드명(category_code, domain, note_scoring_model 등)으로 맞춰서 내려준다.
+    """
+    company_id = enrichment.get_company_id(company)
+    if company_id is None:
+        return []
     supabase = get_supabase()
     res = (
-        supabase.table("esg_diagnosis")
-        .select("*")
-        .eq("company", company)
-        .order("seq_no")
+        supabase.table("esg_diagnostic_scores")
+        .select(
+            "item_code,fulfilled_level,violation_type_1,violation_type_2,violation_type_3,"
+            "score,note_2025,note_2026,urgency,solution,"
+            "esg_diagnostic_items(item_name,area,apply_type,category,scoring_type,"
+            "criteria_detail,kssb_status,kssb_reference,other_reference,"
+            "improvement_guide,audit_question,answer_format)"
+        )
+        .eq("company_id", company_id)
         .execute()
     )
-    return res.data or []
+    merged = []
+    for row in res.data or []:
+        item = row.pop("esg_diagnostic_items") or {}
+        merged.append(
+            {
+                **row,
+                "category_code": row["item_code"],
+                "item_name": item.get("item_name"),
+                "domain": item.get("area"),
+                "apply_type": item.get("apply_type"),
+                "application_type": item.get("apply_type"),
+                "category": item.get("category"),
+                "scoring_type": item.get("scoring_type"),
+                "criteria_detail": item.get("criteria_detail"),
+                "kssb_status": item.get("kssb_status"),
+                "kssb_reference": item.get("kssb_reference"),
+                "other_reference_standards": item.get("other_reference"),
+                "improvement_guide": item.get("improvement_guide"),
+                "audit_question": item.get("audit_question"),
+                "answer_format": item.get("answer_format"),
+                "note_scoring_model": row.get("note_2025"),
+                "note_ai_scoring": row.get("note_2026"),
+            }
+        )
+    merged.sort(key=lambda r: r["category_code"])
+    return merged
 
 
 def list_companies() -> list[CompanyMeta]:
@@ -251,18 +292,10 @@ def build_domain_items(company: str, domain_key: str) -> DomainItemsResponse | N
 
 
 def build_item_detail(company: str, item_code: str) -> ItemDetail | None:
-    supabase = get_supabase()
-    res = (
-        supabase.table("esg_diagnosis")
-        .select("*")
-        .eq("company", company)
-        .eq("category_code", item_code)
-        .limit(1)
-        .execute()
-    )
-    if not res.data:
+    items = fetch_items(company)
+    r = next((row for row in items if row["category_code"] == item_code), None)
+    if r is None:
         return None
-    r = res.data[0]
     ev = parse_evidence(r.get("note_scoring_model"))
     ev.deduction_note = r.get("note_ai_scoring")
     sol = parse_solution(r.get("solution"))
