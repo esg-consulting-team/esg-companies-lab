@@ -2,21 +2,26 @@ import { useParams, useNavigate } from "react-router-dom";
 import { api } from "../api/client";
 import { useFetch } from "../hooks/useFetch";
 import { ExhibitCard, StateMessage } from "../components/common";
-import type { RoadmapChip as RoadmapChipData, UrgencyCounts } from "../types";
+import type { RoadmapChip as RoadmapChipData, RoadmapTask, UrgencyCounts } from "../types";
 
-/** 로드맵 탭 전용 시급성 표시 — L1의 통합 미니바(UrgencyDistribution) 대신, 단계 카드 안에서
- * 즉시·중기·장기를 박스 3개로 나눠 한눈에 보이게 한다(L1 Exhibit 4는 건드리지 않는다). */
-function UrgencyBoxes({ counts }: { counts: UrgencyCounts }) {
-  return (
-    <div className="roadmap-urgency-boxes">
-      {(["즉시", "중기", "장기"] as const).map((level) => (
-        <div className={`roadmap-urgency-box roadmap-urgency-box--${level}`} key={level}>
-          <span className="roadmap-urgency-box__level">{level}</span>
-          <span className="roadmap-urgency-box__count">{counts[level]}</span>
-        </div>
-      ))}
-    </div>
-  );
+export const LEVELS = ["즉시", "중기", "장기"] as const;
+type Level = (typeof LEVELS)[number];
+
+/** 그 해 건수가 가장 많은 시급성(동률이면 즉시>중기>장기 순). 건수가 전부 0이면 null. */
+function dominantLevel(counts: UrgencyCounts): Level | null {
+  let best: Level | null = null;
+  for (const level of LEVELS) {
+    if (counts[level] > 0 && (best === null || counts[level] > counts[best])) best = level;
+  }
+  return best;
+}
+
+/** 과제의 시급성 = 과제에 딸린 항목코드 칩 중 가장 급한 시급성. 시급성이 있는 항목 칩이 없으면 null. */
+export function taskLevel(task: RoadmapTask): Level | null {
+  for (const level of LEVELS) {
+    if (task.chips.some((c) => c.type === "item" && c.urgency === level)) return level;
+  }
+  return null;
 }
 
 function RoadmapChip({
@@ -73,7 +78,7 @@ export function L5RoadmapImprovement() {
           {disclosureDeadline["공급망 요구"] && (
             <div className="roadmap-dday__note">공급망 요구 참고: {disclosureDeadline["공급망 요구"]}</div>
           )}
-          <div className="roadmap-dday__note">출처: 컨설팅보고서 §08 최종 로드맵 · 공시 의무화 일정</div>
+          <div className="roadmap-dday__note">출처: 컨설팅 보고서 §08 최종 로드맵</div>
         </section>
       )}
 
@@ -81,7 +86,7 @@ export function L5RoadmapImprovement() {
         number={1}
         eyebrow="4개년 실행 로드맵"
         title="연도별 단계 · 과제 · 관련 항목"
-        source="컨설팅보고서 §08 최종 로드맵"
+        source="컨설팅 보고서 §08 최종 로드맵"
       >
         <div className="roadmap-stages">
           {stages.map((stage) => (
@@ -91,20 +96,44 @@ export function L5RoadmapImprovement() {
                 <span className="roadmap-stage-card__name">{stage.stageName}</span>
                 {stage.urgencyLevel && <span className="roadmap-stage-card__caption">원문: {stage.urgencyLevel}</span>}
               </div>
-              <UrgencyBoxes counts={stage.urgencyDistribution} />
-              <ul className="roadmap-task-list">
-                {stage.tasks.map((task) => (
-                  <li className="roadmap-task" key={task.taskName}>
-                    <div className="roadmap-task__name">{task.taskName}</div>
-                    <div className="roadmap-task__chips">
-                      {task.chips.map((chip, i) => (
-                        <RoadmapChip key={i} chip={chip} onGoItem={goItem} onGoDomain={goDomain} />
-                      ))}
+              {dominantLevel(stage.urgencyDistribution) && (
+                <div className="roadmap-stage-card__main">주요: {dominantLevel(stage.urgencyDistribution)}</div>
+              )}
+              {[...LEVELS, null].map((level) => {
+                const tasks = stage.tasks.filter((t) => taskLevel(t) === level);
+                if (level === null && tasks.length === 0) return null;
+                const key = level ?? "none";
+                return (
+                  <section className={`roadmap-section roadmap-section--${key}`} key={key}>
+                    <div className="roadmap-section__header">
+                      <span className="roadmap-dot" aria-hidden="true" />
+                      {level ?? "분류 없음"} ({tasks.length})
                     </div>
-                    {task.deliverables && <div className="roadmap-task__deliverables">산출물: {task.deliverables}</div>}
-                  </li>
-                ))}
-              </ul>
+                    {tasks.length === 0 ? (
+                      <p className="roadmap-section__empty">해당 연도에 {level} 과제가 없습니다</p>
+                    ) : (
+                      <ul className="roadmap-task-list">
+                        {tasks.map((task) => (
+                          <li className="roadmap-task" key={task.taskName}>
+                            <div className="roadmap-task__name">
+                              {level && <span className="roadmap-dot roadmap-dot--task" aria-hidden="true" />}
+                              {task.taskName}
+                            </div>
+                            <div className="roadmap-task__chips">
+                              {task.chips.map((chip, i) => (
+                                <RoadmapChip key={i} chip={chip} onGoItem={goItem} onGoDomain={goDomain} />
+                              ))}
+                            </div>
+                            {task.deliverables && (
+                              <div className="roadmap-task__deliverables">산출물: {task.deliverables}</div>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </section>
+                );
+              })}
             </div>
           ))}
         </div>
@@ -115,7 +144,7 @@ export function L5RoadmapImprovement() {
           number={2}
           eyebrow="시급성 판단 기준"
           title="즉시 · 중기 · 장기 분류 기준"
-          source="컨설팅보고서 §08 최종 로드맵 · 시급성 분류 기준"
+          source="컨설팅 보고서 §08 최종 로드맵"
         >
           <div className="roadmap-criteria-grid">
             {urgencyCriteria.map((c) => (
