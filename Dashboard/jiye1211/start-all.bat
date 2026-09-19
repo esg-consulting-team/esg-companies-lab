@@ -1,11 +1,12 @@
 @echo off
+chcp 65001 >nul
 setlocal
 cd /d "%~dp0"
 
 echo [ESG] 백엔드 / 프론트엔드를 각각 새 창에서 띄웁니다...
-start "ESG Backend  (http://127.0.0.1:8000)"  cmd /k call "%~dp0backend\start-backend.bat"
+start "ESG Backend (http://127.0.0.1:8000)" cmd /k "chcp 65001 >nul && call "%~dp0backend\start-backend.bat""
 timeout /t 2 /nobreak >nul
-start "ESG Frontend (http://localhost:5173)"  cmd /k call "%~dp0frontend\start-frontend.bat"
+start "ESG Frontend (http://localhost:5173)" cmd /k "chcp 65001 >nul && call "%~dp0frontend\start-frontend.bat""
 
 echo.
 echo   Backend : http://127.0.0.1:8000

@@ -57,8 +57,9 @@ export function AppShell() {
             onChange={(e) => navigate(`/companies/${encodeURIComponent(e.target.value)}/${currentScreen}`)}
           >
             {companies.map((c) => (
+              // c.id(기업코드)는 데이터에는 유지하되 화면 렌더링에서만 뺀다 — 회사명만 표시.
               <option key={c.name} value={c.name}>
-                {c.name} {c.id ? c.id : ""}
+                {c.name}
               </option>
             ))}
           </select>
