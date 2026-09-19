@@ -12,6 +12,10 @@ import {
   formatPct,
   gradeStyle,
 } from "../components/common";
+// L4의 벤치마킹 익명화 매핑을 그대로 가져다 쓴다 — L7에 따로 만들면 두 곳이 어긋날 수 있어서
+// (L4ComparisonAnalysis.tsx에서 export).
+import { anonymizeBenchmarkPeer, sortPeersByAnonymousLabel } from "./L4ComparisonAnalysis";
+import { LEVELS, taskLevel } from "./L5RoadmapImprovement";
 import type { DomainBucketKey, DomainDetail } from "../types";
 
 const DOMAIN_ORDER: { key: DomainBucketKey }[] = [
@@ -130,7 +134,7 @@ export function L7Report() {
       </section>
 
       {enabled.cover && (
-        <ExhibitCard number={1} eyebrow="표지" title={`${company} ESG 진단 리포트`} source="기업 개황 프로필">
+        <ExhibitCard number={1} eyebrow="표지" title={`${company} ESG 진단 리포트`}>
           <div className="l7-cover">
             <div className="l7-cover__headline">
               {company} {companyMeta.sector && <span className="l7-cover__sector">· {companyMeta.sector}</span>}
@@ -178,7 +182,6 @@ export function L7Report() {
           number={2}
           eyebrow="종합진단 요약"
           title="가채점 총점 · KCGS 등급 · 영역별 달성률"
-          source="K-ESG v2.0 가이드라인 · 2026년 손채점 결과 · KCGS 공식등급"
         >
           <div className="kpi-row">
             <div className="kpi-cell">
@@ -266,10 +269,17 @@ export function L7Report() {
           eyebrow="영역별 진단"
           title="영역별 근거충분성 요약"
           subtitle="항목 전체 목록이 아닌 영역별 집계만 표시합니다 — 상세는 L2를 참고하세요."
-          source="2026년 손채점 결과 · 해당 항목 기준 집계"
+          source="적용 항목 기준"
         >
           <div className="table-scroll">
-            <table className="data-table">
+            <table className="data-table data-table--l7">
+              <colgroup>
+                <col style={{ width: "28%" }} />
+                <col style={{ width: "18%" }} />
+                <col style={{ width: "18%" }} />
+                <col style={{ width: "18%" }} />
+                <col style={{ width: "18%" }} />
+              </colgroup>
               <thead>
                 <tr>
                   <th>영역</th>
@@ -305,11 +315,18 @@ export function L7Report() {
           number={4}
           eyebrow="벤치마킹 비교"
           title="자사 vs 벤치마킹군 도메인별 채점값"
-          source="벤치마킹사 개별 채점값(팀 채점표 기준)"
+          source="벤치마킹사 최신 채점값"
         >
           {benchmark.self ? (
             <div className="table-scroll">
-              <table className="data-table">
+              <table className="data-table data-table--l7">
+                <colgroup>
+                  <col style={{ width: "28%" }} />
+                  <col style={{ width: "18%" }} />
+                  <col style={{ width: "18%" }} />
+                  <col style={{ width: "18%" }} />
+                  <col style={{ width: "18%" }} />
+                </colgroup>
                 <thead>
                   <tr>
                     <th>회사</th>
@@ -329,9 +346,9 @@ export function L7Report() {
                     <td className="num">{benchmark.self.environment ?? <NoData />}</td>
                     <td className="num">{benchmark.self.governance ?? <NoData />}</td>
                   </tr>
-                  {benchmark.peers.map((p) => (
+                  {sortPeersByAnonymousLabel(company, benchmark.peers).map((p) => (
                     <tr key={p.company}>
-                      <td>{p.company}</td>
+                      <td>{anonymizeBenchmarkPeer(company, p.company)}</td>
                       <td className="num">{p.overall ?? <NoData />}</td>
                       <td className="num">{p.disclosure ?? <NoData />}</td>
                       <td className="num">{p.environment ?? <NoData />}</td>
@@ -353,15 +370,21 @@ export function L7Report() {
           eyebrow="개선 로드맵"
           title="4개년 실행 로드맵 요약"
           subtitle="과제 전체 목록이 아닌 단계별 요약만 표시합니다 — 상세는 L5를 참고하세요."
-          source="컨설팅보고서 §08 최종 로드맵"
         >
           <div className="table-scroll">
-            <table className="data-table">
+            <table className="data-table data-table--l7">
+              <colgroup>
+                <col style={{ width: "12%" }} />
+                <col style={{ width: "42%" }} />
+                <col style={{ width: "18%" }} />
+                <col style={{ width: "28%" }} />
+              </colgroup>
               <thead>
                 <tr>
                   <th>연도</th>
                   <th>단계명</th>
                   <th className="num">과제 수</th>
+                  <th className="l7-col-gap">시급성별 과제 수</th>
                 </tr>
               </thead>
               <tbody>
@@ -370,11 +393,15 @@ export function L7Report() {
                     <td className="mono">{s.year}</td>
                     <td>{s.stageName}</td>
                     <td className="num">{s.tasks.length}</td>
+                    <td className="l7-col-gap">{LEVELS.map((lv) => `${lv} ${s.tasks.filter((t) => taskLevel(t) === lv).length}`).join(" · ")}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
+          <p className="exhibit__source l7-table-note">
+            시급성별 과제 수는 과제에 연결된 항목코드의 시급성 기준이며, 시급성을 알 수 없는 과제(채점 외 과제 등)는 포함되지 않습니다.
+          </p>
           {roadmap.yearMismatchNote && <p className="roadmap-dday__caveat">※ {roadmap.yearMismatchNote}</p>}
           {roadmap.disclosureDeadline && (
             <p className="exhibit__source" style={{ marginTop: 4 }}>
@@ -466,7 +493,7 @@ export function L7Report() {
           number={7}
           eyebrow="부록"
           title="참고자료 현황"
-          source="2026년 손채점·AI보조채점 메모 키워드 매칭"
+          source="키워드 매칭"
         >
           {docs.documentCounts.map((d) => (
             <div className={`hbar-row ${d.label === "미분류" ? "hbar-row--muted" : ""}`} key={d.label}>
