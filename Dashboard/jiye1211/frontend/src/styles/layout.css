@@ -1,0 +1,376 @@
+/* 공통 셸: 앱바 + 좌측 레일(178px) + 본문 + 우측 AI 상담 패널(300px / 40px 스트립) */
+
+.app-shell {
+  /* 뷰포트에 높이를 고정하고 넘치는 건 각 컬럼(rail/main/consult) 내부에서만 스크롤하게 한다
+     — min-height였을 때는 AI 상담 메시지가 쌓일수록 셸 전체가 늘어나 페이지 자체가
+     길어졌다(내부 flex:1 자식들이 기댈 상한이 없었기 때문). */
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+}
+
+/* ── 앱바 (표면: --shell, §13.2) ──────────────────────── */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 20px;
+  height: 52px;
+  background: var(--shell);
+  border-bottom: 1px solid var(--rule);
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+
+.topbar__brand {
+  font-weight: 700;
+  font-size: 15px;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+.topbar__select {
+  border: 1px solid var(--rule-mid);
+  background: var(--shell-2);
+  color: var(--ink);
+  font-family: var(--font-family);
+  font-size: 12.5px;
+  padding: 5px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.topbar__link {
+  font-size: 12.5px;
+  color: var(--navy);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  white-space: nowrap;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color var(--motion);
+}
+.topbar__link:hover {
+  text-decoration-color: var(--navy);
+}
+
+.topbar__badge {
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 3px 8px;
+  border: 1px solid var(--rule-mid);
+  color: var(--ink-2);
+  white-space: nowrap;
+  border-radius: var(--radius-md);
+}
+
+.topbar__badge--warn {
+  color: var(--warn);
+  border-color: var(--warn);
+  background: var(--warn-bg);
+}
+
+.topbar__spacer {
+  flex: 1;
+}
+
+.topbar__user {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+/* ── 3열 본문 ─────────────────────────────────────────── */
+.app-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 178px 1fr var(--consult-w, 300px);
+  min-height: 0;
+}
+
+.app-body[data-consult="collapsed"] {
+  --consult-w: 40px;
+}
+
+/* ── 레일 (표면: --shell) ─────────────────────────────── */
+.rail {
+  background: var(--shell);
+  border-right: 1px solid var(--rule);
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow-y: auto;
+}
+
+.rail__group {
+  display: flex;
+  flex-direction: column;
+}
+
+.rail__group-label {
+  padding: 0 16px 6px;
+}
+
+.rail__item {
+  display: block;
+  padding: 8px 16px 8px 13px;
+  border-left: 3px solid transparent;
+  font-size: 13px;
+  color: var(--ink-2);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background var(--motion), border-color var(--motion), color var(--motion);
+}
+
+.rail__item:hover {
+  background: var(--shell-2);
+}
+
+.rail__item--active {
+  border-left-color: var(--navy);
+  background: var(--shell-2);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* ── 본문 ─────────────────────────────────────────────── */
+.main {
+  padding: 20px;
+  overflow-y: auto;
+  min-width: 0;
+  background: var(--paper);
+}
+
+.main__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* AI 상담 패널(.consult*, .citation-card*) 스타일은 ../chat/consult.css로 분리했다 —
+   ConsultPanel.tsx가 직접 import한다. */
+
+.deep-link-chip {
+  border: 1px solid var(--rule-mid);
+  padding: 4px 8px;
+  font-size: 11.5px;
+  color: var(--navy);
+  background: var(--shell-3);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background var(--motion), border-color var(--motion);
+}
+.deep-link-chip:hover {
+  background: var(--shell-2);
+  border-color: var(--navy);
+}
+
+/* ── 평가 기준 패널 (우측 슬라이드, elevation 2 = --shell-3, §13.3) ──── */
+.criteria-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--motion);
+  z-index: 60;
+}
+.criteria-backdrop--open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.criteria-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 440px;
+  max-width: 92vw;
+  background: var(--shell-3);
+  border-left: 1px solid var(--rule-strong);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform var(--motion);
+  z-index: 61;
+}
+.criteria-panel--open {
+  transform: translateX(0);
+}
+
+.criteria-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--rule-mid);
+  flex-shrink: 0;
+}
+.criteria-panel__title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.criteria-panel__close {
+  border: none;
+  background: none;
+  color: var(--ink-3);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px;
+  transition: color var(--motion);
+}
+.criteria-panel__close:hover {
+  color: var(--ink);
+}
+
+.criteria-panel__body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.criteria-panel__social-exclusion {
+  background: var(--shell-2);
+  border-left: 2px solid var(--navy);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+}
+
+.criteria-panel__reason-list {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.criteria-panel__reason-list strong {
+  color: var(--ink);
+}
+
+.criteria-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--ink-2);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  transition: color var(--motion);
+}
+.criteria-banner:hover {
+  color: var(--navy);
+}
+
+.scope3-toggle {
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  transition: color var(--motion);
+}
+.scope3-toggle:hover {
+  color: var(--navy);
+}
+
+.scope3-accordion {
+  background: var(--shell-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.scope3-accordion p {
+  margin: 0;
+}
+.scope3-accordion__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.scope3-accordion__tier {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  border-left: 2px solid transparent;
+}
+.scope3-accordion__tier--active {
+  background: var(--shell-3);
+  border-left-color: var(--navy);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+@media (max-width: 599px) {
+  .criteria-panel {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* ── 반응형 (사양서 §11) ─────────────────────────────── */
+@media (max-width: 1079px) {
+  .app-body {
+    grid-template-columns: 1fr;
+  }
+  .rail {
+    flex-direction: row;
+    overflow-x: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--rule);
+    padding: 0;
+  }
+  .rail__group {
+    flex-direction: row;
+  }
+  .rail__item {
+    border-left: none;
+    border-bottom: 3px solid transparent;
+    padding: 10px 12px;
+  }
+  .rail__item--active {
+    border-left-color: transparent;
+    border-bottom-color: var(--navy);
+  }
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 599px) {
+  .main {
+    padding: 16px;
+  }
+}

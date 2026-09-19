@@ -1,0 +1,171 @@
+/* AI 상담 패널(ConsultPanel) 전용 스타일 — 대시보드 공용 시트(../styles/layout.css)와
+   분리해 팀원이 대시보드 화면 스타일을 작업할 때 이 파일과 겹치지 않도록 한다.
+   (.deep-link-chip처럼 다른 화면도 함께 쓰는 클래스는 layout.css에 그대로 남겨 둔다.) */
+
+.consult {
+  height: 100%;
+  background: var(--shell);
+  border-left: 1px solid var(--rule);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: width var(--motion);
+}
+
+.consult__strip {
+  width: 40px;
+  writing-mode: vertical-rl;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  color: var(--ink-2);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  background: none;
+  border: none;
+  border-left: 1px solid var(--rule);
+  height: 100%;
+  width: 100%;
+  transition: background var(--motion), color var(--motion);
+}
+.consult__strip:hover {
+  background: var(--shell-2);
+  color: var(--ink);
+}
+
+.consult__panel {
+  /* 패널 자체는 늘어나거나 스크롤되지 않는다 — 늘어나는(스크롤되는) 건 .consult__messages뿐이다. */
+  flex: 1;
+  min-height: 0;
+  width: 300px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow: hidden;
+}
+
+.consult__header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.consult__title {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.consult__collapse {
+  border: none;
+  background: none;
+  color: var(--ink-3);
+  cursor: pointer;
+  font-size: 13px;
+  transition: color var(--motion);
+}
+.consult__collapse:hover {
+  color: var(--ink);
+}
+
+.consult__context-badge {
+  flex-shrink: 0;
+  align-self: flex-start;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  background: var(--navy-5);
+  color: var(--navy);
+  border-radius: var(--radius-md);
+}
+
+/* 메시지 목록 — 패널 안에서 유일하게 스크롤되는 영역(flex:1 + overflow-y:auto). 헤더·배지·
+   입력창·안내문은 flex-shrink:0으로 항상 제자리에 고정된다(카톡류 채팅 UI와 동일한 구조). */
+.consult__messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.consult__form {
+  flex-shrink: 0;
+  display: flex;
+  gap: 6px;
+}
+
+.consult__block-label {
+  font-size: 9.5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  margin-bottom: 4px;
+}
+
+.consult__conclusion {
+  font-size: 13.5px;
+  line-height: 1.6;
+  /* 전체 목록 응답(코드 — 이름을 줄바꿈으로 나열)이 한 줄로 뭉개지지 않도록 개행을 유지한다. */
+  white-space: pre-line;
+}
+
+.citation-card {
+  background: var(--shell-3);
+  border-left: 2px solid var(--navy);
+  padding: 6px 8px 6px 10px;
+  font-size: 12px;
+  color: var(--ink-2);
+  margin-bottom: 8px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.citation-card__source {
+  font-size: 10.5px;
+  color: var(--ink-3);
+  margin-bottom: 2px;
+}
+
+.consult__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.consult__footer {
+  flex-shrink: 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+  font-size: 10.5px;
+  color: var(--ink-3);
+  line-height: 1.5;
+}
+
+@media (max-width: 1079px) {
+  /* 이 폭에서는 rail/main/consult가 한 컬럼으로 쌓이는 레이아웃이라 뷰포트 고정 높이를
+     그대로 적용하면 세 영역이 100vh 안에 눌려 들어간다 — 상담 패널은 자기 콘텐츠 높이대로,
+     메시지 영역만 적당한 상한을 두고 스크롤하게 한다. */
+  .consult {
+    height: auto;
+    border-left: none;
+    border-top: 1px solid var(--rule);
+  }
+  .consult__strip {
+    writing-mode: horizontal-tb;
+    height: 40px;
+    width: 100%;
+  }
+  .consult__panel {
+    flex: none;
+    width: 100%;
+  }
+  .consult__messages {
+    flex: none;
+    max-height: 50vh;
+  }
+}

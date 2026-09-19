@@ -1,0 +1,177 @@
+{
+  "_readme": "두 컨설팅 보고서(docx)에서 사람이 직접 읽고 검증한 구조화 데이터. 원본 docx를 매번 재파싱하지 말고 이 파일을 정답 데이터로 사용할 것. 값이 range(범위)로만 보고서에 적힌 경우 note에 표시했고, 원본에 아예 없는 값은 null 처리했다 — null을 임의로 추정해서 채우지 말 것.",
+
+  "companies": {
+    "007340_DN오토모티브": {
+      "applicableItems": 36,
+      "itemBreakdown": { "정보공시": 5, "환경": 12, "지배구조": 19, "업종특화": 0 },
+      "note_applicableItems": "업종특화 6개 항목은 비해당으로 채점 범위에서 제외됨",
+
+      "benchmarkCompanyCount": 4,
+      "benchmarkAliases": ["벤치마킹 A", "벤치마킹 B", "벤치마킹 C", "벤치마킹 D"],
+      "benchmarkMissingDomains": [],
+
+      "totalScore": { "self": 37.1, "benchmarkAvg": 66.6, "gap": -29.5, "scale": "100점 환산 평균" },
+
+      "groupedScoreTrend": {
+        "dependentOnReport": {
+          "itemCount": 32,
+          "items_example": ["P-2-1", "P-3-1", "E-1-2", "E-3-3", "E-10-1"],
+          "selfScoreRange_2023to2025": [14, 21],
+          "benchmarkAvgRange_2023to2025": [60, 66],
+          "gapRange": [41, 50]
+        },
+        "independentOfReport": {
+          "itemCount": 4,
+          "selfVsBenchmarkDeltaRange": [3, 9],
+          "note": "이 그룹에서는 DN오토모티브가 벤치마킹 평균보다 오히려 높음"
+        },
+        "note_dataConfidence": "보고서 본문에 연도별 정확한 수치가 아니라 3개년 범위(range)로만 기재됨. 정확한 연도별 값이 필요하면 컨설턴트의 원본 채점 스프레드시트를 확인해야 함.",
+        "overallAvgTrend": { "2023": 21, "2025": 28, "note": "전사 평균, 개선분은 전부 independentOfReport 그룹에서 발생" }
+      },
+
+      "structuralZeroItems_3yearConsecutive": ["P-2-1", "P-3-1", "E-1-2", "E-3-3", "E-10-1"],
+
+      "precedentCases": [
+        {
+          "benchmarkAlias": "벤치마킹 (대한전선 사례)",
+          "itemCodes": ["P-2-1", "P-3-1", "E-3-3"],
+          "before": 0,
+          "afterRange": [75, 100],
+          "months": 12,
+          "note": "2025년 지속가능경영보고서에 검증기관명·검증표준(AA1000AS V3)·검증수준(Type1·Moderate)·중대성평가 결과를 구체적으로 명시한 것만으로 3개 문항이 동시에 도약. 신규 시스템 구축이 아니라 기재 수준 향상."
+        }
+      ],
+
+      "kcgsCorrelation": null,
+      "note_kcgsCorrelation": "이 보고서에는 항목별 KCGS 등급 상관계수(ρ) 분석이 포함되어 있지 않음 (하나마이크론 보고서에만 있음). 동일 분석을 DN오토모티브에도 적용할지 팀 논의 필요.",
+
+      "pendingItems": [],
+      "note_pendingItems": "9.2 진단의 한계에 일반적 유보사항(사회 영역 제외, 2026년 3월 이사회 개편 미반영)은 있으나, 항목 단위로 '판정 확인 중'이라고 명시된 항목은 없음.",
+
+      "generalLimitations": [
+        "외부 공개자료 기준으로 수행, 사내 미공시 정보 미반영",
+        "대기·수질 오염물질 배출농도 등은 확보된 증빙 기준으로 보수적 평가",
+        "사회(S) 영역은 진단 범위에서 제외",
+        "채점 기준일 2025.12.31 — 2026년 3월 이사회 개편 미반영"
+      ],
+      "nextDiagnosis": {
+        "fullRediagnosis": "2027년 하반기 (제1차 지속가능경영보고서 발간 시점)",
+        "partialCheck": "2026년 12월 — 환경 영역 12개 항목만 부분 재채점",
+        "monitoringCycle": "반기별, 시급성 '즉시' 27개 항목 대상"
+      }
+    },
+
+    "하나마이크론_ESG반도체특화": {
+      "applicableItems": 42,
+      "itemBreakdown": { "정보공시": 5, "환경": 12, "지배구조": 19, "반도체특화": 6 },
+      "note_applicableItems": "K-ESG 기본 36개 항목 + 반도체 특화 6개 항목",
+
+      "benchmarkCompanyCount": 3,
+      "benchmarkAliases": ["A사", "B사", "C사"],
+      "benchmarkMissingDomains": [
+        { "company": "A사", "domain": "지배구조", "note": "A사는 지배구조 영역이 채점되지 않음 — 지배구조 평균은 B·C사 기준, A사 합계는 산출하지 않음" }
+      ],
+
+      "totalScore": { "self": 51.3, "benchmarkAvg": 68.3, "gap": -17.0, "scale": "100점 환산, 42개 항목 평균" },
+
+      "domainScores": [
+        { "domain": "정보공시", "self": 85.0, "benchmarkAvg": 90.0, "gap": -5.0 },
+        { "domain": "환경",     "self": 61.5, "benchmarkAvg": 68.4, "gap": -6.9 },
+        { "domain": "지배구조", "self": 41.6, "benchmarkAvg": 70.9, "gap": -29.3, "note": "격차 최대 영역, A사 미채점으로 B·C사만 평균" },
+        { "domain": "반도체특화", "self": 33.3, "benchmarkAvg": 41.7, "gap": -8.3 }
+      ],
+
+      "domainScoresByCompany": {
+        "반도체특화": { "하나마이크론": 33.3, "A사": 66.7, "B사": 25.0, "C사": 33.3 }
+      },
+      "note_domainScoresByCompany": "반도체특화 벤치마킹은 보고서 원문의 익명 라벨(A/B/C)이며, company_esg_yearly의 실명 벤치마킹사(삼성전기·SK하이닉스·삼성전자)와 순서가 대응한다고 확인되지 않았음 — 별도로 취급할 것.",
+
+      "groupedScoreTrend": {
+        "dependentOnReport": {
+          "itemCount": 23,
+          "selfScore_2023": 53.8,
+          "selfScore_2025": 76.1,
+          "benchmarkAvg_2025": 77.7,
+          "note": "격차 사실상 해소"
+        },
+        "independentOfReport": {
+          "itemCount": 19,
+          "selfScore_2023": 36.3,
+          "selfScore_2025": 42.5,
+          "benchmarkAvg_2025": 65.4,
+          "gap_2025": -23
+        },
+        "note_dataConfidence": "연도별 정확한 수치 있음 (범위 아님)"
+      },
+
+      "structuralZeroItems_3yearConsecutive": ["G-1-2", "G-1-3", "G-1-4", "G-2-3", "G-3-2", "G-5-2", "G-경영진-추가1"],
+
+      "precedentCases": [
+        {
+          "benchmarkAlias": "C사",
+          "itemCodes": ["G-5-1"],
+          "before": 75,
+          "after": 100,
+          "beforeYear": 2023,
+          "afterYear": 2024,
+          "months": 12,
+          "note": "2023년 10월 '감사위원회 사무국' 신설 후 2024년부터 최고단계 도달, 2025년까지 유지. 단, 완전 신규 조직이 아니라 기존 지원기능(75점)의 공식 격상이라는 한계 있음."
+        }
+      ],
+
+      "kcgsCorrelation": [
+        { "itemCode": "G-3-2",          "itemName": "주주총회 집중일 이외 개최",       "self": 0,  "benchmarkAvg": 100.0, "gap": -100.0, "rho": 0.66 },
+        { "itemCode": "G-경영진-추가1", "itemName": "경영진 성과평가 및 보상",         "self": 0,  "benchmarkAvg": 100.0, "gap": -100.0, "rho": 0.45 },
+        { "itemCode": "E-6-1",           "itemName": "폐기물 배출량",                   "self": 0,  "benchmarkAvg": 100.0, "gap": -100.0, "rho": 0.41 },
+        { "itemCode": "G-1-3",           "itemName": "대표이사와 이사회 의장 분리",     "self": 0,  "benchmarkAvg": 100.0, "gap": -100.0, "rho": null, "rhoNote": "0.4 미만" },
+        { "itemCode": "E-10-1",          "itemName": "기후변화 거버넌스",               "self": 0,  "benchmarkAvg": 91.7,  "gap": -91.7,  "rho": 0.70 },
+        { "itemCode": "G-5-1",           "itemName": "내부감사부서 설치",               "self": 25, "benchmarkAvg": 100.0, "gap": -75.0,  "rho": 0.45 },
+        { "itemCode": "G-1-4",           "itemName": "이사회 성별 다양성",              "self": 0,  "benchmarkAvg": 75.0,  "gap": -75.0,  "rho": 0.45 },
+        { "itemCode": "반도체-E-4",      "itemName": "과불화탄소 배출량",               "self": 0,  "benchmarkAvg": 66.7,  "gap": -66.7,  "rho": null, "rhoNote": "분석 제외(표본 부족)" },
+        { "itemCode": "G-2-3",           "itemName": "이사회 산하 위원회",              "self": 0,  "benchmarkAvg": 62.5,  "gap": -62.5,  "rho": 0.49 },
+        { "itemCode": "G-3-1",           "itemName": "주주총회 소집 공고",              "self": 25, "benchmarkAvg": 87.5,  "gap": -62.5,  "rho": null, "rhoNote": "0.4 미만" },
+        { "itemCode": "G-2-4",           "itemName": "이사회 안건 처리",                "self": 0,  "benchmarkAvg": 50.0,  "gap": -50.0,  "rho": null, "rhoNote": "0.4 미만" },
+        { "itemCode": "G-5-2",           "itemName": "감사기구 전문성",                 "self": 0,  "benchmarkAvg": 50.0,  "gap": -50.0,  "rho": null, "rhoNote": "0.4 미만" },
+        { "itemCode": "G-1-2",           "itemName": "사외이사 비율",                   "self": 0,  "benchmarkAvg": 37.5,  "gap": -37.5,  "rho": 0.70 }
+      ],
+      "note_kcgsCorrelation": "rho는 채점값과 KCGS 등급 간 Spearman 상관계수. null + rhoNote인 항목은 |rho| < 0.4로 원 보고서가 상관 낮음으로만 표기(정확한 수치 미기재).",
+
+      "pendingItems": [
+        {
+          "itemCode": "G-1-1",
+          "currentScore": 100,
+          "pendingReason": "2026년 위원회 규정을 반영한 값이어서, FY2025 기준을 엄격 적용하면 25~50점으로 낮아질 수 있음. 판정 확인 중."
+        },
+        {
+          "itemCode": "E-10-5",
+          "currentScore": 62.5,
+          "pendingReason": "2023년도 Scope 3 산정 자료의 인정 여부에 따라 50점이 될 수 있음. 판정 확인 중."
+        },
+        {
+          "itemCode": "G-2-3",
+          "currentScore": 0,
+          "pendingReason": "채점 기준일(2025.12.31) 이후인 2026년 7월 위원회 운영 반영 시 FY2026 기준으로 25점 재평가 가능성."
+        },
+        {
+          "itemCode": "G-5-1",
+          "currentScore": 25,
+          "pendingReason": "2026년 감사실 신설 반영 시 FY2026 기준으로 50~75점 재평가 가능성."
+        }
+      ],
+
+      "generalLimitations": [
+        "외부 공개자료 기준, 사내 미공시 정보 미반영",
+        "A사는 지배구조 영역 미채점 — 지배구조 평균은 2개사 기준",
+        "고객사 평가년도 2026(FY2025), 벤치마킹사 평가년도 2025로 시점 차이 있음",
+        "사회(S) 영역 제외",
+        "반도체 특화 6개 항목은 전공정(FEOL) 중심 설계 — 후공정(OSAT) 기업 적용 시 제약 있음 (에너지효율 제품·초순수·과불화탄소·VOC 4개 항목 산정 불가로 0점)"
+      ],
+      "nextDiagnosis": {
+        "fullRediagnosis": "2027년 하반기 (정기주총 이후, 2027 지속가능경영보고서 발간 시점)",
+        "partialCheck": "2026년 12월 — 지배구조 19개 항목 FY2026 기준 부분 재채점",
+        "monitoringCycle": "반기별, 시급성 '즉시' 20개 항목 대상"
+      }
+    }
+  }
+}

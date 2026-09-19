@@ -1,0 +1,58 @@
+[
+  {
+    "company": "하나마이크론",
+    "stage_no": "1단계",
+    "year": 2026,
+    "stage_name": "기반 정비",
+    "urgency_level": "즉시"
+  },
+  {
+    "company": "하나마이크론",
+    "stage_no": "2단계",
+    "year": 2027,
+    "stage_name": "지배구조 개편",
+    "urgency_level": "즉시~중기"
+  },
+  {
+    "company": "하나마이크론",
+    "stage_no": "3단계",
+    "year": 2028,
+    "stage_name": "연결 공시체계 가동",
+    "urgency_level": "중기"
+  },
+  {
+    "company": "하나마이크론",
+    "stage_no": "4단계",
+    "year": 2029,
+    "stage_name": "첫 공시 대상연도 운영",
+    "urgency_level": "장기"
+  },
+  {
+    "company": "DN오토모티브",
+    "stage_no": "1",
+    "year": 2026,
+    "stage_name": "기반 구축",
+    "urgency_level": null
+  },
+  {
+    "company": "DN오토모티브",
+    "stage_no": "2",
+    "year": 2027,
+    "stage_name": "공시 실행",
+    "urgency_level": null
+  },
+  {
+    "company": "DN오토모티브",
+    "stage_no": "3",
+    "year": 2028,
+    "stage_name": "의무공시 대응",
+    "urgency_level": null
+  },
+  {
+    "company": "DN오토모티브",
+    "stage_no": "4",
+    "year": 2029,
+    "stage_name": "법정공시 이행",
+    "urgency_level": null
+  }
+]

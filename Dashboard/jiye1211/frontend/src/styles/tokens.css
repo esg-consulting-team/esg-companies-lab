@@ -1,0 +1,178 @@
+/* 디자인 시스템 — 사양서(v2) §13 그대로 구현.
+   라이트 단일 테마 · KCGS 공식 팔레트 · Bezier Design System(구조만 차용, 색·폰트 미차용).
+   §13.2에 없는 색상 리터럴은 어떤 컴포넌트에도 추가하지 않는다. */
+
+:root {
+  /* 폰트 — 웹폰트 CDN 없음, 시스템 한글 폰트 스택만 사용 (§13.1) */
+  --font-family: "Malgun Gothic", "NanumGothic", "AppleGothic", "Noto Sans CJK KR",
+    -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* 표면 — 흰색 기반 계단식 (Bezier의 표면 위계 구조 차용, 검정 계단식을 반전) */
+  --paper: #ffffff; /* 최상위 배경 */
+  --shell: #f5f6f8; /* 앱바 · 레일 */
+  --shell-2: #fafbfc; /* 카드 · 패널 (elevation 1) */
+  --shell-3: #f0f1f4; /* 모달 · 드롭다운 · 상담 인용 카드 (elevation 2) */
+
+  /* 텍스트 — 블랙 알파 위계 */
+  --ink: rgba(10, 10, 10, 0.92); /* 본문 기본 */
+  --ink-2: rgba(10, 10, 10, 0.68); /* 보조 텍스트 · 부제 */
+  --ink-3: rgba(10, 10, 10, 0.44); /* 3차 텍스트 · 캡션 · 출처 각주 */
+  --ink-on-light: #1f1f1f; /* TEXT_DARK — 밝은 색 배지(B+/B) 위에서만 사용, §13.2.1 */
+  --ink-on-dark: #ffffff; /* 어두운 색 배지·칩·네이비 필 위에서만 사용, §13.2.1 */
+
+  /* 선 */
+  --rule: rgba(10, 10, 10, 0.08);
+  --rule-mid: rgba(10, 10, 10, 0.14);
+  --rule-strong: rgba(10, 10, 10, 0.28);
+
+  /* 네이비 계열 — 2026.09 "원티드 톤 레시피" 재조정: 색상각(H)은 원본 그대로, 명도(L)·채도(C)만
+     OKLCH에서 재계산(강조 L 0.55, C 0.20 ~ 옅은 틴트 L 0.958, C 0.026), 5단계를 원본의 상대 명도
+     비율 그대로 보간했다. flow-1~7, stage-1~3은 이번 재조정 대상이 아니라 원본 hex를 그대로
+     유지하므로 더 이상 navy 계열과 값이 같지 않다(각 토큰 자체 값 기준으로 쓸 것). */
+  --navy: #2668e4; /* 흰 배경 대비 5.02:1 */
+  --navy-2: #4b9af0;
+  --navy-3: #82b9fa;
+  --navy-4: #a2cdff;
+  --navy-5: #e0f5ff;
+
+  /* 도메인 아이덴티티 컬러 4종 — L2 탭/히트맵, L1 Exhibit 1 막대, L3 항목 리스트 등에서 공유.
+     프론트엔드 코드에서 색을 hex로 직접 쓰지 않고 이 변수를 참조하게 해서, 톤 재조정 시
+     여기 값만 바꾸면 쓰는 화면 전부에 자동 반영된다. 2026.09 원티드 톤 레시피 적용(H 고정). */
+  --domain-disclosure: #2868e4; /* 정보공시 */
+  --domain-environment: #00834d; /* 환경 — 대비 4.82:1 */
+  --domain-governance: #7452dc; /* 지배구조 */
+  --domain-sector: #ba4d00; /* 업종특화 */
+
+  /* 의미색 3종 — 위와 동일한 원티드 톤 레시피 적용(H 고정, L/C만 재계산).
+     environment·good/change-up은 강조 프리셋 중앙값(L 0.55)에서 흰 배경 대비가 4.5:1 미만이라,
+     레시피가 정의한 -0.05 보정 스텝(hover 단계와 같은 델타)을 그대로 재사용해 L 0.50으로 낮췄다
+     — 기존 --warn을 대비 때문에 수동으로 어둡게 조정했던 것과 동일한 선례. */
+  --crit: #cc291e; /* 하락 · 감점 · D-day · 즉시 · 0점 — 대비 5.38:1 */
+  --crit-bg: #ffeae4;
+  --warn: #ab5c00; /* 가채점 · 미확정 · 중기 · 색인 중 — 대비 4.93:1 */
+  --warn-bg: #fdf1d8;
+  --good: #247800; /* 개선 · 상승폭 · 파싱 완료 — L 0.50 보정, 대비 5.58:1 */
+  --good-bg: #e8f8e0;
+
+  /* 등급 칩 — KCGS 공식 6단계. 원티드 톤 레시피 적용: 명도(L)는 원본 그대로 유지해 A+·D가
+     B·B+보다 확연히 어두웠던 상대적 위계를 그대로 보존했고, 채도(C)만 원본 0.086~0.208 범위를
+     0.16~0.24 범위로 비례 확대해 톤만 원티드 쪽으로 옮겼다. KCGS 공식 색상과 비트 단위로
+     동일하지 않다 — 공식 등급 판정 자체는 동일하며 화면 표시 톤만 조정된 것이다. */
+  --grade-a-plus: #1d5c00;
+  --grade-a: #3f8800;
+  --grade-b-plus: #ffbb00;
+  --grade-b: #ff6d00;
+  --grade-c: #cb0000;
+  --grade-d: #8f0000;
+
+  /* 두 집단 비교 — 이번 재조정 대상 아님(원본 유지) */
+  --group-main: #548235;
+  --group-sub: #a6a6a6;
+
+  /* 변화 방향 — 의미색 3종과 동일한 레시피(위 참고) */
+  --change-up: #247800;
+  --change-flat: #717171; /* 무채색(원본도 채도 0) — 색상각이 없어 고정할 H가 없으므로 명도만 강조 프리셋 톤(L 0.55)으로 이동 */
+  --change-down: #cc291e;
+
+  /* 3단계 진행 판정 — 파싱 상태 등 */
+  --stage-1: #548235; /* 완료 */
+  --stage-2: #a9d18e; /* 진행 중 */
+  --stage-3: #a6a6a6; /* 미제출 */
+
+  /* 흐름도 7단계 */
+  --flow-1: #dce6f2;
+  --flow-2: #c9d8ea;
+  --flow-3: #b2c8e1;
+  --flow-4: #9bb7d8;
+  --flow-5: #6c9bd2;
+  --flow-6: #3f6fa5;
+  --flow-7: #203864;
+  --flow-arrow: #7f7f7f;
+  --flow-note: #c00000;
+
+  /* 차트 보조축 */
+  --axis: #7f7f7f;
+  --grid: #ebebeb;
+
+  /* 코너 · 간격 · 모션 (Bezier 구조 차용, §13.3) */
+  --radius-sm: 8px; /* 버튼 · 인풋 */
+  --radius-md: 12px; /* 카드 · 배지 · 배너 */
+  --radius-lg: 20px; /* 모달 */
+  --radius-chip: 6px; /* 등급 칩 */
+  --space-1: 4px;
+  --space-2: 6px;
+  --space-3: 10px;
+  --space-4: 16px;
+  --space-5: 32px;
+  --motion: 150ms cubic-bezier(0.3, 0, 0, 1);
+}
+
+/* 다크 테마 분기 없음 — 본 프로덕트는 흰 배경 · 검정 글자 단일 테마다. */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-family);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: balance;
+}
+
+/* 항목코드(E-7-1 등)처럼 모노스페이스 없이 정렬이 흔들리는 값의 근사 처리 (§13.1) */
+.mono {
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.upper-label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-3);
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+button {
+  font-family: var(--font-family);
+}
+
+a {
+  color: var(--navy);
+}
+
+::selection {
+  background: var(--navy-3);
+  color: var(--ink);
+}
