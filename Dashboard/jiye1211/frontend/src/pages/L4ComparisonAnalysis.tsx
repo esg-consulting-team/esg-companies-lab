@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../api/client";
 import { useFetch } from "../hooks/useFetch";
 import { ExhibitCard, NoData, StateMessage, formatNum } from "../components/common";
+// import { EnvIntensityTrend } from "../components/EnvIntensityTrend"; // 보류 중 — README "알려진 한계" 참고
 import { RadarChart } from "../components/RadarChart";
 import type { DomainBenchmarkCompany, GroupedTrendGroup, PrecedentCase } from "../types";
 
@@ -80,7 +81,15 @@ function GroupStatLine({ group }: { group: GroupedTrendGroup }) {
   );
 }
 
-function PrecedentCardView({ c, onGoItem }: { c: PrecedentCase; onGoItem: (code: string) => void }) {
+function PrecedentCardView({
+  c,
+  company,
+  onGoItem,
+}: {
+  c: PrecedentCase;
+  company: string;
+  onGoItem: (code: string) => void;
+}) {
   const after = c.after !== undefined ? `${formatNum(c.after)}` : c.afterRange ? `${c.afterRange[0]}~${c.afterRange[1]}` : "—";
   const gain =
     c.after !== undefined
@@ -93,7 +102,7 @@ function PrecedentCardView({ c, onGoItem }: { c: PrecedentCase; onGoItem: (code:
   return (
     <div className="precedent-card">
       <div className="precedent-card__head">
-        <span className="precedent-card__alias">{c.benchmarkAlias}</span>
+        <span className="precedent-card__alias">{anonymizeBenchmarkText(company, c.benchmarkAlias)}</span>
         <span className="precedent-card__duration">
           {period}
           {c.months}개월
@@ -110,7 +119,7 @@ function PrecedentCardView({ c, onGoItem }: { c: PrecedentCase; onGoItem: (code:
           </button>
         ))}
       </div>
-      <p className="precedent-card__note">{c.note}</p>
+      <p className="precedent-card__note">{anonymizeBenchmarkText(company, c.note)}</p>
     </div>
   );
 }
@@ -130,29 +139,48 @@ const NAVY_SHADES = ["var(--navy)", "var(--navy-2)", "var(--navy-3)", "var(--nav
 // 이 Exhibit 전용 익명 라벨 — backend/app/benchmark_config.py BENCHMARK_MAP의 리스트 순서에
 // 기대지 않고, 회사별 실명→익명 라벨을 여기 명시적으로 고정한다. 범례·막대 라벨·툴팁 어디에도
 // 실명이 노출되지 않도록 반드시 이 매핑을 거쳐서만 표시한다.
-const BENCHMARK_ANONYMOUS_LABELS: Record<string, Record<string, string>> = {
+// L7Report.tsx의 "④ 벤치마킹 비교" 표도 같은 매핑이 필요해서 export한다 — L7에 따로 만들지
+// 않고 여기서 가져다 쓰게 해서, 매핑이 두 곳에서 따로 어긋나는 걸 막는다.
+export const BENCHMARK_ANONYMOUS_LABELS: Record<string, Record<string, string>> = {
   하나마이크론: { SK하이닉스: "A사", 삼성전자: "B사", 삼성전기: "C사" },
   DN오토모티브: { HD현대일렉트릭: "A사", 엘에스일렉트릭: "B사", SK아이이테크놀로지: "C사", 대한전선: "D사" },
 };
 
-function anonymizeBenchmarkPeer(clientCompany: string, peerRealName: string): string {
+export function anonymizeBenchmarkPeer(clientCompany: string, peerRealName: string): string {
   return BENCHMARK_ANONYMOUS_LABELS[clientCompany]?.[peerRealName] ?? peerRealName;
+}
+
+/** 벤치마킹사를 익명 라벨(A사→B사→…) 순으로 정렬한다 — API 응답 순서와 무관하게 항상 같은 순서. L4·L7 공용. */
+export function sortPeersByAnonymousLabel<T extends { company: string }>(clientCompany: string, peers: T[]): T[] {
+  return [...peers].sort((a, b) =>
+    anonymizeBenchmarkPeer(clientCompany, a.company).localeCompare(anonymizeBenchmarkPeer(clientCompany, b.company))
+  );
+}
+
+/** benchmarkAlias처럼 실명이 문장 중간에 섞여 나오는 문자열용 — 문장 구조는 그대로 두고
+ * 알고 있는 실명 부분만 치환한다(예: "벤치마킹 (대한전선 사례)" → "벤치마킹 (D사 사례)"). */
+function anonymizeBenchmarkText(clientCompany: string, text: string): string {
+  const map = BENCHMARK_ANONYMOUS_LABELS[clientCompany];
+  if (!map) return text;
+  let result = text;
+  for (const [real, anon] of Object.entries(map)) {
+    result = result.split(real).join(anon);
+  }
+  return result;
 }
 
 function SelfVsBenchmarkGroupExhibit({ company }: { company: string }) {
   const { data, loading, error } = useFetch(() => api.getDomainBenchmark(company), [company]);
-  // 반도체특화 도메인은 company_esg_yearly에 컬럼이 없어 별도 소스(report_extracted_data.json)에서
-  // 가져온다 — 이 필드가 있는 회사(현재는 하나마이크론)에서만 하단 미니 표가 나타난다.
-  const { data: reportData } = useFetch(() => api.getReportComparison(company), [company]);
   const hasData = !!data?.self && (data?.peers.length ?? 0) > 0;
-  const semiconductorScores = reportData?.domainScoresByCompany?.["반도체특화"];
+  // 익명 라벨(A사→B사→…) 순으로 정렬해 API 응답 순서와 무관하게 항상 같은 순서로 보여준다.
+  const peers = sortPeersByAnonymousLabel(company, data?.peers ?? []);
 
   return (
     <ExhibitCard
       number={12}
       eyebrow="자사 vs 벤치마킹군"
-      title={hasData ? "벤치마킹군과 도메인별 채점값을 나란히 비교" : "벤치마킹 데이터 없음"}
-      subtitle="정보공시·환경·지배구조만 비교합니다 — 팀 채점표에는 업종특화/반도체특화 도메인의 별도 채점값이 없어 항목 단위 비교와 함께 제외했습니다."
+      title={hasData ? "영역별 통합 채점 비교" : "벤치마킹 데이터 없음"}
+      subtitle="정보공시·환경·지배구조만 비교"
       source="벤치마킹사 개별 채점값(팀 채점표 기준) · 벤치마킹사는 익명 처리됨"
     >
       {loading && <StateMessage>불러오는 중…</StateMessage>}
@@ -169,7 +197,7 @@ function SelfVsBenchmarkGroupExhibit({ company }: { company: string }) {
                 emphasize: true,
                 values: data.self! as unknown as Record<string, number | null>,
               },
-              ...data.peers.map((p, i) => ({
+              ...peers.map((p, i) => ({
                 label: anonymizeBenchmarkPeer(company, p.company),
                 color: NAVY_SHADES[i + 1] ?? "var(--navy-5)",
                 values: p as unknown as Record<string, number | null>,
@@ -179,7 +207,7 @@ function SelfVsBenchmarkGroupExhibit({ company }: { company: string }) {
           {BENCH_DOMAINS.map(({ key, label }) => {
             const rows: (DomainBenchmarkCompany & { isSelf: boolean })[] = [
               { ...data.self!, isSelf: true },
-              ...data.peers.map((p) => ({ ...p, isSelf: false })),
+              ...peers.map((p) => ({ ...p, isSelf: false })),
             ];
             return (
               <div className="bench-group" key={key}>
@@ -193,7 +221,12 @@ function SelfVsBenchmarkGroupExhibit({ company }: { company: string }) {
                       </span>
                       <div className="bench-row__track">
                         {value !== null && (
-                          <div className="bench-row__fill" style={{ width: `${value}%`, background: NAVY_SHADES[i] ?? "var(--navy-5)" }} />
+                          <div className="bench-row__fill" style={{
+                              width: `${value}%`,
+                              background: NAVY_SHADES[i] ?? "var(--navy-5)",
+                              // 가장 옅은 색은 트랙 배경(--navy-5)과 같아 막대가 안 보이므로 윤곽선을 준다.
+                              boxShadow: (NAVY_SHADES[i] ?? "var(--navy-5)") === "var(--navy-5)" ? "inset 0 0 0 1px var(--navy-4)" : undefined,
+                            }} />
                         )}
                       </div>
                       <span className="bench-row__meta">{value !== null ? `${formatNum(value, 1)}%` : <NoData />}</span>
@@ -203,35 +236,6 @@ function SelfVsBenchmarkGroupExhibit({ company }: { company: string }) {
               </div>
             );
           })}
-        </>
-      )}
-
-      {semiconductorScores && (
-        <>
-          <hr className="exhibit__rule" />
-          <div className="upper-label" style={{ marginBottom: 8 }}>
-            반도체특화 (보고서 원문 기준)
-          </div>
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>대상</th>
-                <th className="num">채점값</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Object.entries(semiconductorScores).map(([label, value]) => (
-                <tr key={label}>
-                  <td>{label === company ? `자사 · ${company}` : label}</td>
-                  <td className="num">{value !== null ? `${formatNum(value, 1)}%` : "미채점"}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <p style={{ fontSize: 11, color: "var(--ink-3)", marginTop: 8 }}>
-            반도체특화 벤치마킹은 보고서 원문 자체의 익명 라벨(A/B/C)이며, 위 표의 A사/B사/C사(팀 채점표 기준
-            익명 라벨)와 같은 글자를 쓰더라도 실제로 같은 대상인지 확인되지 않았으므로 별도로 표시함
-          </p>
         </>
       )}
     </ExhibitCard>
@@ -302,9 +306,8 @@ export function L4ComparisonAnalysis() {
       <ExhibitCard
         number={9}
         eyebrow="그룹비교"
-        title="지속가능경영보고서 의존 여부에 따라 개선 속도가 갈린다"
+        title="지속가능경영보고서 의존도에 따른 개선 격차"
         subtitle="보고서 의존 항목: 지속가능경영보고서 기재 수준에 좌우되는 항목 · 보고서 무관 항목: 그 외 항목"
-        source="컨설팅보고서 3개년 분석"
       >
         <div className="grid-2">
           <div>
@@ -341,7 +344,7 @@ export function L4ComparisonAnalysis() {
             ? "격차가 큰 항목일수록 KCGS 등급과의 상관관계도 뚜렷하다"
             : "이 회사는 KCGS 등급 상관도 분석 데이터가 없음"
         }
-        source="컨설팅보고서 KCGS 등급 상관분석(Spearman ρ)"
+        source="Spearman ρ"
       >
         {data.kcgsCorrelation ? (
           <div className="table-scroll">
@@ -389,16 +392,19 @@ export function L4ComparisonAnalysis() {
         eyebrow="선례 카드"
         title="벤치마킹 기업의 실제 도약 사례"
         subtitle="같은 항목에서 벤치마킹 기업이 점수를 끌어올린 방법과 소요 기간"
-        source="컨설팅보고서 벤치마킹 기업 사례 분석"
       >
         {data.precedentCases.length ? (
-          data.precedentCases.map((c, i) => <PrecedentCardView key={i} c={c} onGoItem={goItem} />)
+          data.precedentCases.map((c, i) => <PrecedentCardView key={i} c={c} company={company} onGoItem={goItem} />)
         ) : (
           <NoData />
         )}
       </ExhibitCard>
 
       <SelfVsBenchmarkGroupExhibit company={company} />
+
+      {/* 환경 원단위 3개년 추이(Exhibit 13) — 자동채점/수기 근거 충돌로 보류 중. 재활성화: 위 import 주석 해제 후 이 줄 복구.
+      <EnvIntensityTrend company={company} />
+      */}
     </div>
   );
 }
