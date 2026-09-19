@@ -110,7 +110,7 @@ export function ExhibitCard({
   eyebrow: string;
   title: string;
   subtitle?: string;
-  source: string;
+  source?: string;
   eyebrowRight?: ReactNode;
   children: ReactNode;
   /** 화면 전용 색 오버라이드 등에 쓰는 탈출구(예: L2 도메인 제목 색). 대부분은 생략한다. */
@@ -129,7 +129,7 @@ export function ExhibitCard({
       <hr className="exhibit__rule" />
       <div className="exhibit__body">{children}</div>
       <hr className="exhibit__rule" />
-      <p className="exhibit__source">출처: {source}</p>
+      {source && <p className="exhibit__source">출처: {source}</p>}
     </section>
   );
 }

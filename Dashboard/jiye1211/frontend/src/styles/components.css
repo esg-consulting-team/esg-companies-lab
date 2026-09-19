@@ -71,6 +71,9 @@
   line-height: 1.4;
   /* --domain-heading-color: L2 도메인 탭 전용 오버라이드. 다른 화면에서는 미설정 상태라 --ink로 폴백. */
   color: var(--domain-heading-color, var(--ink));
+  /* 문자열 title에 명시적으로 \n을 넣은 경우에만 그 지점에서 줄바꿈한다(예: L1 Exhibit 4) —
+     \n이 없는 다른 화면의 제목은 지금처럼 자연스럽게 흐름 wrap된다. */
+  white-space: pre-line;
 }
 
 .exhibit__subtitle {
@@ -235,6 +238,33 @@
 }
 .kpi-cell__sub--crit {
   color: var(--crit);
+}
+
+/* KCGS 공식등급 카드 — 다른 KPI 카드 대비 시각적 비중이 작아 보여서 칩·보조텍스트만 확대 */
+.kpi-cell--grade-emphasis .grade-chip {
+  font-size: 17px;
+  padding: 4px 10px;
+  min-width: 34px;
+}
+.kpi-cell--grade-emphasis .kpi-cell__sub {
+  font-size: 15px;
+}
+
+/* 근거 불충분 항목 카드 전용 프로그레스 바 */
+.kpi-progress-bar {
+  height: 6px;
+  background: var(--shell-3);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.kpi-progress-bar__fill {
+  height: 100%;
+  border-radius: var(--radius-sm);
+  transition: width var(--motion);
+}
+.kpi-progress-bar__fill--crit {
+  background: var(--crit);
 }
 
 @media (max-width: 1079px) {
@@ -619,13 +649,16 @@
   font-size: 15px;
 }
 .urgency-lane__bar {
-  height: 6px;
+  height: 10px;
   background: var(--shell-3);
   border-radius: var(--radius-sm);
   overflow: hidden;
+  box-shadow: inset 0 0 0 1px var(--rule);
 }
 .urgency-lane__bar-fill {
   height: 100%;
+  border-radius: var(--radius-sm);
+  transition: width var(--motion);
 }
 .urgency-lane__bar-fill--즉시 {
   background: var(--crit);
@@ -1053,10 +1086,10 @@
   gap: 4px;
 }
 .solution-grid__col-label {
-  font-size: 10px;
+  font-size: 12px;
   text-transform: uppercase;
-  font-weight: 700;
-  color: var(--ink-3);
+  font-weight: 800;
+  color: var(--navy);
   letter-spacing: 0.08em;
 }
 .solution-grid__col-body {
@@ -1152,6 +1185,7 @@
 }
 .roadmap-stage-card__name {
   font-size: 12.5px;
+  font-weight: 700;
   color: var(--ink-2);
 }
 .roadmap-stage-card__caption {
@@ -1160,41 +1194,61 @@
   flex-basis: 100%;
 }
 
-.roadmap-urgency-boxes {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+.roadmap-stage-card__main {
+  font-size: 11px;
+  color: var(--ink-3);
+  margin-top: -6px;
 }
-.roadmap-urgency-box {
-  background: var(--shell-3);
-  border: 1px solid var(--rule);
-  border-left: 3px solid transparent;
+
+/* 시급성 섹션 — 헤더 + 그 섹션 과제 목록을 옅은 틴트 배경으로 감싼다 */
+.roadmap-section {
+  --section-color: var(--ink-3);
+  --section-bg: var(--shell-3);
+  background: var(--section-bg);
   border-radius: var(--radius-md);
-  padding: 8px 10px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 8px;
 }
-.roadmap-urgency-box__level {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+.roadmap-section--즉시 {
+  --section-color: var(--crit);
+  --section-bg: var(--crit-bg);
+}
+.roadmap-section--중기 {
+  --section-color: var(--warn);
+  --section-bg: var(--warn-bg);
+}
+.roadmap-section--장기 {
+  --section-color: var(--good);
+  --section-bg: var(--good-bg);
+}
+.roadmap-section__header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
   font-weight: 700;
+  color: var(--section-color);
+}
+.roadmap-section__empty {
+  margin: 0;
+  font-size: 12px;
   color: var(--ink-3);
 }
-.roadmap-urgency-box__count {
-  font-size: 20px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
+.roadmap-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--section-color);
+  flex: none;
 }
-.roadmap-urgency-box--즉시 {
-  border-left-color: var(--crit);
-}
-.roadmap-urgency-box--중기 {
-  border-left-color: var(--warn);
-}
-.roadmap-urgency-box--장기 {
-  border-left-color: var(--stage-3);
+.roadmap-dot--task {
+  width: 7px;
+  height: 7px;
+  display: inline-block;
+  margin-right: 6px;
+  vertical-align: middle;
 }
 
 .roadmap-task-list {
@@ -1402,4 +1456,111 @@
   .exhibit {
     break-inside: avoid;
   }
+}
+
+/* ── L3 점검기준 원문 구조화 ──────────────────────────── */
+.criteria-parsed {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.criteria-row {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+.criteria-row__label {
+  flex: none;
+  min-width: 64px;
+  text-align: center;
+  padding: 1px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--shell-3);
+  border: 1px solid var(--rule-mid);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.criteria-row__text {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  white-space: pre-wrap;
+}
+.criteria-notes {
+  margin-top: 6px;
+  padding-top: 8px;
+  border-top: 1px solid var(--rule);
+}
+.criteria-notes__title {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-3);
+}
+.criteria-notes ul {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.criteria-caption {
+  margin: 0 0 6px;
+  font-size: 11px;
+  color: var(--ink-3);
+}
+.criteria-plain p {
+  margin: 0 0 4px;
+}
+
+/* L3 항목 상세 — 3개 그룹 카드 사이 간격 */
+.item-detail-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.item-detail-groups .field-block__label {
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* L6 참고자료 유형 라벨("지속가능경영보고서")이 줄바꿈되지 않도록 라벨 열만 넓힌다 */
+.hbar-row--wide-label {
+  grid-template-columns: 140px 1fr 130px;
+}
+.hbar-row--wide-label .hbar-row__label {
+  white-space: nowrap;
+}
+
+/* L7 표 Exhibit(③~⑤) — 컬럼 폭 고정 분배, 행 여백 확대, 헤더 구분선, 가로줄 zebra(세로 괘선 없음) */
+.data-table--l7 {
+  width: 100%;
+  table-layout: fixed;
+}
+.data-table--l7 th {
+  padding: var(--space-3) var(--space-3);
+  border-bottom: 2px solid var(--rule-mid);
+}
+.data-table--l7 td {
+  padding: var(--space-4) var(--space-3);
+  vertical-align: middle;
+}
+.data-table--l7 th.num {
+  text-align: right;
+}
+.data-table--l7 tbody tr:nth-child(even):not(.total-row) td {
+  /* 카드 배경이 이미 --shell-2라 같은 색은 안 보인다 — 한 단계 진한 --shell-3를 옅게 섞어 쓴다 */
+  background: color-mix(in srgb, var(--shell-3) 50%, transparent);
+}
+/* "과제 수"(우측 정렬) 바로 옆 열이 붙어 보이지 않도록 왼쪽 여백을 넓힌다 */
+.data-table--l7 th.l7-col-gap,
+.data-table--l7 td.l7-col-gap {
+  padding-left: var(--space-4);
+}
+/* 표 본문과 각주 사이 여백 + 얇은 구분선 */
+.l7-table-note {
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--rule);
 }

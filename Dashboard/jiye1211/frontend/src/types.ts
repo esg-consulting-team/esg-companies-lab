@@ -55,6 +55,13 @@ export interface AssessmentInfo {
   rate: number | null;
   applicableItems: number;
   totalItems: number;
+  /** L1 KPI "개선 과제" 전용 — 적용 항목 중 만점(100점) 미만인 항목 수 (urgencyCounts 합계·
+   * totalItems와는 다른 값). */
+  improvementTaskCount: number;
+  /** L1 KPI "근거 불충분 항목" 전용 — applicable 항목만 대상으로 한 분자(§14 분모 고정값
+   * 버그 수정). 분모는 applicableItems를 함께 쓸 것 — totalItems가 아님. 기존
+   * evidenceCounts.불충분/totalItems 조합은 그대로 남아있으니 혼용하지 말 것. */
+  insufficientEvidenceCount: number;
 }
 
 export interface OfficialGrade {
@@ -130,6 +137,10 @@ export interface CompanySummary {
   domains: DomainSummary[];
   evidenceCounts: EvidenceCounts;
   urgencyCounts: UrgencyCounts;
+  /** L1 Exhibit 4 전용 — 시급성 구간별 "아직 미해결"(applicable & score<100)인 항목 수.
+   * urgencyCounts(구간 전체, 이미 만점인 항목 포함)와는 다른 값 — urgency는 score와 독립된
+   * 컬럼이라 즉시인데 이미 만점인 항목이 실제로 존재한다. */
+  urgencyPendingCounts: UrgencyCounts;
   lossTop5: LossItem[];
   immediateTasks: ImmediateTask[];
   simulation: SimulationResult;
@@ -343,6 +354,8 @@ export interface RoadmapChip {
   code: string | null;
   bucket: DomainBucketKey | null;
   raw: string;
+  /** type="item" 칩에만 — esg_diagnosis 시급성(즉시/중기/장기, 없으면 null). */
+  urgency?: string | null;
 }
 
 export interface RoadmapTask {
@@ -392,6 +405,16 @@ export interface DocumentCoverage {
   totalItems: number;
   unclassifiedCount: number;
   unclassifiedRate: number | null;
+}
+
+export interface EvidenceInventoryDoc {
+  docId: string;
+  docType: string;
+  year: number;
+  totalPages: number | null;
+  failedPages: number | null;
+  parsed: boolean;
+  linkedItems: number | undefined;
 }
 
 export interface EvidenceGapItem {

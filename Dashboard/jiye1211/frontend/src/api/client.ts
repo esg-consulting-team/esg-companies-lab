@@ -6,6 +6,7 @@ import type {
   DomainBenchmarkResponse,
   DomainDetail,
   EvidenceGapItem,
+  EvidenceInventoryDoc,
   ItemDetail,
   ItemSummary,
   ReportComparison,
@@ -68,6 +69,8 @@ export const api = {
     request<RoadmapResponse>(`/api/companies/${encodeURIComponent(company)}/roadmap`),
   getEvidenceDocuments: (company: string) =>
     request<DocumentCoverage>(`/api/companies/${encodeURIComponent(company)}/evidence-documents`),
+  getEvidenceInventory: (company: string) =>
+    request<EvidenceInventoryDoc[]>(`/api/companies/${encodeURIComponent(company)}/evidence-inventory`),
   getEvidenceGaps: (company: string) =>
     request<EvidenceGapItem[]>(`/api/companies/${encodeURIComponent(company)}/evidence-gaps`),
   getProfileCard: (company: string) =>
