@@ -93,15 +93,13 @@ export function L1Dashboard() {
   if (loading) return <StateMessage>불러오는 중…</StateMessage>;
   if (error || !data) return <StateMessage error>{error ?? "데이터를 불러오지 못했습니다."}</StateMessage>;
 
-  const { assessment, officialGrade, domains, gradeHistory, evidenceCounts, urgencyCounts, lossTop5, immediateTasks, simulation, companyMeta } =
+  const { assessment, officialGrade, domains, gradeHistory, evidenceCounts, urgencyCounts, urgencyPendingCounts, lossTop5, immediateTasks, simulation, companyMeta } =
     { ...data, companyMeta: data.company };
 
   const goItem = (code: string) => navigate(`/companies/${encodeURIComponent(company)}/l3/${encodeURIComponent(code)}`);
 
   const roadmap = companyMeta.disclosureRoadmap;
   const dday = roadmap.deadlineDate ? daysUntil(roadmap.deadlineDate) : null;
-
-  const applicableTotalGap = urgencyCounts.즉시 + urgencyCounts.중기 + urgencyCounts.장기;
 
   return (
     <div className="main__grid">
@@ -121,9 +119,10 @@ export function L1Dashboard() {
               착수 기한 <strong>{roadmap.deadlineDate}</strong>
               <br />
               연결자산총액 {formatTrillion(roadmap.totalAssets)} 기준{" "}
-              {roadmap.disclosureStartYear}년 의무공시 대상.{" "}
+              <strong>{roadmap.disclosureStartYear}년 의무공시 대상</strong>
+              {" / "}
               <button className="scope3-toggle" onClick={() => setScope3Open((v) => !v)} aria-expanded={scope3Open}>
-                Scope 3 배출량은 {roadmap.scope3GraceYear}년까지 유예됩니다.
+                <strong>Scope 3 배출량은 {roadmap.scope3GraceYear}년까지 유예</strong>
               </button>
             </div>
             {scope3Open && (
@@ -191,7 +190,7 @@ export function L1Dashboard() {
             />
           </div>
         </div>
-        <div className="kpi-cell">
+        <div className="kpi-cell kpi-cell--grade-emphasis">
           <span className="kpi-cell__label">KCGS 공식등급</span>
           <div className="kpi-cell__value-row">
             <GradeChip grade={officialGrade?.overall} />
@@ -208,16 +207,21 @@ export function L1Dashboard() {
         <div className="kpi-cell">
           <span className="kpi-cell__label">근거 불충분 항목</span>
           <span className="kpi-cell__value tabular-nums">
-            {evidenceCounts.불충분} / {assessment.totalItems}
+            {assessment.insufficientEvidenceCount} / {assessment.applicableItems}
           </span>
+          <div className="kpi-progress-bar">
+            <div
+              className="kpi-progress-bar__fill kpi-progress-bar__fill--crit"
+              style={{
+                width: `${assessment.applicableItems ? (assessment.insufficientEvidenceCount / assessment.applicableItems) * 100 : 0}%`,
+              }}
+            />
+          </div>
           <span className="kpi-cell__sub">부분 인정 {evidenceCounts.부분}건 포함</span>
         </div>
         <div className="kpi-cell">
           <span className="kpi-cell__label">개선 과제</span>
-          <span className="kpi-cell__value tabular-nums">{applicableTotalGap} 건</span>
-          <span className="kpi-cell__sub">
-            즉시 {urgencyCounts.즉시} · 중기 {urgencyCounts.중기} · 장기 {urgencyCounts.장기}
-          </span>
+          <span className="kpi-cell__value tabular-nums">{assessment.improvementTaskCount} 건</span>
         </div>
       </div>
 
@@ -226,9 +230,9 @@ export function L1Dashboard() {
         <ExhibitCard
           number={1}
           eyebrow="영역별 달성률"
-          title="모든 영역 벤치마킹 대비 평균 미달"
+          title="벤치마킹 대비 평균 미달"
           eyebrowRight={<span>적용 {assessment.totalItems}개 항목</span>}
-          source="K-ESG v2.0 가이드라인 · 2026년 손채점 결과 · 벤치마킹 평균은 컨설팅보고서 실측치(일부 영역은 참고용 샘플값)"
+          source="K-ESG v2.0 · 세로선 = 벤치마킹 평균 (하나마이크론: 벤치마킹사 3곳 최신 채점 평균 / DN오토모티브: 샘플 값)"
         >
           {domains.map((d) => {
             // 자사 값 자체가 "해당 없음"(비적용 도메인)이면 벤치마킹 평균이 있어도 비교 대상이
@@ -264,7 +268,7 @@ export function L1Dashboard() {
           number={2}
           eyebrow="3개년 KCGS 등급 추이"
           title={gradeTrendTitle(gradeHistory)}
-          source="한국ESG기준원(KCGS) 공식등급 · 3개년 등급 이력"
+          source="한국ESG기준원(KCGS) 공식등급"
         >
           {gradeHistory.length ? (
             <>
@@ -325,8 +329,8 @@ export function L1Dashboard() {
         <ExhibitCard
           number={3}
           eyebrow="손실점수 Top 5"
-          title="만점 대비 미획득 점수가 가장 큰 항목"
-          source="K-ESG v2.0 가이드라인 · 2026년 손채점 결과 · 항목당 100점 환산 기준"
+          title="가장 시급한 손실 영역 (TOP 5)"
+          source="항목당 100점 정규화 기준"
         >
           <div className="table-scroll">
             <table className="data-table">
@@ -364,19 +368,30 @@ export function L1Dashboard() {
         <ExhibitCard
           number={4}
           eyebrow="시급성 · 시뮬레이션"
-          title={`즉시 과제 ${immediateTasks.length}건으로 달성률 ${formatPct(simulation.rateTo)} 회복 가능`}
-          source="2026년 손채점 결과 기반 시뮬레이션 · 예상치"
+          title={
+            simulation.rateFrom !== null && simulation.rateTo !== null
+              ? `즉시 과제 ${immediateTasks.length}건 착수 시,\n달성률 ${formatPct(simulation.rateTo)}(+${(
+                  (simulation.rateTo - simulation.rateFrom) *
+                  100
+                ).toFixed(1)}%p) 회복 가능`
+              : `즉시 과제 ${immediateTasks.length}건으로 달성률 회복 가능`
+          }
+          source="진단 결과 기반 산출 · 예상치"
         >
           <div className="urgency-lanes" style={{ marginBottom: 14 }}>
             {(["즉시", "중기", "장기"] as const).map((u) => (
               <div className="urgency-lane" key={u}>
                 <span className="kpi-cell__label">{u}</span>
-                <span className="urgency-lane__count">{urgencyCounts[u]}</span>
+                <span className="urgency-lane__count">{urgencyPendingCounts[u]}</span>
+                <span className="kpi-cell__sub">
+                  {urgencyCounts[u]}건 중 {urgencyPendingCounts[u]}건
+                </span>
                 <div className="urgency-lane__bar">
                   <div
                     className={`urgency-lane__bar-fill urgency-lane__bar-fill--${u}`}
                     style={{
-                      width: `${(urgencyCounts[u] / Math.max(1, urgencyCounts.즉시 + urgencyCounts.중기 + urgencyCounts.장기)) * 100}%`,
+                      width: `${(urgencyPendingCounts[u] / Math.max(1, urgencyCounts[u])) * 100
+                      }%`,
                     }}
                   />
                 </div>
@@ -401,7 +416,7 @@ export function L1Dashboard() {
         eyebrow="즉시 착수 과제"
         title={immediateTasks.length ? "가장 낮은 점수의 즉시 과제부터 착수" : "즉시 착수 과제 없음"}
         subtitle="예산·기간·담당 부서는 원본 데이터에 없어 컨설턴트 산정이 필요합니다."
-        source="2026년 손채점 결과 · 시급성 '즉시' 항목 기준"
+        source="시급성=즉시 기준"
       >
         <div className="table-scroll">
           <table className="data-table">
