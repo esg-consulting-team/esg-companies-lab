@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../api/client";
 import { useFetch } from "../hooks/useFetch";
+import { CriteriaDetail } from "../components/CriteriaDetail";
 import { EvidenceBadge, PendingBadge, StateMessage, UrgencyTag, evidenceLevelFromScore, formatNum } from "../components/common";
 
 export function L3ItemDetail() {
@@ -90,99 +91,115 @@ export function L3ItemDetail() {
               </div>
             )}
 
-            {detail.criteriaDetail && (
-              <div className="exhibit">
-                <div className="field-block">
-                  <span className="field-block__label">점검기준 (K-ESG 원문)</span>
-                  <div className="quote-block">{detail.criteriaDetail}</div>
+            <div className="item-detail-groups">
+              {(detail.criteriaDetail || detail.scoringNote.raw || detail.scoringNote.judgmentBasis || detail.scoringNote.confirmedBasis) && (
+                <div className="exhibit">
+                  <div className="exhibit__eyebrow">
+                    <span>진단 근거</span>
+                  </div>
+                  {detail.criteriaDetail && (
+                    <div className="field-block">
+                      <span className="field-block__label">점검기준 (K-ESG 원문)</span>
+                      <CriteriaDetail code={detail.code} text={detail.criteriaDetail} />
+                    </div>
+                  )}
+                  {detail.scoringNote.structured ? (
+                    <>
+                      {detail.scoringNote.judgmentBasis && (
+                        <div className="field-block">
+                          <span className="field-block__label">판단근거</span>
+                          <div className="field-block__value">{detail.scoringNote.judgmentBasis}</div>
+                        </div>
+                      )}
+                      {detail.scoringNote.confirmedBasis && (
+                        <div className="field-block">
+                          <span className="field-block__label">확인근거</span>
+                          <div className="field-block__value">{detail.scoringNote.confirmedBasis}</div>
+                        </div>
+                      )}
+                    </>
+                  ) : detail.scoringNote.raw ? (
+                    <div className="field-block">
+                      <span className="field-block__label">채점 메모 (원문 · 미구조화)</span>
+                      <div className="field-block__value">{detail.scoringNote.raw}</div>
+                    </div>
+                  ) : null}
                 </div>
+              )}
 
-                {detail.scoringNote.structured ? (
-                  <>
-                    {detail.scoringNote.judgmentBasis && (
-                      <div className="field-block">
-                        <span className="field-block__label">판단근거</span>
-                        <div className="field-block__value">{detail.scoringNote.judgmentBasis}</div>
-                      </div>
-                    )}
-                    {detail.scoringNote.confirmedBasis && (
-                      <div className="field-block">
-                        <span className="field-block__label">확인근거</span>
-                        <div className="field-block__value">{detail.scoringNote.confirmedBasis}</div>
-                      </div>
-                    )}
-                    {detail.scoringNote.deductionReason && (
-                      <div className="field-block">
-                        <span className="field-block__label">감점사유</span>
-                        <div className="field-block__value">{detail.scoringNote.deductionReason}</div>
-                      </div>
-                    )}
-                    {detail.scoringNote.requiredEvidenceNote && (
-                      <div className="field-block">
-                        <span className="field-block__label">보완필요증빙</span>
-                        <div className="field-block__value">{detail.scoringNote.requiredEvidenceNote}</div>
-                      </div>
-                    )}
-                  </>
-                ) : detail.scoringNote.raw ? (
+              {detail.solutionSplit.raw && (
+                <div className="exhibit">
+                  <div className="exhibit__eyebrow">
+                    <span>해결방안</span>
+                  </div>
                   <div className="field-block">
-                    <span className="field-block__label">채점 메모 (원문 · 미구조화)</span>
-                    <div className="field-block__value">{detail.scoringNote.raw}</div>
-                  </div>
-                ) : null}
-
-                {detail.dataSource && (
-                  <div className="field-block">
-                    <span className="field-block__label">참고 자료 출처</span>
-                    <div className="field-block__value">{detail.dataSource}</div>
-                  </div>
-                )}
-
-                {detail.evidenceSources.length > 0 && (
-                  <p className="evidence-source-caption">출처: {detail.evidenceSources.join(" · ")}</p>
-                )}
-              </div>
-            )}
-
-            {detail.solutionSplit.raw && (
-              <div className="exhibit">
-                <div className="exhibit__eyebrow">
-                  <span>해결방안</span>
-                </div>
-                {detail.solutionSplit.structured ? (
-                  <div className="solution-grid">
-                    <div className="solution-grid__col">
-                      <span className="solution-grid__col-label">현재 문제점</span>
-                      <div className="solution-grid__col-body">{detail.solutionSplit.problem ?? "—"}</div>
-                    </div>
-                    <div className="solution-grid__col">
-                      <span className="solution-grid__col-label">개선방향</span>
-                      <div className="solution-grid__col-body">{detail.solutionSplit.direction ?? "—"}</div>
-                    </div>
-                    <div className="solution-grid__col">
-                      <span className="solution-grid__col-label">필요 근거</span>
-                      <div className="solution-grid__col-body">{detail.solutionSplit.evidence ?? "—"}</div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="field-block__value">{detail.solutionSplit.raw}</div>
-                )}
-              </div>
-            )}
-
-            {detail.dueDiligenceQuestion && (
-              <div className="exhibit">
-                <div className="field-block">
-                  <span className="field-block__label">실사 진단 질문</span>
-                  <div className="field-block__value">
-                    {detail.dueDiligenceQuestion}
-                    {detail.answerFormat && (
-                      <span style={{ color: "var(--ink-3)" }}> ({detail.answerFormat})</span>
+                    {detail.solutionSplit.structured ? (
+                      <div className="solution-grid">
+                        <div className="solution-grid__col">
+                          <span className="solution-grid__col-label">현재 문제점</span>
+                          <div className="solution-grid__col-body">{detail.solutionSplit.problem ?? "—"}</div>
+                        </div>
+                        <div className="solution-grid__col">
+                          <span className="solution-grid__col-label">개선방향</span>
+                          <div className="solution-grid__col-body">{detail.solutionSplit.direction ?? "—"}</div>
+                        </div>
+                        <div className="solution-grid__col">
+                          <span className="solution-grid__col-label">필요 근거</span>
+                          <div className="solution-grid__col-body">{detail.solutionSplit.evidence ?? "—"}</div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="field-block__value">{detail.solutionSplit.raw}</div>
                     )}
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+
+              {(detail.dueDiligenceQuestion ||
+                (detail.scoringNote.structured && (detail.scoringNote.deductionReason || detail.scoringNote.requiredEvidenceNote)) ||
+                detail.dataSource ||
+                detail.evidenceSources.length > 0) && (
+                <div className="exhibit">
+                  <div className="exhibit__eyebrow">
+                    <span>채점 상세</span>
+                  </div>
+                  {detail.dueDiligenceQuestion && (
+                    <div className="field-block">
+                      <span className="field-block__label">실사 진단 질문</span>
+                      <div className="field-block__value">
+                        {detail.dueDiligenceQuestion}
+                        {detail.answerFormat && <span style={{ color: "var(--ink-3)" }}> ({detail.answerFormat})</span>}
+                      </div>
+                    </div>
+                  )}
+                  {detail.scoringNote.structured && (
+                    <>
+                      {detail.scoringNote.deductionReason && (
+                        <div className="field-block">
+                          <span className="field-block__label">감점사유</span>
+                          <div className="field-block__value">{detail.scoringNote.deductionReason}</div>
+                        </div>
+                      )}
+                      {detail.scoringNote.requiredEvidenceNote && (
+                        <div className="field-block">
+                          <span className="field-block__label">보완필요증빙</span>
+                          <div className="field-block__value">{detail.scoringNote.requiredEvidenceNote}</div>
+                        </div>
+                      )}
+                    </>
+                  )}
+                  {detail.dataSource && (
+                    <div className="field-block">
+                      <span className="field-block__label">참고 자료 출처</span>
+                      <div className="field-block__value">{detail.dataSource}</div>
+                    </div>
+                  )}
+                  {detail.evidenceSources.length > 0 && (
+                    <p className="evidence-source-caption">출처: {detail.evidenceSources.join(" · ")}</p>
+                  )}
+                </div>
+              )}
+            </div>
           </>
         )}
       </div>
