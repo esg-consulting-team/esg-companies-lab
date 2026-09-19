@@ -5,7 +5,7 @@ from .benchmark_config import BENCHMARK_MAP
 from .cache_utils import ttl_cache
 from .mock_data import INDUSTRY_NAMES, get_company_profile
 from .parsing import DOMAIN_BUCKETS, bucket_of, evidence_level, extract_evidence_sources, parse_scoring_note, parse_solution
-from .report_data import get_domain_benchmark_map, get_pending_item, get_report_comparison
+from .report_data import get_pending_item, get_report_comparison
 from .supabase_client import get_supabase
 
 ASSESSMENT_YEAR = 2026  # 원본 파일명 "...26년 현황..." 기준 단일 스냅샷
@@ -280,10 +280,7 @@ def normalize_item(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def build_domains(items: list[dict[str, Any]], profile: dict[str, Any], company: str) -> list[dict[str, Any]]:
-    # 컨설팅 보고서가 실측 검증한 도메인별 벤치마킹 평균이 있으면 그걸 우선 쓰고, 없는 회사만
-    # mock_data.py의 참고용 샘플값으로 대체한다(report_data.get_domain_benchmark_map 참고).
-    report_bench = get_domain_benchmark_map(company)
+def build_domains(items: list[dict[str, Any]], profile: dict[str, Any]) -> list[dict[str, Any]]:
     buckets: dict[str, dict[str, Any]] = {}
     for key, meta in DOMAIN_BUCKETS.items():
         buckets[key] = {
@@ -292,7 +289,7 @@ def build_domains(items: list[dict[str, Any]], profile: dict[str, Any], company:
             "items": 0,
             "score": 0.0,
             "max": 0,
-            "benchmarkAvg": report_bench.get(key, profile.get("benchmarkAvgByBucket", {}).get(key)),
+            "benchmarkAvg": profile.get("benchmarkAvgByBucket", {}).get(key),
         }
     for it in items:
         b = buckets.get(it["domainBucket"])
@@ -312,11 +309,28 @@ def build_summary(company: str) -> dict[str, Any]:
     profile = get_company_profile(company)
     rows = fetch_rows(company)
     items = [normalize_item(r) for r in rows]
-    domains = build_domains(items, profile, company)
+    if not profile.get("benchmarkAvgByBucket"):
+        # 샘플 벤치마킹 평균이 없는 회사는 BENCHMARK_MAP 벤치마킹사들의 최신 채점값(company_esg_yearly,
+        # 0~100) 평균을 기준점으로 쓴다. 채점 컬럼이 없는 도메인(업종특화)은 기준점을 만들지 않는다.
+        peers = fetch_domain_benchmark(company)["peers"]
+        avg_by_bucket: dict[str, float] = {}
+        for bucket, col in (("disclosure", "disclosure"), ("environment", "environment"), ("governance", "governance")):
+            vals = [p[col] for p in peers if p.get(col) is not None]
+            if vals:
+                avg_by_bucket[bucket] = round(sum(vals) / len(vals) / 100, 4)
+        profile = {**profile, "benchmarkAvgByBucket": avg_by_bucket}
+    domains = build_domains(items, profile)
 
     applicable_items = [it for it in items if it["applicable"]]
     total_score = sum(it["score"] for it in applicable_items)
     total_max = len(applicable_items) * 100
+    # L1 KPI "개선 과제" 전용 — 적용 항목 중 만점(100점) 미만인 항목 수. urgencyCounts 합계나
+    # totalItems(전체 행 수, 업종특화 N/A 포함)와는 다른 값이니 혼용하지 말 것.
+    improvement_task_count = sum(1 for it in applicable_items if it["score"] < 100)
+    # L1 KPI "근거 불충분 항목" 전용(§14 분모 고정값 버그 수정) — 분자·분모 둘 다 applicable
+    # 항목만 대상으로 한다. 기존 evidenceCounts/totalItems(N/A 포함, L7이 그대로 쓰는 값)는
+    # 다른 화면에 영향 주지 않도록 건드리지 않고 새 필드로 따로 낸다.
+    insufficient_evidence_count = sum(1 for it in applicable_items if it["evidence"] == "불충분")
 
     evidence_counts = {"충분": 0, "부분": 0, "불충분": 0, None: 0}
     for it in items:
@@ -326,6 +340,14 @@ def build_summary(company: str) -> dict[str, Any]:
     for it in items:
         if it["urgency"] in urgency_counts:
             urgency_counts[it["urgency"]] += 1
+
+    # L1 Exhibit 4 전용 — 시급성 구간별 "아직 미해결"(applicable & score<100)인 항목 수.
+    # urgency_counts(구간 분류 전체, 이미 만점인 항목도 포함)와는 다른 값이라 별도로 둔다 —
+    # urgency는 score와 독립된 컬럼이라 즉시인데 이미 만점인 항목이 실제로 존재함.
+    urgency_pending_counts = {"즉시": 0, "중기": 0, "장기": 0}
+    for it in items:
+        if it["urgency"] in urgency_pending_counts and it["applicable"] and it["score"] < 100:
+            urgency_pending_counts[it["urgency"]] += 1
 
     loss_top5 = sorted(
         (it for it in applicable_items),
@@ -383,6 +405,8 @@ def build_summary(company: str) -> dict[str, Any]:
             "rate": round(total_score / total_max, 4) if total_max else None,
             "applicableItems": len(applicable_items),
             "totalItems": len(items),
+            "improvementTaskCount": improvement_task_count,
+            "insufficientEvidenceCount": insufficient_evidence_count,
         },
         "officialGrade": official_grade,
         "gradeHistory": grade_history,
@@ -394,6 +418,7 @@ def build_summary(company: str) -> dict[str, Any]:
             "미평가": evidence_counts.get(None, 0),
         },
         "urgencyCounts": urgency_counts,
+        "urgencyPendingCounts": urgency_pending_counts,
         "lossTop5": loss_top5,
         "immediateTasks": immediate_tasks,
         "simulation": {

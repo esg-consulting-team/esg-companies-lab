@@ -1,6 +1,10 @@
 """L6 증빙 데이터룸 — esg_diagnosis 채점 근거 텍스트에서 참고자료 유형을 추출하고,
 근거충분성이 낮은 항목을 모은다. 둘 다 기존 esg_diagnosis 컬럼만 쓰고 새 데이터를 만들지 않는다.
 """
+import csv
+import json
+import unicodedata
+from pathlib import Path
 from typing import Any
 
 from .parsing import evidence_page_text, parse_scoring_note
@@ -69,3 +73,59 @@ def build_evidence_gaps(company: str) -> list[dict[str, Any]]:
         }
         for it in gaps
     ]
+
+
+# ── Exhibit 3 — 문서 인벤토리 (db/manifest.csv · extraction_diagnostics.csv · checkpoint_completed.json) ──
+_DB_DIR = Path(__file__).resolve().parents[2] / "db"
+# manifest의 doc_type → 위 Exhibit 1과 같은 표시 라벨 (연결 항목 수는 build_document_coverage 결과를 그대로 재사용)
+_DOC_TYPE_LABELS = {
+    "business_report": "사업보고서",
+    "sustainability_report": "지속가능경영보고서",
+    "governance_report": "지배구조보고서",
+}
+
+
+def _nfc(text: str) -> str:
+    return unicodedata.normalize("NFC", text or "")
+
+
+def _read_csv(name: str) -> list[dict[str, str]]:
+    with open(_DB_DIR / name, encoding="utf-8-sig", newline="") as f:
+        return list(csv.DictReader(f))
+
+
+def _failed_page_count(raw: str) -> int:
+    raw = (raw or "").strip()
+    if not raw or raw == "[]":
+        return 0
+    return len([p for p in raw.strip("[]").split(",") if p.strip()])
+
+
+def build_document_inventory(company: str) -> list[dict[str, Any]]:
+    """회사별 문서 목록. 페이지 수·추출 실패 페이지 수는 extraction_diagnostics.csv, 완료 여부는
+    checkpoint_completed.json에 doc_id가 있는지로만 판정한다(완료/미완료 2단계 — 그 외 상태는 추적 근거 없음).
+    연결 항목 수는 build_document_coverage의 문서유형별 키워드 매칭 결과를 그대로 재사용한다."""
+    manifest = [r for r in _read_csv("manifest.csv") if _nfc(r["company_name"]) == company]
+    diagnostics = {r["doc_id"]: r for r in _read_csv("extraction_diagnostics.csv")}
+    with open(_DB_DIR / "checkpoint_completed.json", encoding="utf-8") as f:
+        completed = set(json.load(f))
+    linked = {d["label"]: d["count"] for d in build_document_coverage(company)["documentCounts"]}
+
+    rows = []
+    for r in manifest:
+        doc_id = f"{r['company_code']}_{r['year']}_{r['doc_type']}"
+        diag = diagnostics.get(doc_id)
+        label = _DOC_TYPE_LABELS.get(r["doc_type"], r["doc_type"])
+        rows.append(
+            {
+                "docId": doc_id,
+                "docType": label,
+                "year": int(r["year"]),
+                "totalPages": int(diag["total_pages"]) if diag and diag.get("total_pages") else None,
+                "failedPages": _failed_page_count(diag.get("still_failed_pages")) if diag else None,
+                "parsed": doc_id in completed,
+                "linkedItems": linked.get(label),
+            }
+        )
+    rows.sort(key=lambda x: (x["docType"], x["year"]))
+    return rows

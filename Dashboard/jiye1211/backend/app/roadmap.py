@@ -129,6 +129,10 @@ def build_roadmap(company: str) -> Optional[dict[str, Any]]:
     tasks_by_stage: dict[int, list[dict[str, Any]]] = {}
     for row in task_rows:
         chips = classify_related_codes(row.get("related_item_codes") or [])
+        # 칩 분류·분포 계산은 그대로 두고, 단일 항목코드 칩에 esg_diagnosis 시급성만 덧붙인다(L5 섹션 배치용).
+        for chip in chips:
+            if chip["type"] == "item":
+                chip["urgency"] = urgency_by_code.get(chip["code"])
         tasks_by_stage.setdefault(row["stage_no"], []).append(
             {"taskName": row["task_name"], "deliverables": row.get("deliverables"), "chips": chips}
         )

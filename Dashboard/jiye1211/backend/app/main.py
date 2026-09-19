@@ -132,6 +132,15 @@ def company_evidence_documents(company: str) -> dict:
     return evidence_docs.build_document_coverage(company)
 
 
+@app.get("/api/companies/{company}/evidence-inventory")
+def company_evidence_inventory(company: str) -> list[dict]:
+    """L6 Exhibit 3 — 문서 인벤토리(manifest.csv · extraction_diagnostics.csv · checkpoint_completed.json)."""
+    names = repository.fetch_companies()
+    if company not in names:
+        raise HTTPException(status_code=404, detail=f"'{company}' 회사 데이터를 찾을 수 없습니다.")
+    return evidence_docs.build_document_inventory(company)
+
+
 @app.get("/api/companies/{company}/evidence-gaps")
 def company_evidence_gaps(company: str) -> list[dict]:
     """L6 Exhibit 2 — 근거충분성이 불충분/부분인 항목 목록 (evidence_level() 재사용)."""
