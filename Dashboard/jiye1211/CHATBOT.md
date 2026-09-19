@@ -66,7 +66,25 @@ L1~L7 대시보드와 별개로 진행 중인 "AI 상담" 패널(우측 사이�
    뷰포트 높이에 고정하고, 메시지 목록만 스크롤되게 수정 (카톡 스타일). 새 메시지 도착 시 자동
    스크롤.
 
-## 4. RAG 인덱스 현황 (`backend/data/rag_index.sqlite3`)
+## 4. 벡터 검색 저장소 — 로컬 sqlite + Zilliz Cloud 이원화
+
+하나마이크론(067310) + 벤치마킹 3사(SK하이닉스·삼성전자·삼성전기, 총 28,000개 청크)는
+**Zilliz Cloud(Milvus)** 컬렉션 `esg_doc_chunks`로 이관했습니다 (`backend/app/milvus_client.py`,
+`backend/scripts/migrate_to_zilliz.py`). 회사별 인덱스를 따로 두지 않고 `company_code` 메타데이터
+필드에 대한 필터 표현식으로 회사를 구분합니다. 그 외 회사(DN오토모티브 등)는 그대로 기존 로컬
+`rag_index.sqlite3`를 씁니다 — `rag.py`가 회사 코드에 따라 두 경로 중 하나로 자동 라우팅합니다.
+
+**팀원이 챗봇을 직접 실행/테스트하려면** `backend/.env`에 아래 값이 필요합니다(`.env.example`
+참고, 실제 값은 안내받아서 채울 것):
+```
+ZILLIZ_URI=...
+ZILLIZ_TOKEN=...
+ZILLIZ_COLLECTION=esg_doc_chunks
+```
+없어도 백엔드 자체는 정상 기동하고 다른 회사 질문도 되지만, 하나마이크론/벤치마킹 3사 관련
+질문에서만 에러가 납니다. 대시보드 화면(L1~L7) 작업만 한다면 당장 필요하지 않습니다.
+
+## 5. RAG 인덱스 현황 (`backend/data/rag_index.sqlite3`)
 
 `scripts/build_rag_index.py`로 원본 ChromaDB 문서를 Gemini 임베딩 API로 재임베딩해서 구축.
 현재 상태:
@@ -90,7 +108,7 @@ L1~L7 대시보드와 별개로 진행 중인 "AI 상담" 패널(우측 사이�
 - 임베딩 API(`gemini-embedding-001`)는 유료(입력 토큰당 $0.15/100만 토큰)라서, 이후 추가로
   재임베딩이 필요하면 반드시 사전에 비용 확인 후 진행 예정.
 
-## 5. 조사했지만 보류된 것
+## 6. 조사했지만 보류된 것
 
 - **원본 ChromaDB 벡터 재사용 시도**: 마이그레이션 과정에서 벡터가 유실됐다는 가설을 검증했으나,
   실제로는 원본 인덱스가 정상 작동함을 확인(자기 자신 검색 시 거리 0.0). 다만 chromadb
@@ -101,7 +119,7 @@ L1~L7 대시보드와 별개로 진행 중인 "AI 상담" 패널(우측 사이�
   워크로드 오프라인 설치 캐시(1.22GB)는 `C:\vsbt_layout_probe`에 받아둔 상태이나, 관리자 권한
   터미널에서 실제 설치는 아직 진행하지 않음. (지금 당장 급하지 않아 보류 중)
 
-## 6. 실행/테스트 방법
+## 7. 실행/테스트 방법
 
 레포 루트 `README.md`의 실행 방법과 동일 (`start-all.bat` 또는 backend/frontend 개별 실행).
 챗봇만 빠르게 확인하려면:
@@ -115,9 +133,11 @@ POST /api/chat
 }
 ```
 
-## 7. 남은 TODO
+## 8. 남은 TODO
 
 - [ ] HD현대일렉트릭 / SK아이이테크놀로지 임베딩 마저 채울지 결정 (비용 승인 필요)
 - [ ] Visual Studio Build Tools 실제 설치(관리자 권한 필요) 후 `chroma-hnswlib` 소스 빌드 재시도 여부 결정
 - [ ] 대시보드(L1~L7) 팀원 작업과 병합 시 공용 파일(`main.py`, `types.ts`, `api/client.ts`,
       `styles/layout.css`) 충돌 여부 최종 확인
+- [ ] 챗봇을 직접 테스트할 팀원에게 Zilliz Cloud 접속 정보(`ZILLIZ_URI`/`ZILLIZ_TOKEN`) 전달
+      — 채팅으로 한 번 노출됐던 값이라 전달 전 Zilliz 콘솔에서 재발급 권장
