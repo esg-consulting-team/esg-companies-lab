@@ -1,0 +1,3642 @@
+{
+  "033180_2025_business_report": {
+    "source_file_hash": "6a9cf157639a069ebdf1f55fa0498db5",
+    "indexed_at": "2026-09-02T11:13:05.275799",
+    "source_file_stat": {
+      "size": 2592140,
+      "mtime": 1788329108.0
+    }
+  },
+  "033180_2025_governance_report": {
+    "source_file_hash": "0ae564d7fb74d59b50f0bf1dc0f2b1b4",
+    "indexed_at": "2026-09-02T11:14:12.641014",
+    "source_file_stat": {
+      "size": 2631226,
+      "mtime": 1788329061.0
+    }
+  },
+  "061970_2023_business_report": {
+    "source_file_hash": "15d0198642084e356d1f54069c24b0e1",
+    "indexed_at": "2026-09-02T11:14:29.948886",
+    "source_file_stat": {
+      "size": 934399,
+      "mtime": 1788329743.0
+    }
+  },
+  "061970_2023_sustainability_report": {
+    "source_file_hash": "dfbc83cf98fe6261b3bd38880f7c8b5b",
+    "indexed_at": "2026-09-02T11:15:11.494097",
+    "source_file_stat": {
+      "size": 5314431,
+      "mtime": 1788329801.0
+    }
+  },
+  "061970_2024_business_report": {
+    "source_file_hash": "4abd6fb893a93de0f9343196d7d6a9b2",
+    "indexed_at": "2026-09-02T11:15:17.750905",
+    "source_file_stat": {
+      "size": 963693,
+      "mtime": 1788329737.0
+    }
+  },
+  "061970_2024_sustainability_report": {
+    "source_file_hash": "db75e08baf1d12977bd019f8cca6243e",
+    "indexed_at": "2026-09-02T11:16:01.347299",
+    "source_file_stat": {
+      "size": 11310340,
+      "mtime": 1788329799.0
+    }
+  },
+  "034220_2022_business_report": {
+    "source_file_hash": "b554c84a5f2cb42cf5b6be9399d139d8",
+    "indexed_at": "2026-09-02T11:16:33.296609",
+    "source_file_stat": {
+      "size": 1326210,
+      "mtime": 1788330133.0
+    }
+  },
+  "034220_2022_governance_report": {
+    "source_file_hash": "b772120ea42152dcce96b8760b3d7d4b",
+    "indexed_at": "2026-09-02T11:17:43.765899",
+    "source_file_stat": {
+      "size": 2729756,
+      "mtime": 1788330220.0
+    }
+  },
+  "034220_2022_sustainability_report": {
+    "source_file_hash": "29548a1903d74d4bcec66229a9599770",
+    "indexed_at": "2026-09-02T11:18:17.704566",
+    "source_file_stat": {
+      "size": 19650296,
+      "mtime": 1788330099.0
+    }
+  },
+  "034220_2023_business_report": {
+    "source_file_hash": "197ae3d55a6c27880840ad6d65bef97f",
+    "indexed_at": "2026-09-02T11:21:41.045540",
+    "source_file_stat": {
+      "size": 1369149,
+      "mtime": 1788330125.0
+    }
+  },
+  "034220_2023_governance_report": {
+    "source_file_hash": "907a76a05af7f4a2bab7b363edbb3a8a",
+    "indexed_at": "2026-09-02T11:22:54.751042",
+    "source_file_stat": {
+      "size": 3148425,
+      "mtime": 1788330208.0
+    }
+  },
+  "034220_2023_sustainability_report": {
+    "source_file_hash": "6b298097e3ee823a5f43a4722f4ca380",
+    "indexed_at": "2026-09-02T11:23:33.552458",
+    "source_file_stat": {
+      "size": 19243309,
+      "mtime": 1788330094.0
+    }
+  },
+  "034220_2024_business_report": {
+    "source_file_hash": "035fd325186e94de0809bc016d84d202",
+    "indexed_at": "2026-09-02T11:24:23.875911",
+    "source_file_stat": {
+      "size": 1645950,
+      "mtime": 1788330118.0
+    }
+  },
+  "034220_2024_governance_report": {
+    "source_file_hash": "5eb6b95c79700adfe885107c39e37bd0",
+    "indexed_at": "2026-09-02T11:25:44.154898",
+    "source_file_stat": {
+      "size": 3716774,
+      "mtime": 1788330198.0
+    }
+  },
+  "034220_2024_sustainability_report": {
+    "source_file_hash": "9010bc26bbb84bffd7e9de5e4d911ed3",
+    "indexed_at": "2026-09-02T11:26:16.885989",
+    "source_file_stat": {
+      "size": 20076925,
+      "mtime": 1788330093.0
+    }
+  },
+  "034220_2025_business_report": {
+    "source_file_hash": "d0c4979e9521a16c811f7a9dec040a24",
+    "indexed_at": "2026-09-02T11:27:31.698899",
+    "source_file_stat": {
+      "size": 1780772,
+      "mtime": 1788330109.0
+    }
+  },
+  "034220_2025_governance_report": {
+    "source_file_hash": "5d098b1322bb9516ddcd04170f02f3d3",
+    "indexed_at": "2026-09-02T11:28:53.934609",
+    "source_file_stat": {
+      "size": 3240590,
+      "mtime": 1788330179.0
+    }
+  },
+  "034220_2025_sustainability_report": {
+    "source_file_hash": "aa68bba133cc9b6585ef435f5fd38f6e",
+    "indexed_at": "2026-09-02T11:29:28.354284",
+    "source_file_stat": {
+      "size": 5092605,
+      "mtime": 1788330079.0
+    }
+  },
+  "373220_2024_business_report": {
+    "source_file_hash": "c1a38628035e78844d5ef953d1702885",
+    "indexed_at": "2026-09-02T11:30:04.743354",
+    "source_file_stat": {
+      "size": 1686435,
+      "mtime": 1788330544.0
+    }
+  },
+  "373220_2024_governance_report": {
+    "source_file_hash": "cc0f3cf9f06c5a37d682497c7336da21",
+    "indexed_at": "2026-09-02T11:31:28.765314",
+    "source_file_stat": {
+      "size": 3676619,
+      "mtime": 1788330497.0
+    }
+  },
+  "373220_2024_sustainability_report": {
+    "source_file_hash": "c1165f3f8fcbb4de26b5032edc5bb449",
+    "indexed_at": "2026-09-02T11:31:58.581729",
+    "source_file_stat": {
+      "size": 10232644,
+      "mtime": 1788330523.0
+    }
+  },
+  "373220_2025_business_report": {
+    "source_file_hash": "134072715974d92d7d7f981920cf7aa7",
+    "indexed_at": "2026-09-02T11:32:56.371044",
+    "source_file_stat": {
+      "size": 1659581,
+      "mtime": 1788330537.0
+    }
+  },
+  "373220_2025_governance_report": {
+    "source_file_hash": "78ecfb7926f729aa0df1bc2b0f1a65c9",
+    "indexed_at": "2026-09-02T11:34:25.656958",
+    "source_file_stat": {
+      "size": 6240830,
+      "mtime": 1788330477.0
+    }
+  },
+  "373220_2025_sustainability_report": {
+    "source_file_hash": "8e576477eec1d04271fca829aa151f13",
+    "indexed_at": "2026-09-02T11:35:02.036695",
+    "source_file_stat": {
+      "size": 17962004,
+      "mtime": 1788330518.0
+    }
+  },
+  "011070_2022_business_report": {
+    "source_file_hash": "042c777c6630d5a422b2e1ad4c5ac812",
+    "indexed_at": "2026-09-02T11:36:18.655296",
+    "source_file_stat": {
+      "size": 1410811,
+      "mtime": 1788239928.0
+    }
+  },
+  "011070_2022_sustainability_report": {
+    "source_file_hash": "ff41e424a999cb9f3829b09733f44a50",
+    "indexed_at": "2026-09-02T11:37:28.851910",
+    "source_file_stat": {
+      "size": 19388882,
+      "mtime": 1788239986.0
+    }
+  },
+  "011070_2023_business_report": {
+    "source_file_hash": "a2dd32e7f6e760e31a8323ffc2220f97",
+    "indexed_at": "2026-09-02T11:38:18.529588",
+    "source_file_stat": {
+      "size": 1498670,
+      "mtime": 1788239710.0
+    }
+  },
+  "011070_2023_sustainability_report": {
+    "source_file_hash": "199c98c47e83279a1a5f2a29305d084a",
+    "indexed_at": "2026-09-02T11:39:25.062923",
+    "source_file_stat": {
+      "size": 17715701,
+      "mtime": 1788239784.0
+    }
+  },
+  "011070_2024_business_report": {
+    "source_file_hash": "dc151425cd8b5091251f63202ef41878",
+    "indexed_at": "2026-09-02T11:40:12.209222",
+    "source_file_stat": {
+      "size": 6973778,
+      "mtime": 1788239413.0
+    }
+  },
+  "011070_2024_governance_report": {
+    "source_file_hash": "22f2dd8be567e16d1e200e3f679a8638",
+    "indexed_at": "2026-09-02T11:40:13.536205",
+    "source_file_stat": {
+      "size": 3241667,
+      "mtime": 1788241923.0
+    }
+  },
+  "011070_2024_sustainability_report": {
+    "source_file_hash": "8892c151e5f303c98a79f8a3cf34e6b2",
+    "indexed_at": "2026-09-02T11:40:38.222414",
+    "source_file_stat": {
+      "size": 22043231,
+      "mtime": 1788239471.0
+    }
+  },
+  "011070_2025_business_report": {
+    "source_file_hash": "c33046eede200d81431b5154e81c6ded",
+    "indexed_at": "2026-09-02T11:41:48.087776",
+    "source_file_stat": {
+      "size": 1708246,
+      "mtime": 1788239099.0
+    }
+  },
+  "011070_2025_governance_report": {
+    "source_file_hash": "c1b5d325d8a69872a6ffe895dd724a44",
+    "indexed_at": "2026-09-02T11:43:12.394662",
+    "source_file_stat": {
+      "size": 2521859,
+      "mtime": 1788241818.0
+    }
+  },
+  "011070_2025_sustainability_report": {
+    "source_file_hash": "a9b9c7dd478a4ddc451439b40d33fde8",
+    "indexed_at": "2026-09-02T11:43:39.172679",
+    "source_file_stat": {
+      "size": 45616668,
+      "mtime": 1788239190.0
+    }
+  },
+  "066570_2022_business_report": {
+    "source_file_hash": "af4dfe30b3bbfa1cf5391f1404196a63",
+    "indexed_at": "2026-09-02T11:45:18.031719",
+    "source_file_stat": {
+      "size": 2253285,
+      "mtime": 1788330886.0
+    }
+  },
+  "066570_2022_governance_report": {
+    "source_file_hash": "be7d26e29376343211f80892a491a2ac",
+    "indexed_at": "2026-09-02T11:48:34.862228",
+    "source_file_stat": {
+      "size": 2191751,
+      "mtime": 1788331048.0
+    }
+  },
+  "066570_2022_sustainability_report": {
+    "source_file_hash": "4f6c0a066dfe75c47be860293bbea7fe",
+    "indexed_at": "2026-09-02T11:49:21.342398",
+    "source_file_stat": {
+      "size": 7881480,
+      "mtime": 1788330941.0
+    }
+  },
+  "066570_2023_business_report": {
+    "source_file_hash": "8d8f488fd0685ad1e956dd5bc44d3e4d",
+    "indexed_at": "2026-09-02T11:49:52.805545",
+    "source_file_stat": {
+      "size": 2147843,
+      "mtime": 1788330877.0
+    }
+  },
+  "066570_2023_governance_report": {
+    "source_file_hash": "04d9734299be57176745562517915e5f",
+    "indexed_at": "2026-09-02T11:52:00.222496",
+    "source_file_stat": {
+      "size": 2179745,
+      "mtime": 1788331040.0
+    }
+  },
+  "066570_2023_sustainability_report": {
+    "source_file_hash": "ab2a97027df32639e4ed94f13b5deb4f",
+    "indexed_at": "2026-09-02T11:52:44.939428",
+    "source_file_stat": {
+      "size": 5301726,
+      "mtime": 1788330924.0
+    }
+  },
+  "066570_2024_business_report": {
+    "source_file_hash": "daae2a5166d9b7fafe39ebde60246705",
+    "indexed_at": "2026-09-02T11:53:28.981392",
+    "source_file_stat": {
+      "size": 2465791,
+      "mtime": 1788330864.0
+    }
+  },
+  "066570_2024_governance_report": {
+    "source_file_hash": "d37f49c492d5af917f95039d9dda3ba9",
+    "indexed_at": "2026-09-02T11:56:05.553374",
+    "source_file_stat": {
+      "size": 4305705,
+      "mtime": 1788331019.0
+    }
+  },
+  "066570_2024_sustainability_report": {
+    "source_file_hash": "fb2381e8875e90f5b940bdcb1e2113a5",
+    "indexed_at": "2026-09-02T11:56:38.975084",
+    "source_file_stat": {
+      "size": 4536660,
+      "mtime": 1788330917.0
+    }
+  },
+  "066570_2025_business_report": {
+    "source_file_hash": "63c76cb983a66b2102bcf1a53728410b",
+    "indexed_at": "2026-09-02T11:57:43.613007",
+    "source_file_stat": {
+      "size": 2671496,
+      "mtime": 1788330856.0
+    }
+  },
+  "066570_2025_governance_report": {
+    "source_file_hash": "98896e36e1fc72238ab0df6236f11387",
+    "indexed_at": "2026-09-02T12:01:03.919281",
+    "source_file_stat": {
+      "size": 3941924,
+      "mtime": 1788330996.0
+    }
+  },
+  "066570_2025_sustainability_report": {
+    "source_file_hash": "81021b25372dd31d6cad80c33bb0d837",
+    "indexed_at": "2026-09-02T12:01:40.110972",
+    "source_file_stat": {
+      "size": 13101484,
+      "mtime": 1788330908.0
+    }
+  },
+  "108320_2022_business_report": {
+    "source_file_hash": "7fb688c3b3a7cec1f1333c44cf46d662",
+    "indexed_at": "2026-09-02T12:02:46.010173",
+    "source_file_stat": {
+      "size": 1422775,
+      "mtime": 1788332006.0
+    }
+  },
+  "108320_2022_sustainability_report": {
+    "source_file_hash": "8bd6207a505e07ae4947d73bd4b85577",
+    "indexed_at": "2026-09-02T12:03:50.002185",
+    "source_file_stat": {
+      "size": 4477362,
+      "mtime": 1788332088.0
+    }
+  },
+  "108320_2023_business_report": {
+    "source_file_hash": "dadaf6993a21037c38aded5efeb91cf3",
+    "indexed_at": "2026-09-02T12:04:17.852259",
+    "source_file_stat": {
+      "size": 1250729,
+      "mtime": 1788331996.0
+    }
+  },
+  "108320_2023_governance_report": {
+    "source_file_hash": "e12d2ff0defb00a22c74c525806015cc",
+    "indexed_at": "2026-09-02T12:05:05.376714",
+    "source_file_stat": {
+      "size": 892882,
+      "mtime": 1788331848.0
+    }
+  },
+  "108320_2023_sustainability_report": {
+    "source_file_hash": "006ea50476ebdafb4d43fddf2f1ccb1d",
+    "indexed_at": "2026-09-02T12:05:30.341853",
+    "source_file_stat": {
+      "size": 9626993,
+      "mtime": 1788332086.0
+    }
+  },
+  "108320_2024_business_report": {
+    "source_file_hash": "cc8f55069b244b7beec267e33e4981b3",
+    "indexed_at": "2026-09-02T12:06:08.377996",
+    "source_file_stat": {
+      "size": 1284305,
+      "mtime": 1788331987.0
+    }
+  },
+  "108320_2024_governance_report": {
+    "source_file_hash": "91804496b04ccf2c588202ea55b08fc1",
+    "indexed_at": "2026-09-02T12:06:54.299993",
+    "source_file_stat": {
+      "size": 3160770,
+      "mtime": 1788331927.0
+    }
+  },
+  "108320_2024_sustainability_report": {
+    "source_file_hash": "31511022f3ead4a4c60797e61d4cee0f",
+    "indexed_at": "2026-09-02T12:07:19.525582",
+    "source_file_stat": {
+      "size": 9791145,
+      "mtime": 1788332038.0
+    }
+  },
+  "108320_2025_business_report": {
+    "source_file_hash": "fe1fdf42b694a0611dd044849e6cd76b",
+    "indexed_at": "2026-09-02T12:08:00.089673",
+    "source_file_stat": {
+      "size": 1351372,
+      "mtime": 1788331978.0
+    }
+  },
+  "108320_2025_governance_report": {
+    "source_file_hash": "cac6b558072ef8b6ea657322de1018cb",
+    "indexed_at": "2026-09-02T12:08:58.156424",
+    "source_file_stat": {
+      "size": 3063137,
+      "mtime": 1788331960.0
+    }
+  },
+  "108320_2025_sustainability_report": {
+    "source_file_hash": "7871923606d435869b2dcdc6320b01ed",
+    "indexed_at": "2026-09-02T12:09:21.682268",
+    "source_file_stat": {
+      "size": 3686814,
+      "mtime": 1788332032.0
+    }
+  },
+  "361610_2023_business_report": {
+    "source_file_hash": "6afcddd06263a197bd3228dbc4a0acf7",
+    "indexed_at": "2026-09-02T12:10:01.793158",
+    "source_file_stat": {
+      "size": 1717804,
+      "mtime": 1788332673.0
+    }
+  },
+  "361610_2023_governance_report": {
+    "source_file_hash": "cd73ccafcec0fe003fb35fcc2acbf15e",
+    "indexed_at": "2026-09-02T12:11:19.281091",
+    "source_file_stat": {
+      "size": 2977708,
+      "mtime": 1788332472.0
+    }
+  },
+  "361610_2024_business_report": {
+    "source_file_hash": "5f834e74053728b0aea46fe8849895f9",
+    "indexed_at": "2026-09-02T12:12:00.747259",
+    "source_file_stat": {
+      "size": 1342784,
+      "mtime": 1788332665.0
+    }
+  },
+  "361610_2024_governance_report": {
+    "source_file_hash": "ab1d61013f0133a08850353274d67ccb",
+    "indexed_at": "2026-09-02T12:13:19.833543",
+    "source_file_stat": {
+      "size": 3058548,
+      "mtime": 1788332459.0
+    }
+  },
+  "361610_2024_sustainability_report": {
+    "source_file_hash": "dec05e55cbf74d1673fa708a87d74dbe",
+    "source_file_stat": {
+      "size": 36848522,
+      "mtime": 1788845977.0
+    },
+    "indexed_at": "2026-09-08T09:45:06.631840"
+  },
+  "361610_2025_business_report": {
+    "source_file_hash": "0d2c8c1fe058af76664b5f49e3808feb",
+    "indexed_at": "2026-09-02T12:16:44.349093",
+    "source_file_stat": {
+      "size": 1306247,
+      "mtime": 1788332658.0
+    }
+  },
+  "361610_2025_governance_report": {
+    "source_file_hash": "db52ae51b5015086504a21c09fb60f70",
+    "indexed_at": "2026-09-02T12:18:12.808611",
+    "source_file_stat": {
+      "size": 3677749,
+      "mtime": 1788332443.0
+    }
+  },
+  "361610_2025_sustainability_report": {
+    "source_file_hash": "dec05e55cbf74d1673fa708a87d74dbe",
+    "indexed_at": "2026-09-02T12:18:46.465607",
+    "source_file_stat": {
+      "size": 36848522,
+      "mtime": 1788332824.0
+    }
+  },
+  "000660_2022_business_report": {
+    "source_file_hash": "3437797754218d1ceb56b6cca86b8bf1",
+    "indexed_at": "2026-09-02T12:19:45.955932",
+    "source_file_stat": {
+      "size": 1595659,
+      "mtime": 1788240986.0
+    }
+  },
+  "000660_2022_sustainability_report": {
+    "source_file_hash": "c3c510b2a1273b9bfc9bf116ffddce40",
+    "indexed_at": "2026-09-02T12:21:13.552280",
+    "source_file_stat": {
+      "size": 25523366,
+      "mtime": 1788242760.0
+    }
+  },
+  "000660_2023_business_report": {
+    "source_file_hash": "ffebfbd062d40ce8ae43a4ce3b0c9228",
+    "indexed_at": "2026-09-02T12:24:18.019485",
+    "source_file_stat": {
+      "size": 1481044,
+      "mtime": 1788240978.0
+    }
+  },
+  "000660_2023_sustainability_report": {
+    "source_file_hash": "2375ea18a900745cc68b42c816bf295c",
+    "indexed_at": "2026-09-02T12:25:54.526394",
+    "source_file_stat": {
+      "size": 19377828,
+      "mtime": 1788242764.0
+    }
+  },
+  "000660_2024_business_report": {
+    "source_file_hash": "c78027c7eac05c360e7ce674c22a4e4b",
+    "indexed_at": "2026-09-02T12:26:49.565995",
+    "source_file_stat": {
+      "size": 1977150,
+      "mtime": 1788240972.0
+    }
+  },
+  "000660_2024_governance_report": {
+    "source_file_hash": "60281c93783d3c28fc81d0287907bc9f",
+    "indexed_at": "2026-09-02T12:28:45.916754",
+    "source_file_stat": {
+      "size": 3469938,
+      "mtime": 1788242314.0
+    }
+  },
+  "000660_2024_sustainability_report": {
+    "source_file_hash": "3169180429e2ce24d19ae36595cb7042",
+    "indexed_at": "2026-09-02T12:29:21.569404",
+    "source_file_stat": {
+      "size": 11932465,
+      "mtime": 1788242768.0
+    }
+  },
+  "000660_2025_business_report": {
+    "source_file_hash": "f11f9c121fc80d110e53b92ba24fbad2",
+    "indexed_at": "2026-09-02T12:35:21.657464",
+    "source_file_stat": {
+      "size": 1823829,
+      "mtime": 1788240922.0
+    }
+  },
+  "000990_2022_business_report": {
+    "source_file_hash": "091a2dbc2f0432fb74788730c8169bf3",
+    "indexed_at": "2026-09-02T12:42:33.055802",
+    "source_file_stat": {
+      "size": 995852,
+      "mtime": 1788240505.0
+    }
+  },
+  "000990_2022_governance_report": {
+    "source_file_hash": "996fd2f80db4056b78efcfb0a171a9aa",
+    "indexed_at": "2026-09-02T12:43:25.700289",
+    "source_file_stat": {
+      "size": 1851465,
+      "mtime": 1788241746.0
+    }
+  },
+  "000990_2022_sustainability_report": {
+    "source_file_hash": "5f635d303dba1336474aba1b1b927d5c",
+    "indexed_at": "2026-09-02T12:43:43.946814",
+    "source_file_stat": {
+      "size": 18859656,
+      "mtime": 1788240511.0
+    }
+  },
+  "000990_2023_business_report": {
+    "source_file_hash": "54dc5e4e102459eea3ffd1e5cc848fc6",
+    "indexed_at": "2026-09-02T12:45:57.003036",
+    "source_file_stat": {
+      "size": 997735,
+      "mtime": 1788240516.0
+    }
+  },
+  "000990_2023_governance_report": {
+    "source_file_hash": "d9f1f9cefeb8afc8463a9c0823670569",
+    "indexed_at": "2026-09-02T12:47:00.143901",
+    "source_file_stat": {
+      "size": 1948242,
+      "mtime": 1788241751.0
+    }
+  },
+  "000990_2023_sustainability_report": {
+    "source_file_hash": "182a904f499882e27a2fdc7c01b24c78",
+    "indexed_at": "2026-09-02T12:47:19.206772",
+    "source_file_stat": {
+      "size": 23752030,
+      "mtime": 1788240521.0
+    }
+  },
+  "000990_2024_business_report": {
+    "source_file_hash": "96f506f11cc0e7d2e423f7236d210f42",
+    "indexed_at": "2026-09-02T12:49:49.578605",
+    "source_file_stat": {
+      "size": 1462968,
+      "mtime": 1788240526.0
+    }
+  },
+  "000990_2024_governance_report": {
+    "source_file_hash": "2ea7f003e2f7f06c8b1341e3af74828e",
+    "indexed_at": "2026-09-02T12:51:18.343317",
+    "source_file_stat": {
+      "size": 2765099,
+      "mtime": 1788241756.0
+    }
+  },
+  "000990_2024_sustainability_report": {
+    "source_file_hash": "304c555bb4522a5c98ae8c1790d754d9",
+    "indexed_at": "2026-09-02T12:51:40.211800",
+    "source_file_stat": {
+      "size": 24460521,
+      "mtime": 1788240532.0
+    }
+  },
+  "000990_2025_business_report": {
+    "source_file_hash": "1723b3f653d2000b7a831bef8dc703ee",
+    "indexed_at": "2026-09-02T12:54:18.959384",
+    "source_file_stat": {
+      "size": 1167007,
+      "mtime": 1788240536.0
+    }
+  },
+  "000990_2025_governance_report": {
+    "source_file_hash": "5437fe8ad3d72b7a76ad4c7f56cde1d6",
+    "indexed_at": "2026-09-02T12:55:39.242425",
+    "source_file_stat": {
+      "size": 2845756,
+      "mtime": 1788241760.0
+    }
+  },
+  "000990_2025_sustainability_report": {
+    "source_file_hash": "d73de86ff519503388a64c035dfebdce",
+    "indexed_at": "2026-09-02T12:56:08.354719",
+    "source_file_stat": {
+      "size": 24770651,
+      "mtime": 1788240540.0
+    }
+  },
+  "007340_2022_business_report": {
+    "source_file_hash": "fc54aa3e41df6f988971c6629e7a301c",
+    "indexed_at": "2026-09-02T12:58:54.463013",
+    "source_file_stat": {
+      "size": 1062581,
+      "mtime": 1788335348.0
+    }
+  },
+  "007340_2022_governance_report": {
+    "source_file_hash": "d92164f4cbbd75b944cc5f646333948c",
+    "indexed_at": "2026-09-02T12:59:57.401877",
+    "source_file_stat": {
+      "size": 616609,
+      "mtime": 1788334934.0
+    }
+  },
+  "007340_2023_business_report": {
+    "source_file_hash": "a3c5354bc25a4e89b51a75042e20c503",
+    "indexed_at": "2026-09-02T13:00:09.904396",
+    "source_file_stat": {
+      "size": 1345286,
+      "mtime": 1788327748.0
+    }
+  },
+  "007340_2023_governance_report": {
+    "source_file_hash": "c4328b9bdc2fef4d08072a9a11038d8f",
+    "indexed_at": "2026-09-02T13:01:41.333266",
+    "source_file_stat": {
+      "size": 482917,
+      "mtime": 1788327882.0
+    }
+  },
+  "007340_2024_business_report": {
+    "source_file_hash": "7a28195eb95c48790ed8f70683239da6",
+    "indexed_at": "2026-09-02T13:02:22.660675",
+    "source_file_stat": {
+      "size": 998231,
+      "mtime": 1788327740.0
+    }
+  },
+  "007340_2024_governance_report": {
+    "source_file_hash": "0d42cbd3376037ee9ea4b73fc7489279",
+    "indexed_at": "2026-09-02T13:09:26.323175",
+    "source_file_stat": {
+      "size": 2184657,
+      "mtime": 1788327863.0
+    }
+  },
+  "007340_2025_business_report": {
+    "source_file_hash": "3195beed81dcfe0d4d3c9ee791e5bf29",
+    "indexed_at": "2026-09-02T13:11:01.893306",
+    "source_file_stat": {
+      "size": 1514659,
+      "mtime": 1788327732.0
+    }
+  },
+  "007340_2025_governance_report": {
+    "source_file_hash": "3a3fd92a13c18b9f03728b001941fafa",
+    "indexed_at": "2026-09-02T13:12:52.863472",
+    "source_file_stat": {
+      "size": 2316458,
+      "mtime": 1788327849.0
+    }
+  },
+  "322000_2023_business_report": {
+    "source_file_hash": "c6fa240e022949319a5e9c32cf1747ea",
+    "indexed_at": "2026-09-02T13:14:37.314099",
+    "source_file_stat": {
+      "size": 1114252,
+      "mtime": 1788328273.0
+    }
+  },
+  "322000_2023_sustainability_report": {
+    "source_file_hash": "ece1f050d270bf8a73e098bd0983373b",
+    "indexed_at": "2026-09-02T13:16:01.305549",
+    "source_file_stat": {
+      "size": 23879323,
+      "mtime": 1788328239.0
+    }
+  },
+  "322000_2024_business_report": {
+    "source_file_hash": "166b13bd96066e027fecbf6cea564e27",
+    "indexed_at": "2026-09-02T13:16:44.264335",
+    "source_file_stat": {
+      "size": 1023505,
+      "mtime": 1788328266.0
+    }
+  },
+  "322000_2024_governance_report": {
+    "source_file_hash": "2929efd462b5635e842a874df64c2406",
+    "indexed_at": "2026-09-02T13:17:40.380201",
+    "source_file_stat": {
+      "size": 2860310,
+      "mtime": 1788328202.0
+    }
+  },
+  "322000_2024_sustainability_report": {
+    "source_file_hash": "f133f3505f76e590648c7a6ce17e4f2d",
+    "indexed_at": "2026-09-02T13:18:33.017847",
+    "source_file_stat": {
+      "size": 18850242,
+      "mtime": 1788328232.0
+    }
+  },
+  "322000_2025_business_report": {
+    "source_file_hash": "4cc9433ff2d147a6f867533e7c6e4ef1",
+    "indexed_at": "2026-09-02T13:19:02.887474",
+    "source_file_stat": {
+      "size": 1313026,
+      "mtime": 1788328256.0
+    }
+  },
+  "322000_2025_governance_report": {
+    "source_file_hash": "2f9347beab8f07527b1fe485f3cae77e",
+    "indexed_at": "2026-09-02T13:21:20.645379",
+    "source_file_stat": {
+      "size": 3150404,
+      "mtime": 1788328182.0
+    }
+  },
+  "322000_2025_sustainability_report": {
+    "source_file_hash": "58aa35aec4a8ada270e2d44e593a9c8b",
+    "indexed_at": "2026-09-02T13:22:37.396964",
+    "source_file_stat": {
+      "size": 15774954,
+      "mtime": 1788328225.0
+    }
+  },
+  "267260_2023_business_report": {
+    "source_file_hash": "1c3d951abd4df8a5d909dbd363193f00",
+    "indexed_at": "2026-09-02T13:23:16.789975",
+    "source_file_stat": {
+      "size": 1369234,
+      "mtime": 1788328697.0
+    }
+  },
+  "267260_2023_governance_report": {
+    "source_file_hash": "bc74885ae21b744ae1c21ccbf453fe6c",
+    "indexed_at": "2026-09-02T13:24:57.997648",
+    "source_file_stat": {
+      "size": 692552,
+      "mtime": 1788328657.0
+    }
+  },
+  "267260_2023_sustainability_report": {
+    "source_file_hash": "59184d7af98a5427e0c7d669cd25d28e",
+    "indexed_at": "2026-09-02T13:25:51.387230",
+    "source_file_stat": {
+      "size": 2149101,
+      "mtime": 1788328735.0
+    }
+  },
+  "267260_2024_business_report": {
+    "source_file_hash": "d4a2d656c8b40d5f5eaa570ff30a964e",
+    "indexed_at": "2026-09-02T13:31:21.355484",
+    "source_file_stat": {
+      "size": 1565086,
+      "mtime": 1788328688.0
+    }
+  },
+  "267260_2024_governance_report": {
+    "source_file_hash": "cbe2c8d441fca9f4d221c590b8fbe7ce",
+    "indexed_at": "2026-09-02T13:34:05.981447",
+    "source_file_stat": {
+      "size": 3122642,
+      "mtime": 1788328642.0
+    }
+  },
+  "267260_2024_sustainability_report": {
+    "source_file_hash": "caeb888efaa86f6f36f08f0d26bd154c",
+    "indexed_at": "2026-09-02T13:34:32.954537",
+    "source_file_stat": {
+      "size": 5830204,
+      "mtime": 1788328726.0
+    }
+  },
+  "267260_2025_business_report": {
+    "source_file_hash": "9d474a83880de31e9940be622a9294ad",
+    "indexed_at": "2026-09-02T13:36:17.506184",
+    "source_file_stat": {
+      "size": 1797351,
+      "mtime": 1788328681.0
+    }
+  },
+  "267260_2025_governance_report": {
+    "source_file_hash": "af36723e4b274c0813ebc44eebfd8df5",
+    "indexed_at": "2026-09-02T13:38:10.655308",
+    "source_file_stat": {
+      "size": 2901915,
+      "mtime": 1788328625.0
+    }
+  },
+  "267260_2025_sustainability_report": {
+    "source_file_hash": "eac33071e30c7ddb8adb18d597f88c03",
+    "indexed_at": "2026-09-02T13:38:36.679007",
+    "source_file_stat": {
+      "size": 13201449,
+      "mtime": 1788328721.0
+    }
+  },
+  "060720_2023_business_report": {
+    "source_file_hash": "d841add4587abe160915dfc0d580792a",
+    "indexed_at": "2026-09-02T13:40:21.185968",
+    "source_file_stat": {
+      "size": 903822,
+      "mtime": 1788329469.0
+    }
+  },
+  "060720_2023_sustainability_report": {
+    "source_file_hash": "5bc80461866d333f4d596364e5fe8f6a",
+    "indexed_at": "2026-09-02T13:41:14.833803",
+    "source_file_stat": {
+      "size": 7458751,
+      "mtime": 1788329553.0
+    }
+  },
+  "060720_2024_business_report": {
+    "source_file_hash": "ac35d2a0cb3abe812b71c531941cff40",
+    "indexed_at": "2026-09-02T13:41:23.449369",
+    "source_file_stat": {
+      "size": 1106973,
+      "mtime": 1788329399.0
+    }
+  },
+  "033180_2023_business_report": {
+    "source_file_hash": "8f6c71af3abe148490a91490a522f5ad",
+    "indexed_at": "2026-09-02T13:43:06.744961",
+    "source_file_stat": {
+      "size": 2247743,
+      "mtime": 1788329124.0
+    }
+  },
+  "033180_2023_governance_report": {
+    "source_file_hash": "c01109767098e98d0630a6273d901e79",
+    "indexed_at": "2026-09-02T13:44:30.690059",
+    "source_file_stat": {
+      "size": 1332275,
+      "mtime": 1788329276.0
+    }
+  },
+  "033180_2024_business_report": {
+    "source_file_hash": "39565f009e3819192cac0e8e438831a7",
+    "indexed_at": "2026-09-02T13:45:41.106203",
+    "source_file_stat": {
+      "size": 2437629,
+      "mtime": 1788329117.0
+    }
+  },
+  "033180_2024_governance_report": {
+    "source_file_hash": "74beb0c30e09a4e060e693a8537bb7a2",
+    "indexed_at": "2026-09-02T13:47:10.325370",
+    "source_file_stat": {
+      "size": 2333114,
+      "mtime": 1788329085.0
+    }
+  },
+  "000660_2025_governance_report": {
+    "source_file_hash": "39f35ea4169ae96e9254a4fb9d99e6a8",
+    "indexed_at": "2026-09-02T13:47:35.856608",
+    "source_file_stat": {
+      "size": 3269718,
+      "mtime": 1788242305.0
+    }
+  },
+  "000660_2025_sustainability_report": {
+    "source_file_hash": "8047e07de29f6ec01009ab37b1585de1",
+    "indexed_at": "2026-09-02T13:48:52.402525",
+    "source_file_stat": {
+      "size": 10333324,
+      "mtime": 1788242773.0
+    }
+  },
+  "000500_2022_business_report": {
+    "source_file_hash": "6ef75e74ec33320187dd9051503c58dd",
+    "indexed_at": "2026-09-02T14:04:18.261234",
+    "source_file_stat": {
+      "size": 1745939,
+      "mtime": 1788326886.0
+    }
+  },
+  "000500_2022_sustainability_report": {
+    "source_file_hash": "4fc2192ebbea793ee0b220bcdbbf6ce4",
+    "indexed_at": "2026-09-02T14:05:32.584255",
+    "source_file_stat": {
+      "size": 46984192,
+      "mtime": 1788326585.0
+    }
+  },
+  "000500_2023_business_report": {
+    "source_file_hash": "63cebe5a0258e14ee597d7f1e4dcc8fb",
+    "indexed_at": "2026-09-02T14:08:35.461726",
+    "source_file_stat": {
+      "size": 1372041,
+      "mtime": 1788326858.0
+    }
+  },
+  "000500_2023_sustainability_report": {
+    "source_file_hash": "7aae7096878abb6aa4e547dc484b18d6",
+    "indexed_at": "2026-09-02T14:10:46.064568",
+    "source_file_stat": {
+      "size": 90104832,
+      "mtime": 1788326586.0
+    }
+  },
+  "000500_2024_business_report": {
+    "source_file_hash": "c805c2764ebebb55535442e411e9e26e",
+    "indexed_at": "2026-09-02T14:12:21.441334",
+    "source_file_stat": {
+      "size": 1266788,
+      "mtime": 1788326825.0
+    }
+  },
+  "000500_2024_governance_report": {
+    "source_file_hash": "9466e2eb668cfac39545e9287de07bf7",
+    "indexed_at": "2026-09-02T14:13:27.345329",
+    "source_file_stat": {
+      "size": 3379858,
+      "mtime": 1788327089.0
+    }
+  },
+  "000500_2024_sustainability_report": {
+    "source_file_hash": "7c91679d5ce924a9b57b35fcff0cd62d",
+    "indexed_at": "2026-09-02T14:14:44.806201",
+    "source_file_stat": {
+      "size": 4797440,
+      "mtime": 1788326578.0
+    }
+  },
+  "000500_2025_business_report": {
+    "source_file_hash": "9b8f3b512e84a36f91403070a11b0e50",
+    "indexed_at": "2026-09-02T14:15:36.858557",
+    "source_file_stat": {
+      "size": 1652913,
+      "mtime": 1788326782.0
+    }
+  },
+  "000500_2025_governance_report": {
+    "source_file_hash": "c30a221664246e8460b97a3d24269610",
+    "indexed_at": "2026-09-02T14:17:04.830072",
+    "source_file_stat": {
+      "size": 3302979,
+      "mtime": 1788327048.0
+    }
+  },
+  "000500_2025_sustainability_report": {
+    "source_file_hash": "d6da6ddb4f14b9cde2b8bf7390de01d3",
+    "indexed_at": "2026-09-02T14:18:39.055444",
+    "source_file_stat": {
+      "size": 19766272,
+      "mtime": 1788326575.0
+    }
+  },
+  "009450_2023_business_report": {
+    "source_file_hash": "1b82f8483803b48356436aa365327b68",
+    "indexed_at": "2026-09-02T14:19:44.489031",
+    "source_file_stat": {
+      "size": 1391025,
+      "mtime": 1788329997.0
+    }
+  },
+  "009450_2023_governance_report": {
+    "source_file_hash": "382ce9e0c0b862e5c244fc62a8b43884",
+    "indexed_at": "2026-09-02T14:20:44.791666",
+    "source_file_stat": {
+      "size": 3074107,
+      "mtime": 1788329993.0
+    }
+  },
+  "009450_2023_sustainability_report": {
+    "source_file_hash": "ae4a0526715a755ea645958d7480dab4",
+    "indexed_at": "2026-09-02T14:22:05.173839",
+    "source_file_stat": {
+      "size": 25354980,
+      "mtime": 1788329988.0
+    }
+  },
+  "009450_2024_business_report": {
+    "source_file_hash": "4b37ca304de33719e8538f6acf3164e6",
+    "indexed_at": "2026-09-02T14:23:19.337367",
+    "source_file_stat": {
+      "size": 1146431,
+      "mtime": 1788329983.0
+    }
+  },
+  "009450_2024_governance_report": {
+    "source_file_hash": "1b583661c157928119964dea42cc098b",
+    "indexed_at": "2026-09-02T14:24:32.937460",
+    "source_file_stat": {
+      "size": 3146314,
+      "mtime": 1788329979.0
+    }
+  },
+  "009450_2024_sustainability_report": {
+    "source_file_hash": "6f9b8b6b7622f2dd0dc0811fce3f2204",
+    "indexed_at": "2026-09-02T14:26:14.069931",
+    "source_file_stat": {
+      "size": 19166843,
+      "mtime": 1788329975.0
+    }
+  },
+  "009450_2025_business_report": {
+    "source_file_hash": "a0092e0b4146c88b7c14a5c5352f4be9",
+    "indexed_at": "2026-09-02T14:27:53.651157",
+    "source_file_stat": {
+      "size": 1257248,
+      "mtime": 1788329969.0
+    }
+  },
+  "009450_2025_governance_report": {
+    "source_file_hash": "062a51e0c78d04ab22951861222d4b1a",
+    "indexed_at": "2026-09-02T14:30:30.090351",
+    "source_file_stat": {
+      "size": 3027624,
+      "mtime": 1788329964.0
+    }
+  },
+  "009450_2025_sustainability_report": {
+    "source_file_hash": "88782e684a915e1b25deed096e127102",
+    "indexed_at": "2026-09-02T14:32:05.386172",
+    "source_file_stat": {
+      "size": 11984460,
+      "mtime": 1788329957.0
+    }
+  },
+  "017040_2022_business_report": {
+    "source_file_hash": "b88decf4a238dacc63978223a5fedac0",
+    "indexed_at": "2026-09-02T14:33:51.766260",
+    "source_file_stat": {
+      "size": 1287733,
+      "mtime": 1788337752.0
+    }
+  },
+  "017040_2023_business_report": {
+    "source_file_hash": "049f00a0144dbf4d72875b38a2c80097",
+    "indexed_at": "2026-09-02T14:36:25.650346",
+    "source_file_stat": {
+      "size": 1145022,
+      "mtime": 1788337683.0
+    }
+  },
+  "017040_2023_sustainability_report": {
+    "source_file_hash": "78fdd4600d187fcbd60379331958eed2",
+    "indexed_at": "2026-09-02T14:39:41.253871",
+    "source_file_stat": {
+      "size": 2541884,
+      "mtime": 1788337436.0
+    }
+  },
+  "017040_2024_business_report": {
+    "source_file_hash": "b7d7ce8a368ef06f12bc842f49cc9574",
+    "indexed_at": "2026-09-02T14:39:47.122221",
+    "source_file_stat": {
+      "size": 1376306,
+      "mtime": 1788337612.0
+    }
+  },
+  "017040_2024_sustainability_report": {
+    "source_file_hash": "e5cd6db6c0e75ea4d4f9824817ddedfc",
+    "indexed_at": "2026-09-02T14:40:54.398270",
+    "source_file_stat": {
+      "size": 1738258,
+      "mtime": 1788337656.0
+    }
+  },
+  "017040_2025_business_report": {
+    "source_file_hash": "4061a3c1d925c8f664fe390ed7d5d6c7",
+    "indexed_at": "2026-09-02T14:42:03.501142",
+    "source_file_stat": {
+      "size": 1257528,
+      "mtime": 1788337716.0
+    }
+  },
+  "017040_2025_sustainability_report": {
+    "source_file_hash": "c5320aa7c01dde06472d8a94596e2890",
+    "indexed_at": "2026-09-02T14:43:08.664644",
+    "source_file_stat": {
+      "size": 1444136,
+      "mtime": 1788337629.0
+    }
+  },
+  "033640_2023_business_report": {
+    "source_file_hash": "a4c494bac404d53036f1cf0f32dc4af3",
+    "indexed_at": "2026-09-02T14:43:19.643958",
+    "source_file_stat": {
+      "size": 1443674,
+      "mtime": 1788328443.0
+    }
+  },
+  "033640_2023_sustainability_report": {
+    "source_file_hash": "d32497b2c0d4fadab2e58666949676ad",
+    "indexed_at": "2026-09-02T14:45:15.948675",
+    "source_file_stat": {
+      "size": 3782596,
+      "mtime": 1788327845.0
+    }
+  },
+  "033640_2024_business_report": {
+    "source_file_hash": "774542380d79eadbdfe3ac7f0cfb0fdb",
+    "indexed_at": "2026-09-02T14:45:33.799061",
+    "source_file_stat": {
+      "size": 1568219,
+      "mtime": 1788328390.0
+    }
+  },
+  "033640_2025_business_report": {
+    "source_file_hash": "ff5a331af7a188f0165922665f45a4f6",
+    "indexed_at": "2026-09-02T14:46:53.100352",
+    "source_file_stat": {
+      "size": 1196419,
+      "mtime": 1788328359.0
+    }
+  },
+  "033640_2025_sustainability_report": {
+    "source_file_hash": "fa1dd39d3d0dc88fa421443c710bf804",
+    "indexed_at": "2026-09-02T14:48:58.495779",
+    "source_file_stat": {
+      "size": 5803781,
+      "mtime": 1788327795.0
+    }
+  },
+  "353200_2022_business_report": {
+    "source_file_hash": "5afe1933bdda27b88a5cd00d66da16af",
+    "indexed_at": "2026-09-02T14:49:36.080337",
+    "source_file_stat": {
+      "size": 1031384,
+      "mtime": 1788329324.0
+    }
+  },
+  "353200_2023_business_report": {
+    "source_file_hash": "c84df807933c3547da4c70313fec8270",
+    "indexed_at": "2026-09-02T14:50:20.425648",
+    "source_file_stat": {
+      "size": 874502,
+      "mtime": 1788329311.0
+    }
+  },
+  "353200_2023_governance_report": {
+    "source_file_hash": "bca3ea40162f1f9169c5be23971be871",
+    "indexed_at": "2026-09-02T14:52:17.962804",
+    "source_file_stat": {
+      "size": 1559512,
+      "mtime": 1788329253.0
+    }
+  },
+  "353200_2024_business_report": {
+    "source_file_hash": "8e65d57c2bbe49ac10b35806a4c2f1f4",
+    "indexed_at": "2026-09-02T14:52:31.628981",
+    "source_file_stat": {
+      "size": 941125,
+      "mtime": 1788329195.0
+    }
+  },
+  "353200_2024_governance_report": {
+    "source_file_hash": "da2f73d521baa7dd8cfc43d45f52494b",
+    "indexed_at": "2026-09-02T14:53:38.614407",
+    "source_file_stat": {
+      "size": 2155905,
+      "mtime": 1788329133.0
+    }
+  },
+  "353200_2025_business_report": {
+    "source_file_hash": "710f4a86403e38e39f0da22ae6c8966c",
+    "indexed_at": "2026-09-02T14:54:58.979878",
+    "source_file_stat": {
+      "size": 1095590,
+      "mtime": 1788329052.0
+    }
+  },
+  "353200_2025_governance_report": {
+    "source_file_hash": "c217ae10e621aa3fcf955456b106b88d",
+    "indexed_at": "2026-09-02T14:56:15.408264",
+    "source_file_stat": {
+      "size": 2164002,
+      "mtime": 1788329090.0
+    }
+  },
+  "001440_2022_business_report": {
+    "source_file_hash": "0c6d286ab7c88dd4b71ac00d964e345e",
+    "indexed_at": "2026-09-02T14:56:40.989658",
+    "source_file_stat": {
+      "size": 1086903,
+      "mtime": 1788330141.0
+    }
+  },
+  "001440_2022_governance_report": {
+    "source_file_hash": "4aa81e351ae497cda23671e446acb037",
+    "indexed_at": "2026-09-02T14:58:44.654419",
+    "source_file_stat": {
+      "size": 776814,
+      "mtime": 1788330016.0
+    }
+  },
+  "001440_2022_sustainability_report": {
+    "source_file_hash": "3161702deddb666f0bea448b937e708c",
+    "indexed_at": "2026-09-02T14:59:20.513391",
+    "source_file_stat": {
+      "size": 3301690,
+      "mtime": 1788329766.0
+    }
+  },
+  "001440_2023_business_report": {
+    "source_file_hash": "e8d7f0cc4f7f7da5ef6c9a697442d905",
+    "indexed_at": "2026-09-02T14:59:32.909029",
+    "source_file_stat": {
+      "size": 1076092,
+      "mtime": 1788329985.0
+    }
+  },
+  "001440_2023_governance_report": {
+    "source_file_hash": "ab102451f3d1b899a6d1565d119d0e4f",
+    "indexed_at": "2026-09-02T15:01:50.026985",
+    "source_file_stat": {
+      "size": 795884,
+      "mtime": 1788330244.0
+    }
+  },
+  "001440_2023_sustainability_report": {
+    "source_file_hash": "d424f5606dfd0e385ef33af5edbafbeb",
+    "indexed_at": "2026-09-02T15:02:31.173377",
+    "source_file_stat": {
+      "size": 3860773,
+      "mtime": 1788329748.0
+    }
+  },
+  "001440_2024_business_report": {
+    "source_file_hash": "6c94754b57fa4e01b1d849812911b633",
+    "indexed_at": "2026-09-02T15:02:47.665790",
+    "source_file_stat": {
+      "size": 1115308,
+      "mtime": 1788329960.0
+    }
+  },
+  "001440_2024_governance_report": {
+    "source_file_hash": "6730aa8fe99b7d2d0b02a134b71c3a38",
+    "indexed_at": "2026-09-02T15:05:02.136047",
+    "source_file_stat": {
+      "size": 2489686,
+      "mtime": 1788329949.0
+    }
+  },
+  "001440_2024_sustainability_report": {
+    "source_file_hash": "46c2169f9c324af5e7b4519158bc147e",
+    "indexed_at": "2026-09-02T15:05:38.190004",
+    "source_file_stat": {
+      "size": 4449556,
+      "mtime": 1788329682.0
+    }
+  },
+  "001440_2025_business_report": {
+    "source_file_hash": "7b7f070950eeeb95b6863e657b6ca152",
+    "indexed_at": "2026-09-02T15:05:54.538780",
+    "source_file_stat": {
+      "size": 1694066,
+      "mtime": 1788329916.0
+    }
+  },
+  "001440_2025_governance_report": {
+    "source_file_hash": "28a052e3272024139ee4de900c2029b2",
+    "indexed_at": "2026-09-02T15:09:07.390860",
+    "source_file_stat": {
+      "size": 2841446,
+      "mtime": 1788329906.0
+    }
+  },
+  "001440_2025_sustainability_report": {
+    "source_file_hash": "eca9a53a90a7572c9e92ba69d70eae1c",
+    "indexed_at": "2026-09-02T15:09:53.063197",
+    "source_file_stat": {
+      "size": 5936544,
+      "mtime": 1788329657.0
+    }
+  },
+  "393890_2024_business_report": {
+    "source_file_hash": "59e7fde3d05d8f9b4e6616bc0dc0f144",
+    "indexed_at": "2026-09-02T15:10:18.495523",
+    "source_file_stat": {
+      "size": 1446697,
+      "mtime": 1788338385.0
+    }
+  },
+  "393890_2025_sustainability_report": {
+    "source_file_hash": "487087dcb54e57007e75cf8c1cbf1511",
+    "indexed_at": "2026-09-02T15:12:39.388485",
+    "source_file_stat": {
+      "size": 8951713,
+      "mtime": 1788338300.0
+    }
+  },
+  "213420_2022_business_report": {
+    "source_file_hash": "b556b3277bfb148503afc0931c07d60a",
+    "indexed_at": "2026-09-02T15:13:25.070498",
+    "source_file_stat": {
+      "size": 2654692,
+      "mtime": 1788330544.0
+    }
+  },
+  "213420_2022_sustainability_report": {
+    "source_file_hash": "4fb4c1c467d648013997204060f86406",
+    "indexed_at": "2026-09-02T15:14:09.284980",
+    "source_file_stat": {
+      "size": 50845697,
+      "mtime": 1788330438.0
+    }
+  },
+  "213420_2023_business_report": {
+    "source_file_hash": "bd6097e1f696bd51050eaf3e23272e85",
+    "indexed_at": "2026-09-02T15:15:38.626212",
+    "source_file_stat": {
+      "size": 2633863,
+      "mtime": 1788330491.0
+    }
+  },
+  "213420_2023_sustainability_report": {
+    "source_file_hash": "ebaec1c9969b0ed9b4885d3a4ce8e1c1",
+    "indexed_at": "2026-09-02T15:16:48.144806",
+    "source_file_stat": {
+      "size": 24871299,
+      "mtime": 1788330421.0
+    }
+  },
+  "213420_2024_business_report": {
+    "source_file_hash": "92421b1d0b228895e09be914f2c38d79",
+    "indexed_at": "2026-09-02T15:17:20.318261",
+    "source_file_stat": {
+      "size": 2466641,
+      "mtime": 1788330480.0
+    }
+  },
+  "213420_2024_sustainability_report": {
+    "source_file_hash": "f43e85fe73b5d8b1567371d5fbf403fc",
+    "indexed_at": "2026-09-02T15:19:19.711436",
+    "source_file_stat": {
+      "size": 4096415,
+      "mtime": 1788330408.0
+    }
+  },
+  "213420_2025_business_report": {
+    "source_file_hash": "e76d1df64e33d3a136ef54ef9ffd8258",
+    "indexed_at": "2026-09-02T15:20:07.176153",
+    "source_file_stat": {
+      "size": 2417455,
+      "mtime": 1788330470.0
+    }
+  },
+  "213420_2025_sustainability_report": {
+    "source_file_hash": "9e2a9525d12363021cd77bc8e79285e8",
+    "indexed_at": "2026-09-02T15:20:55.878911",
+    "source_file_stat": {
+      "size": 9098675,
+      "mtime": 1788330372.0
+    }
+  },
+  "336260_2022_business_report": {
+    "source_file_hash": "972a00914555073997374245a8a45da4",
+    "indexed_at": "2026-09-02T15:22:19.824770",
+    "source_file_stat": {
+      "size": 964624,
+      "mtime": 1788331880.0
+    }
+  },
+  "336260_2022_sustainability_report": {
+    "source_file_hash": "575ed55a98a62d4263cf67c8a9605996",
+    "indexed_at": "2026-09-02T15:23:13.816065",
+    "source_file_stat": {
+      "size": 7197662,
+      "mtime": 1788331420.0
+    }
+  },
+  "336260_2023_business_report": {
+    "source_file_hash": "faad18424a71e9fe74e362b96be3f6a2",
+    "indexed_at": "2026-09-02T15:23:51.998781",
+    "source_file_stat": {
+      "size": 1006720,
+      "mtime": 1788331859.0
+    }
+  },
+  "336260_2023_governance_report": {
+    "source_file_hash": "8c3cbe091967d0cdb6947d46b2721360",
+    "indexed_at": "2026-09-02T15:25:51.336630",
+    "source_file_stat": {
+      "size": 7304275,
+      "mtime": 1788331849.0
+    }
+  },
+  "336260_2023_sustainability_report": {
+    "source_file_hash": "d28112ffa0b22e14858b2b751cac4f13",
+    "indexed_at": "2026-09-02T15:26:43.575271",
+    "source_file_stat": {
+      "size": 11768970,
+      "mtime": 1788331419.0
+    }
+  },
+  "336260_2024_business_report": {
+    "source_file_hash": "8fd6f06aea2232afdc2affba4047d380",
+    "indexed_at": "2026-09-02T15:27:44.675466",
+    "source_file_stat": {
+      "size": 1044544,
+      "mtime": 1788331828.0
+    }
+  },
+  "336260_2024_governance_report": {
+    "source_file_hash": "5022eb4723882f8aa8e3b42ee7a4f4d5",
+    "indexed_at": "2026-09-02T15:31:12.268751",
+    "source_file_stat": {
+      "size": 2372554,
+      "mtime": 1788331819.0
+    }
+  },
+  "336260_2024_sustainability_report": {
+    "source_file_hash": "70100fc8494695d19b8b1e1d06ae63f2",
+    "indexed_at": "2026-09-02T15:31:35.775602",
+    "source_file_stat": {
+      "size": 27594917,
+      "mtime": 1788331418.0
+    }
+  },
+  "336260_2025_business_report": {
+    "source_file_hash": "e47f91786d1379ab3bf06ed48072ba55",
+    "indexed_at": "2026-09-02T15:32:31.921308",
+    "source_file_stat": {
+      "size": 1462806,
+      "mtime": 1788331788.0
+    }
+  },
+  "336260_2025_governance_report": {
+    "source_file_hash": "c41fcda28a57d415a346c851a67eccf9",
+    "indexed_at": "2026-09-02T15:34:59.892520",
+    "source_file_stat": {
+      "size": 2415283,
+      "mtime": 1788331737.0
+    }
+  },
+  "336260_2025_sustainability_report": {
+    "source_file_hash": "3d98fee4eeac1deacce7894ad83a0197",
+    "indexed_at": "2026-09-02T15:35:39.346950",
+    "source_file_stat": {
+      "size": 12758054,
+      "mtime": 1788331416.0
+    }
+  },
+  "192650_2024_business_report": {
+    "source_file_hash": "561f02d855767eee0398bb503df402e1",
+    "indexed_at": "2026-09-02T15:37:04.680598",
+    "source_file_stat": {
+      "size": 2343499,
+      "mtime": 1788333089.0
+    }
+  },
+  "192650_2024_governance_report": {
+    "source_file_hash": "5b53027faba9a7f27597ec9046b9a1b3",
+    "indexed_at": "2026-09-02T15:39:21.444594",
+    "source_file_stat": {
+      "size": 1566938,
+      "mtime": 1788332926.0
+    }
+  },
+  "192650_2025_business_report": {
+    "source_file_hash": "2dd3618d928b968f9b984399316a760a",
+    "indexed_at": "2026-09-02T15:40:05.655697",
+    "source_file_stat": {
+      "size": 2358438,
+      "mtime": 1788333071.0
+    }
+  },
+  "192650_2025_governance_report": {
+    "source_file_hash": "364b9eb57e50d89e207d32ea5bf9deb4",
+    "indexed_at": "2026-09-02T15:41:11.757415",
+    "source_file_stat": {
+      "size": 1912350,
+      "mtime": 1788332897.0
+    }
+  },
+  "192650_2025_sustainability_report": {
+    "source_file_hash": "5d3947446b9b788b5a0c73eee90dd000",
+    "indexed_at": "2026-09-02T15:42:45.726477",
+    "source_file_stat": {
+      "size": 4352543,
+      "mtime": 1788333203.0
+    }
+  },
+  "020150_2022_business_report": {
+    "source_file_hash": "32be1817c59326beb5aa471749b93f0c",
+    "indexed_at": "2026-09-02T15:43:35.391690",
+    "source_file_stat": {
+      "size": 1011820,
+      "mtime": 1788327570.0
+    }
+  },
+  "020150_2022_governance_report": {
+    "source_file_hash": "cc8c695c121859efdf15e13562c0bc28",
+    "indexed_at": "2026-09-02T15:44:35.947331",
+    "source_file_stat": {
+      "size": 2323137,
+      "mtime": 1788327524.0
+    }
+  },
+  "020150_2023_business_report": {
+    "source_file_hash": "32be1817c59326beb5aa471749b93f0c",
+    "indexed_at": "2026-09-02T15:46:28.295997",
+    "source_file_stat": {
+      "size": 1011820,
+      "mtime": 1788333694.0
+    }
+  },
+  "020150_2023_governance_report": {
+    "source_file_hash": "cc8c695c121859efdf15e13562c0bc28",
+    "indexed_at": "2026-09-02T15:47:44.383207",
+    "source_file_stat": {
+      "size": 2323137,
+      "mtime": 1788333596.0
+    }
+  },
+  "020150_2024_business_report": {
+    "source_file_hash": "3eea7c9658fb802a0c0d306c9041f4c8",
+    "indexed_at": "2026-09-02T15:48:24.707913",
+    "source_file_stat": {
+      "size": 1146624,
+      "mtime": 1788333676.0
+    }
+  },
+  "020150_2024_governance_report": {
+    "source_file_hash": "e7eef25e445ec2e0867b3fd9a36c792e",
+    "indexed_at": "2026-09-02T15:50:56.700906",
+    "source_file_stat": {
+      "size": 2366341,
+      "mtime": 1788333536.0
+    }
+  },
+  "020150_2024_sustainability_report": {
+    "source_file_hash": "2a45cde40123970da75bfdcbda5c9894",
+    "indexed_at": "2026-09-02T15:51:45.214093",
+    "source_file_stat": {
+      "size": 10187385,
+      "mtime": 1788333775.0
+    }
+  },
+  "020150_2025_business_report": {
+    "source_file_hash": "c136c459933503c6c919d0a431743848",
+    "indexed_at": "2026-09-02T15:52:25.619224",
+    "source_file_stat": {
+      "size": 1287700,
+      "mtime": 1788333659.0
+    }
+  },
+  "020150_2025_governance_report": {
+    "source_file_hash": "00f848af255489ae8b1dfdf0a7727f47",
+    "indexed_at": "2026-09-02T15:55:06.358153",
+    "source_file_stat": {
+      "size": 2569660,
+      "mtime": 1788333499.0
+    }
+  },
+  "020150_2025_sustainability_report": {
+    "source_file_hash": "2e62fa51b37ee505486d7e94875fbf54",
+    "indexed_at": "2026-09-02T15:56:01.809497",
+    "source_file_stat": {
+      "size": 8613791,
+      "mtime": 1788333751.0
+    }
+  },
+  "090460_2024_business_report": {
+    "source_file_hash": "eff36fd6e9341518765bf4431e83532a",
+    "indexed_at": "2026-09-02T15:56:47.866393",
+    "source_file_stat": {
+      "size": 1352154,
+      "mtime": 1788334151.0
+    }
+  },
+  "090460_2024_governance_report": {
+    "source_file_hash": "a7c50ff3233b465617701e374a3915c9",
+    "indexed_at": "2026-09-02T15:59:27.951753",
+    "source_file_stat": {
+      "size": 1837789,
+      "mtime": 1788334091.0
+    }
+  },
+  "090460_2024_sustainability_report": {
+    "source_file_hash": "072cb9b88eeee1d692d08fd182abd32b",
+    "indexed_at": "2026-09-02T16:00:12.381407",
+    "source_file_stat": {
+      "size": 3283367,
+      "mtime": 1788333954.0
+    }
+  },
+  "090460_2025_business_report": {
+    "source_file_hash": "e0855118bc808c673ba1deda28eb73e7",
+    "indexed_at": "2026-09-02T16:00:51.836492",
+    "source_file_stat": {
+      "size": 1534789,
+      "mtime": 1788334139.0
+    }
+  },
+  "090460_2025_governance_report": {
+    "source_file_hash": "c7c1255e4496753ff11eae9a7971611d",
+    "indexed_at": "2026-09-02T16:03:34.305248",
+    "source_file_stat": {
+      "size": 1858343,
+      "mtime": 1788334064.0
+    }
+  },
+  "090460_2025_sustainability_report": {
+    "source_file_hash": "8712bdcad83687d989e7c33dfd7e46fe",
+    "indexed_at": "2026-09-02T16:04:15.038640",
+    "source_file_stat": {
+      "size": 5662061,
+      "mtime": 1788333930.0
+    }
+  },
+  "006400_2022_business_report": {
+    "source_file_hash": "2929b708b6b634f8afc2bda809069551",
+    "indexed_at": "2026-09-02T16:05:00.529335",
+    "source_file_stat": {
+      "size": 1189935,
+      "mtime": 1788328774.0
+    }
+  },
+  "006400_2022_governance_report": {
+    "source_file_hash": "b23efb575e12aa06c1541db48fb84c4b",
+    "indexed_at": "2026-09-02T16:07:36.626157",
+    "source_file_stat": {
+      "size": 2414382,
+      "mtime": 1788328657.0
+    }
+  },
+  "006400_2022_sustainability_report": {
+    "source_file_hash": "41a7609ca5fcdf84875f8406c7b3c8f1",
+    "indexed_at": "2026-09-02T16:08:34.462914",
+    "source_file_stat": {
+      "size": 46253313,
+      "mtime": 1788328368.0
+    }
+  },
+  "006400_2023_business_report": {
+    "source_file_hash": "52f5cede37c778a11beebbf35b0a6ace",
+    "indexed_at": "2026-09-02T16:10:48.288821",
+    "source_file_stat": {
+      "size": 1233237,
+      "mtime": 1788328765.0
+    }
+  },
+  "006400_2023_governance_report": {
+    "source_file_hash": "b9e954c9776238aa3cedd1c0aed27b16",
+    "indexed_at": "2026-09-02T16:13:34.093259",
+    "source_file_stat": {
+      "size": 852256,
+      "mtime": 1788328633.0
+    }
+  },
+  "006400_2023_sustainability_report": {
+    "source_file_hash": "4c8bc04357a4a9fb9cbe1ef0f95d7325",
+    "indexed_at": "2026-09-02T16:14:28.187618",
+    "source_file_stat": {
+      "size": 48318917,
+      "mtime": 1788328313.0
+    }
+  },
+  "006400_2024_business_report": {
+    "source_file_hash": "158896f2bd5e332ca36672a7b9c0c811",
+    "indexed_at": "2026-09-02T16:15:12.170177",
+    "source_file_stat": {
+      "size": 1458478,
+      "mtime": 1788328757.0
+    }
+  },
+  "006400_2024_governance_report": {
+    "source_file_hash": "1f2fc07e5d1e76afbffba5f52861c675",
+    "indexed_at": "2026-09-02T16:17:58.188790",
+    "source_file_stat": {
+      "size": 3094371,
+      "mtime": 1788328548.0
+    }
+  },
+  "006400_2024_sustainability_report": {
+    "source_file_hash": "4e687579442236c98045dc9bdec59755",
+    "indexed_at": "2026-09-02T16:18:46.018122",
+    "source_file_stat": {
+      "size": 30877662,
+      "mtime": 1788328221.0
+    }
+  },
+  "006400_2025_business_report": {
+    "source_file_hash": "14bcdace3daf92a5caa61db2f28b9044",
+    "indexed_at": "2026-09-02T16:19:55.682221",
+    "source_file_stat": {
+      "size": 1330941,
+      "mtime": 1788328747.0
+    }
+  },
+  "006400_2025_governance_report": {
+    "source_file_hash": "afb9171c56a70be5d0c5b7185a398094",
+    "indexed_at": "2026-09-02T16:22:58.767768",
+    "source_file_stat": {
+      "size": 2854098,
+      "mtime": 1788328509.0
+    }
+  },
+  "006400_2025_sustainability_report": {
+    "source_file_hash": "85e4943378ff05ae2174b03c13076cc1",
+    "indexed_at": "2026-09-02T16:28:31.802606",
+    "source_file_stat": {
+      "size": 14679092,
+      "mtime": 1788328190.0
+    }
+  },
+  "009150_2022_business_report": {
+    "source_file_hash": "565d3db1a261110c2871bd2bd9d7079f",
+    "indexed_at": "2026-09-02T16:30:01.219187",
+    "source_file_stat": {
+      "size": 1235530,
+      "mtime": 1788327960.0
+    }
+  },
+  "009150_2022_governance_report": {
+    "source_file_hash": "9c73b7728dccd58cb8475c559db4249d",
+    "indexed_at": "2026-09-02T16:31:25.186765",
+    "source_file_stat": {
+      "size": 1229940,
+      "mtime": 1788327562.0
+    }
+  },
+  "009150_2022_sustainability_report": {
+    "source_file_hash": "bd09f3eb7f6645aff39a3864a68f690f",
+    "indexed_at": "2026-09-02T16:33:27.386036",
+    "source_file_stat": {
+      "size": 9659468,
+      "mtime": 1788327797.0
+    }
+  },
+  "009150_2023_business_report": {
+    "source_file_hash": "0610447aac08ee3bfff0c6a376f734fe",
+    "indexed_at": "2026-09-02T16:35:20.580381",
+    "source_file_stat": {
+      "size": 1466879,
+      "mtime": 1788327952.0
+    }
+  },
+  "009150_2023_governance_report": {
+    "source_file_hash": "f7c2f75d1241c8d75b4159fb65520340",
+    "indexed_at": "2026-09-02T16:36:43.449542",
+    "source_file_stat": {
+      "size": 2702645,
+      "mtime": 1788327535.0
+    }
+  },
+  "009150_2023_sustainability_report": {
+    "source_file_hash": "2a4eb85fcdf9b914839202ad0a5aa691",
+    "indexed_at": "2026-09-02T16:38:42.088895",
+    "source_file_stat": {
+      "size": 21017481,
+      "mtime": 1788327777.0
+    }
+  },
+  "009150_2024_business_report": {
+    "source_file_hash": "3986b256d6bd9b637fb07486c4c4b715",
+    "indexed_at": "2026-09-02T16:40:27.962153",
+    "source_file_stat": {
+      "size": 1988678,
+      "mtime": 1788327940.0
+    }
+  },
+  "009150_2024_governance_report": {
+    "source_file_hash": "26b3cc5a2ec0d8e55349449f7c22a589",
+    "indexed_at": "2026-09-02T16:42:19.307453",
+    "source_file_stat": {
+      "size": 2026095,
+      "mtime": 1788326669.0
+    }
+  },
+  "009150_2024_sustainability_report": {
+    "source_file_hash": "e0a9a03944e1502b88aa04261c4813f0",
+    "indexed_at": "2026-09-02T16:44:19.998655",
+    "source_file_stat": {
+      "size": 8645932,
+      "mtime": 1788327696.0
+    }
+  },
+  "009150_2025_business_report": {
+    "source_file_hash": "1470aa97f48ccdfee510e148b1fd73d7",
+    "indexed_at": "2026-09-02T16:46:08.404860",
+    "source_file_stat": {
+      "size": 1532564,
+      "mtime": 1788327877.0
+    }
+  },
+  "009150_2025_governance_report": {
+    "source_file_hash": "3b3631127353de7e6ba2a9fd02ea8191",
+    "indexed_at": "2026-09-02T16:47:48.316813",
+    "source_file_stat": {
+      "size": 2001647,
+      "mtime": 1788326563.0
+    }
+  },
+  "009150_2025_sustainability_report": {
+    "source_file_hash": "542f2f223a11624011006bfc7c9ede7d",
+    "indexed_at": "2026-09-02T16:49:54.518525",
+    "source_file_stat": {
+      "size": 11515671,
+      "mtime": 1788327664.0
+    }
+  },
+  "005930_2022_business_report": {
+    "source_file_hash": "821ca2b8986d06b2268c9c189bd998d4",
+    "indexed_at": "2026-09-02T16:51:26.699854",
+    "source_file_stat": {
+      "size": 2039014,
+      "mtime": 1788241516.0
+    }
+  },
+  "005930_2022_governance_report": {
+    "source_file_hash": "34dc5c8f74a0139e2509488e15b107b5",
+    "source_file_stat": {
+      "size": 997173,
+      "mtime": 1788847718.0
+    },
+    "indexed_at": "2026-09-08T09:46:16.682125"
+  },
+  "005930_2022_sustainability_report": {
+    "source_file_hash": "b40c0570b7aa6afe65cf69335dac6be6",
+    "indexed_at": "2026-09-02T16:56:16.606608",
+    "source_file_stat": {
+      "size": 10862540,
+      "mtime": 1788241505.0
+    }
+  },
+  "005930_2023_business_report": {
+    "source_file_hash": "f0a7f9c822b9874e6f2f482338240873",
+    "indexed_at": "2026-09-02T16:57:59.101922",
+    "source_file_stat": {
+      "size": 2036035,
+      "mtime": 1788241499.0
+    }
+  },
+  "005930_2023_governance_report": {
+    "source_file_hash": "8f6b138795ab71bf25a65e34b8f131ef",
+    "source_file_stat": {
+      "size": 3175288,
+      "mtime": 1788847793.0
+    },
+    "indexed_at": "2026-09-08T09:47:01.977270"
+  },
+  "005930_2023_sustainability_report": {
+    "source_file_hash": "0683b1b1d2a19b3e071a529f33277ad3",
+    "indexed_at": "2026-09-02T17:02:38.731528",
+    "source_file_stat": {
+      "size": 8440267,
+      "mtime": 1788241488.0
+    }
+  },
+  "005930_2024_business_report": {
+    "source_file_hash": "016fd00b11eec71a77858ad6a4ed060b",
+    "indexed_at": "2026-09-02T17:04:17.752718",
+    "source_file_stat": {
+      "size": 2238265,
+      "mtime": 1788241483.0
+    }
+  },
+  "005930_2024_governance_report": {
+    "source_file_hash": "e6aa0e967ec493ff809f857ba028d4c7",
+    "source_file_stat": {
+      "size": 9087957,
+      "mtime": 1788847789.0
+    },
+    "indexed_at": "2026-09-08T09:50:30.069001"
+  },
+  "005930_2024_sustainability_report": {
+    "source_file_hash": "6e7bf870115a488d0dac7ea5910c3c5c",
+    "indexed_at": "2026-09-02T17:09:13.869262",
+    "source_file_stat": {
+      "size": 3839654,
+      "mtime": 1788241472.0
+    }
+  },
+  "005930_2025_business_report": {
+    "source_file_hash": "aeac5d28399ea4a0441f35b5740ed091",
+    "indexed_at": "2026-09-02T17:10:35.780020",
+    "source_file_stat": {
+      "size": 2077211,
+      "mtime": 1788241465.0
+    }
+  },
+  "005930_2025_governance_report": {
+    "source_file_hash": "e5b7fca02e1d21c16863c3bec22f7dfe",
+    "source_file_stat": {
+      "size": 7234107,
+      "mtime": 1788847784.0
+    },
+    "indexed_at": "2026-09-08T09:51:21.848160"
+  },
+  "005930_2025_sustainability_report": {
+    "source_file_hash": "6291f379fdbba2236866a9c62b9c685b",
+    "indexed_at": "2026-09-02T17:15:43.564814",
+    "source_file_stat": {
+      "size": 5649767,
+      "mtime": 1788241455.0
+    }
+  },
+  "005680_2024_business_report": {
+    "source_file_hash": "20139115f3be062b2df063a70434b85f",
+    "indexed_at": "2026-09-02T17:17:20.934372",
+    "source_file_stat": {
+      "size": 797030,
+      "mtime": 1788329316.0
+    }
+  },
+  "005680_2024_governance_report": {
+    "source_file_hash": "67accca8817dfae86a278581793ce076",
+    "indexed_at": "2026-09-02T17:18:07.479968",
+    "source_file_stat": {
+      "size": 1293449,
+      "mtime": 1788329169.0
+    }
+  },
+  "005680_2025_business_report": {
+    "source_file_hash": "c003702934db810d6c200be35dd03d2f",
+    "indexed_at": "2026-09-02T17:20:12.480127",
+    "source_file_stat": {
+      "size": 890088,
+      "mtime": 1788329297.0
+    }
+  },
+  "005680_2025_governance_report": {
+    "source_file_hash": "b28883229a3e1f796b92464fe4b9549b",
+    "indexed_at": "2026-09-02T17:21:14.587472",
+    "source_file_stat": {
+      "size": 1416714,
+      "mtime": 1788329147.0
+    }
+  },
+  "004490_2022_business_report": {
+    "source_file_hash": "ba747e3d569bcd3b819de0250b5ffc46",
+    "indexed_at": "2026-09-02T17:21:30.189732",
+    "source_file_stat": {
+      "size": 1054413,
+      "mtime": 1788329538.0
+    }
+  },
+  "004490_2022_governance_report": {
+    "source_file_hash": "ec74374e47711da6b81b7608fc307aee",
+    "indexed_at": "2026-09-02T17:24:15.450149",
+    "source_file_stat": {
+      "size": 1767626,
+      "mtime": 1788329919.0
+    }
+  },
+  "004490_2022_sustainability_report": {
+    "source_file_hash": "d677bf89e14a6f45356fc106c8a15cdf",
+    "indexed_at": "2026-09-02T17:24:58.873468",
+    "source_file_stat": {
+      "size": 8260511,
+      "mtime": 1788330149.0
+    }
+  },
+  "004490_2023_business_report": {
+    "source_file_hash": "ced22dff34db70342a2895b21dcdfa18",
+    "indexed_at": "2026-09-02T17:25:23.861400",
+    "source_file_stat": {
+      "size": 1133761,
+      "mtime": 1788329530.0
+    }
+  },
+  "004490_2023_governance_report": {
+    "source_file_hash": "1a9e43ed7411ce264b72cca5ac0aa266",
+    "indexed_at": "2026-09-02T17:28:03.876041",
+    "source_file_stat": {
+      "size": 558709,
+      "mtime": 1788329790.0
+    }
+  },
+  "004490_2023_sustainability_report": {
+    "source_file_hash": "b3eae5427b1e04b2bc00b9e38a737a28",
+    "indexed_at": "2026-09-02T17:28:46.465175",
+    "source_file_stat": {
+      "size": 18540461,
+      "mtime": 1788330080.0
+    }
+  },
+  "004490_2024_business_report": {
+    "source_file_hash": "56773e7b1b0f2ce20ab7be5fee04620f",
+    "indexed_at": "2026-09-02T17:29:14.409000",
+    "source_file_stat": {
+      "size": 1218479,
+      "mtime": 1788329523.0
+    }
+  },
+  "004490_2024_governance_report": {
+    "source_file_hash": "c84755b51976d38866c90569760e27fc",
+    "indexed_at": "2026-09-02T17:32:04.557691",
+    "source_file_stat": {
+      "size": 2200926,
+      "mtime": 1788329748.0
+    }
+  },
+  "004490_2024_sustainability_report": {
+    "source_file_hash": "1502e3de9ae62d5063df4c2a26e2311d",
+    "indexed_at": "2026-09-02T17:32:58.075279",
+    "source_file_stat": {
+      "size": 24637541,
+      "mtime": 1788330059.0
+    }
+  },
+  "004490_2025_business_report": {
+    "source_file_hash": "4c4c61e72c092d859214014a2f55b7ab",
+    "indexed_at": "2026-09-02T17:33:35.790154",
+    "source_file_stat": {
+      "size": 1394890,
+      "mtime": 1788329514.0
+    }
+  },
+  "004490_2025_governance_report": {
+    "source_file_hash": "c69534e6a32724b3a58105c264d42fe5",
+    "indexed_at": "2026-09-02T17:36:40.677870",
+    "source_file_stat": {
+      "size": 1779654,
+      "mtime": 1788329718.0
+    }
+  },
+  "004490_2025_sustainability_report": {
+    "source_file_hash": "4bf0abd4db16bf5f2aca0b167e450ff7",
+    "indexed_at": "2026-09-02T17:37:26.590057",
+    "source_file_stat": {
+      "size": 5402292,
+      "mtime": 1788330036.0
+    }
+  },
+  "336370_2022_business_report": {
+    "source_file_hash": "abb6bd5ebe7b1b58444fd642bdacbbd8",
+    "indexed_at": "2026-09-02T17:38:06.400914",
+    "source_file_stat": {
+      "size": 1497942,
+      "mtime": 1788330319.0
+    }
+  },
+  "336370_2022_governance_report": {
+    "source_file_hash": "67d18efbc44d13b051251199b917c625",
+    "indexed_at": "2026-09-02T17:41:09.130832",
+    "source_file_stat": {
+      "size": 2315250,
+      "mtime": 1788330535.0
+    }
+  },
+  "336370_2023_business_report": {
+    "source_file_hash": "fa36be2f2de4f70d8b24bf82ddf7b811",
+    "indexed_at": "2026-09-02T17:42:08.171588",
+    "source_file_stat": {
+      "size": 1133260,
+      "mtime": 1788330311.0
+    }
+  },
+  "336370_2023_governance_report": {
+    "source_file_hash": "566d1ddb36776c3dc5f60fe23c4834ef",
+    "indexed_at": "2026-09-02T17:43:14.435593",
+    "source_file_stat": {
+      "size": 770852,
+      "mtime": 1788330513.0
+    }
+  },
+  "336370_2023_sustainability_report": {
+    "source_file_hash": "1d6f59d9f8e23c1a79e335ba6378563b",
+    "indexed_at": "2026-09-02T17:45:33.775410",
+    "source_file_stat": {
+      "size": 8296145,
+      "mtime": 1788331069.0
+    }
+  },
+  "336370_2024_business_report": {
+    "source_file_hash": "716cdadfcbb847ccee0c03af9a05c33e",
+    "indexed_at": "2026-09-02T17:47:05.747943",
+    "source_file_stat": {
+      "size": 1084353,
+      "mtime": 1788330304.0
+    }
+  },
+  "336370_2024_governance_report": {
+    "source_file_hash": "1e5f0558502631153c05fc8899e67599",
+    "indexed_at": "2026-09-02T17:48:08.080957",
+    "source_file_stat": {
+      "size": 2076090,
+      "mtime": 1788330490.0
+    }
+  },
+  "336370_2025_business_report": {
+    "source_file_hash": "11ad005fffcbb1f15daf2173e8f5f296",
+    "indexed_at": "2026-09-02T17:50:29.647178",
+    "source_file_stat": {
+      "size": 1519053,
+      "mtime": 1788330297.0
+    }
+  },
+  "336370_2025_governance_report": {
+    "source_file_hash": "eaa75c868f61ebe99e756d55bc52b2e2",
+    "indexed_at": "2026-09-02T17:52:16.061339",
+    "source_file_stat": {
+      "size": 2132935,
+      "mtime": 1788330470.0
+    }
+  },
+  "248070_2023_business_report": {
+    "source_file_hash": "fb381d09b00e1023bc9432e10e366596",
+    "indexed_at": "2026-09-02T17:52:43.749279",
+    "source_file_stat": {
+      "size": 1016556,
+      "mtime": 1788332166.0
+    }
+  },
+  "248070_2023_governance_report": {
+    "source_file_hash": "2e4f528401f24e33448f60c2fcafa6bf",
+    "indexed_at": "2026-09-02T17:55:41.860805",
+    "source_file_stat": {
+      "size": 837393,
+      "mtime": 1788332001.0
+    }
+  },
+  "248070_2024_business_report": {
+    "source_file_hash": "95097acf4f27d61d5729eb745fe8104d",
+    "indexed_at": "2026-09-02T17:56:36.965465",
+    "source_file_stat": {
+      "size": 1184179,
+      "mtime": 1788332155.0
+    }
+  },
+  "248070_2024_governance_report": {
+    "source_file_hash": "ce2e912cc01ab5b99ab44a5067d67b98",
+    "indexed_at": "2026-09-02T17:57:35.487608",
+    "source_file_stat": {
+      "size": 2746529,
+      "mtime": 1788331954.0
+    }
+  },
+  "248070_2024_sustainability_report": {
+    "source_file_hash": "47d89ee642334ca1b417cc6b23ad4be1",
+    "indexed_at": "2026-09-02T18:00:07.538811",
+    "source_file_stat": {
+      "size": 114660806,
+      "mtime": 1788333088.0
+    }
+  },
+  "248070_2025_business_report": {
+    "source_file_hash": "12104e72b9dc23f257316b04a759578c",
+    "indexed_at": "2026-09-02T18:02:56.525636",
+    "source_file_stat": {
+      "size": 1346353,
+      "mtime": 1788332146.0
+    }
+  },
+  "248070_2025_governance_report": {
+    "source_file_hash": "4f240e231e0e0612586e9ab057ef144a",
+    "indexed_at": "2026-09-02T18:04:13.254850",
+    "source_file_stat": {
+      "size": 2729443,
+      "mtime": 1788331339.0
+    }
+  },
+  "248070_2025_sustainability_report": {
+    "source_file_hash": "bbc8dc13751b87ede0c27292cc4fd2de",
+    "indexed_at": "2026-09-02T18:06:47.588807",
+    "source_file_stat": {
+      "size": 21420697,
+      "mtime": 1788333085.0
+    }
+  },
+  "029530_2022_business_report": {
+    "source_file_hash": "d41e4a6f8a2c7a8d7bf7c35dfc3ecb08",
+    "indexed_at": "2026-09-02T18:08:11.041143",
+    "source_file_stat": {
+      "size": 974198,
+      "mtime": 1788333507.0
+    }
+  },
+  "029530_2022_governance_report": {
+    "source_file_hash": "cff645203bfe3b416728ff9d4a11d9d5",
+    "indexed_at": "2026-09-02T18:09:09.890531",
+    "source_file_stat": {
+      "size": 1211598,
+      "mtime": 1788333658.0
+    }
+  },
+  "029530_2023_business_report": {
+    "source_file_hash": "9c417875f0b16d97888cf0ee791c0f1b",
+    "indexed_at": "2026-09-02T18:11:49.571199",
+    "source_file_stat": {
+      "size": 964004,
+      "mtime": 1788333501.0
+    }
+  },
+  "029530_2023_governance_report": {
+    "source_file_hash": "4e776bf0bd3e2e737f479bf7173da274",
+    "indexed_at": "2026-09-02T18:12:57.949488",
+    "source_file_stat": {
+      "size": 1293576,
+      "mtime": 1788333621.0
+    }
+  },
+  "029530_2024_business_report": {
+    "source_file_hash": "d32181eecea54877f722473f42faeb92",
+    "indexed_at": "2026-09-02T18:13:27.232068",
+    "source_file_stat": {
+      "size": 1070229,
+      "mtime": 1788333490.0
+    }
+  },
+  "029530_2024_governance_report": {
+    "source_file_hash": "9d5fa20bf0d52280e6549a56b4eb6628",
+    "indexed_at": "2026-09-02T18:16:32.702505",
+    "source_file_stat": {
+      "size": 2288807,
+      "mtime": 1788333603.0
+    }
+  },
+  "029530_2025_business_report": {
+    "source_file_hash": "e1599146e4e270959462e47fcc24b1e0",
+    "indexed_at": "2026-09-02T18:17:18.212890",
+    "source_file_stat": {
+      "size": 1221451,
+      "mtime": 1788333484.0
+    }
+  },
+  "029530_2025_governance_report": {
+    "source_file_hash": "b801352213f91dfc699ab33149b5a1e6",
+    "indexed_at": "2026-09-02T18:18:12.150757",
+    "source_file_stat": {
+      "size": 1860619,
+      "mtime": 1788333587.0
+    }
+  },
+  "011930_2024_business_report": {
+    "source_file_hash": "af8220bb8eab4471c17d2e2bad8ce08d",
+    "indexed_at": "2026-09-02T18:20:53.074041",
+    "source_file_stat": {
+      "size": 1782759,
+      "mtime": 1788333983.0
+    }
+  },
+  "011930_2024_governance_report": {
+    "source_file_hash": "a7538a6c6671abcd28e31d38ada3b3ed",
+    "indexed_at": "2026-09-02T18:22:24.749682",
+    "source_file_stat": {
+      "size": 2136961,
+      "mtime": 1788334106.0
+    }
+  },
+  "011930_2025_business_report": {
+    "source_file_hash": "f8fdd7f5193e34312ce5b9ec4ad97f36",
+    "indexed_at": "2026-09-02T18:22:48.837646",
+    "source_file_stat": {
+      "size": 2105013,
+      "mtime": 1788333973.0
+    }
+  },
+  "011930_2025_governance_report": {
+    "source_file_hash": "068d0715d243b62d2ae7b75b06491dea",
+    "indexed_at": "2026-09-02T18:26:02.288354",
+    "source_file_stat": {
+      "size": 1853472,
+      "mtime": 1788334085.0
+    }
+  },
+  "011930_2025_sustainability_report": {
+    "source_file_hash": "9d4879120459b62beea89c838c190214",
+    "indexed_at": "2026-09-02T18:26:51.054442",
+    "source_file_stat": {
+      "size": 9281246,
+      "mtime": 1788334203.0
+    }
+  },
+  "450080_2025_business_report": {
+    "source_file_hash": "188d5026f62d4f6a69f67522109c76da",
+    "indexed_at": "2026-09-02T18:27:24.975492",
+    "source_file_stat": {
+      "size": 1775638,
+      "mtime": 1788334453.0
+    }
+  },
+  "450080_2025_governance_report": {
+    "source_file_hash": "47ec453cce672df3d0c1d183c36484c7",
+    "indexed_at": "2026-09-02T18:30:14.391567",
+    "source_file_stat": {
+      "size": 1877558,
+      "mtime": 1788334522.0
+    }
+  },
+  "450080_2025_sustainability_report": {
+    "source_file_hash": "20a6d87e4bcb81481508a75f254b20ad",
+    "indexed_at": "2026-09-02T18:31:08.104445",
+    "source_file_stat": {
+      "size": 44455664,
+      "mtime": 1788334579.0
+    }
+  },
+  "247540_2023_business_report": {
+    "source_file_hash": "1a1e18da213d0d258f4693129294312b",
+    "indexed_at": "2026-09-02T18:31:56.353277",
+    "source_file_stat": {
+      "size": 2188339,
+      "mtime": 1788334684.0
+    }
+  },
+  "247540_2023_sustainability_report": {
+    "source_file_hash": "db570803b7d885f80dbcbac0236652f5",
+    "indexed_at": "2026-09-02T18:35:45.655419",
+    "source_file_stat": {
+      "size": 24899513,
+      "mtime": 1788334823.0
+    }
+  },
+  "247540_2024_business_report": {
+    "source_file_hash": "74c350970a293de664545d033d83580c",
+    "indexed_at": "2026-09-02T18:37:02.433053",
+    "source_file_stat": {
+      "size": 2685940,
+      "mtime": 1788334670.0
+    }
+  },
+  "247540_2024_sustainability_report": {
+    "source_file_hash": "1feab7df900634b3be97e347f3b1153e",
+    "indexed_at": "2026-09-02T18:39:05.976975",
+    "source_file_stat": {
+      "size": 19665831,
+      "mtime": 1788334787.0
+    }
+  },
+  "322000_2022_business_report": {
+    "source_file_hash": "e2cc7fbc3a70ac18b5bfb84d16b014da",
+    "indexed_at": "2026-09-02T21:29:52.973936",
+    "source_file_stat": {
+      "size": 1540043,
+      "mtime": 1788347817.0
+    }
+  },
+  "322000_2022_sustainability_report": {
+    "source_file_hash": "25c989a87c98a97c7470772c35838c03",
+    "indexed_at": "2026-09-02T21:30:51.864380",
+    "source_file_stat": {
+      "size": 4243897,
+      "mtime": 1788347820.0
+    }
+  },
+  "267260_2022_business_report": {
+    "source_file_hash": "9aeb7bf34863fa27f83d17cd7e0748d7",
+    "indexed_at": "2026-09-02T21:31:23.237819",
+    "source_file_stat": {
+      "size": 1295036,
+      "mtime": 1788332282.0
+    }
+  },
+  "267260_2022_governance_report": {
+    "source_file_hash": "ad87140039a7f7c4dc8e53da22926f62",
+    "indexed_at": "2026-09-02T21:33:41.777936",
+    "source_file_stat": {
+      "size": 969462,
+      "mtime": 1788332396.0
+    }
+  },
+  "061970_2022_business_report": {
+    "source_file_hash": "e8662b8210fe8d52233472009b2b08f8",
+    "indexed_at": "2026-09-02T21:35:06.697824",
+    "source_file_stat": {
+      "size": 1004914,
+      "mtime": 1788347790.0
+    }
+  },
+  "061970_2022_sustainability_report": {
+    "source_file_hash": "758fe8aa33529faeddf23257948ea790",
+    "indexed_at": "2026-09-02T21:37:06.862614",
+    "source_file_stat": {
+      "size": 1439081,
+      "mtime": 1788347793.0
+    }
+  },
+  "247540_2025_business_report": {
+    "source_file_hash": "be5ab204bfd72f6be240d4e2423ec6cb",
+    "indexed_at": "2026-09-02T21:42:56.077922",
+    "source_file_stat": {
+      "size": 2780091,
+      "mtime": 1788334662.0
+    }
+  },
+  "247540_2025_sustainability_report": {
+    "source_file_hash": "a53273071fe3b5f1b66548a0ed90c422",
+    "indexed_at": "2026-09-02T21:44:27.225315",
+    "source_file_stat": {
+      "size": 17482495,
+      "mtime": 1788334786.0
+    }
+  },
+  "066970_2022_business_report": {
+    "source_file_hash": "4ec3b2ad3282c24ff1e0304f1dc82a17",
+    "indexed_at": "2026-09-02T21:46:44.772952",
+    "source_file_stat": {
+      "size": 1399644,
+      "mtime": 1788335314.0
+    }
+  },
+  "066970_2023_business_report": {
+    "source_file_hash": "95a5ec8070cc1d6f4c03c565d1edefbb",
+    "indexed_at": "2026-09-02T21:47:59.635854",
+    "source_file_stat": {
+      "size": 1235548,
+      "mtime": 1788335306.0
+    }
+  },
+  "066970_2023_sustainability_report": {
+    "source_file_hash": "acc5f8ef5b958b884482403dc5a9f67c",
+    "indexed_at": "2026-09-02T21:49:24.265806",
+    "source_file_stat": {
+      "size": 33297763,
+      "mtime": 1788335557.0
+    }
+  },
+  "066970_2024_business_report": {
+    "source_file_hash": "a2b6ac14241ac002e1d7448187484a32",
+    "indexed_at": "2026-09-02T21:52:24.115298",
+    "source_file_stat": {
+      "size": 1426509,
+      "mtime": 1788335299.0
+    }
+  },
+  "066970_2024_governance_report": {
+    "source_file_hash": "78e39e11ceab24c5ab18bc38e387fc78",
+    "indexed_at": "2026-09-02T21:54:04.868252",
+    "source_file_stat": {
+      "size": 2441573,
+      "mtime": 1788335468.0
+    }
+  },
+  "066970_2024_sustainability_report": {
+    "source_file_hash": "1135b7d1c2a3517566181f182db66ef1",
+    "indexed_at": "2026-09-02T21:54:33.595533",
+    "source_file_stat": {
+      "size": 7781617,
+      "mtime": 1788335555.0
+    }
+  },
+  "066970_2025_business_report": {
+    "source_file_hash": "07d37702c48b96e73682ad75f68b7786",
+    "indexed_at": "2026-09-02T21:56:41.351629",
+    "source_file_stat": {
+      "size": 1399778,
+      "mtime": 1788335293.0
+    }
+  },
+  "066970_2025_governance_report": {
+    "source_file_hash": "c4a8ff1a18bb2d8f05f2d60ec0f05897",
+    "indexed_at": "2026-09-02T21:58:28.242463",
+    "source_file_stat": {
+      "size": 1935973,
+      "mtime": 1788335414.0
+    }
+  },
+  "066970_2025_sustainability_report": {
+    "source_file_hash": "27c12eefc9c99b9ddbb89705043f5020",
+    "indexed_at": "2026-09-02T21:59:04.014892",
+    "source_file_stat": {
+      "size": 11049052,
+      "mtime": 1788335555.0
+    }
+  },
+  "010120_2022_business_report": {
+    "source_file_hash": "10974fb4e0ac60d2711143d2a9274298",
+    "indexed_at": "2026-09-02T22:01:08.234881",
+    "source_file_stat": {
+      "size": 1150387,
+      "mtime": 1788241838.0
+    }
+  },
+  "010120_2022_governance_report": {
+    "source_file_hash": "7f8a2ef91c9f72d77b84cf6988dc0cf6",
+    "indexed_at": "2026-09-02T22:02:38.366503",
+    "source_file_stat": {
+      "size": 553572,
+      "mtime": 1788241798.0
+    }
+  },
+  "010120_2022_sustainability_report": {
+    "source_file_hash": "5c7b4afd1d282481c60aa20c70847c54",
+    "indexed_at": "2026-09-02T22:02:58.076235",
+    "source_file_stat": {
+      "size": 7684460,
+      "mtime": 1788239729.0
+    }
+  },
+  "010120_2023_business_report": {
+    "source_file_hash": "9fb7948cfa01eef67caec956f6aaed88",
+    "indexed_at": "2026-09-02T22:05:42.979095",
+    "source_file_stat": {
+      "size": 1314198,
+      "mtime": 1788240602.0
+    }
+  },
+  "010120_2023_governance_report": {
+    "source_file_hash": "e344c2b575463ed770edce8217bee697",
+    "indexed_at": "2026-09-02T22:07:21.206621",
+    "source_file_stat": {
+      "size": 566849,
+      "mtime": 1788241729.0
+    }
+  },
+  "010120_2023_sustainability_report": {
+    "source_file_hash": "46b4f937a4c7215b76f3f666e0d36383",
+    "indexed_at": "2026-09-02T22:07:42.377009",
+    "source_file_stat": {
+      "size": 11508822,
+      "mtime": 1788239697.0
+    }
+  },
+  "010120_2024_business_report": {
+    "source_file_hash": "99cd0b7681dfac0055a8ad29def784d4",
+    "indexed_at": "2026-09-02T22:09:58.860621",
+    "source_file_stat": {
+      "size": 1753124,
+      "mtime": 1788240595.0
+    }
+  },
+  "010120_2024_governance_report": {
+    "source_file_hash": "a95c668a967c291bc8c954a01da3161d",
+    "indexed_at": "2026-09-02T22:12:35.828901",
+    "source_file_stat": {
+      "size": 3065695,
+      "mtime": 1788241711.0
+    }
+  },
+  "010120_2024_sustainability_report": {
+    "source_file_hash": "9388ad89ea3ec09c5baeb73f19074d75",
+    "indexed_at": "2026-09-02T22:13:00.035739",
+    "source_file_stat": {
+      "size": 10388346,
+      "mtime": 1788239719.0
+    }
+  },
+  "010120_2025_business_report": {
+    "source_file_hash": "9d5faa28c3feffd193b6344730c8cbdb",
+    "indexed_at": "2026-09-02T22:15:12.058320",
+    "source_file_stat": {
+      "size": 1650038,
+      "mtime": 1788240584.0
+    }
+  },
+  "010120_2025_governance_report": {
+    "source_file_hash": "5c03990b33d95de43cabf655944cc61b",
+    "indexed_at": "2026-09-02T22:18:03.661755",
+    "source_file_stat": {
+      "size": 2842377,
+      "mtime": 1788241685.0
+    }
+  },
+  "010120_2025_sustainability_report": {
+    "source_file_hash": "1e2aa25a0b2c5d263946f2aa1f3fe690",
+    "indexed_at": "2026-09-02T22:18:33.006985",
+    "source_file_stat": {
+      "size": 17277838,
+      "mtime": 1788239659.0
+    }
+  },
+  "097520_2024_business_report": {
+    "source_file_hash": "c6f2cabaec77a131b5acb80256d62f95",
+    "indexed_at": "2026-09-02T22:22:14.343844",
+    "source_file_stat": {
+      "size": 1179663,
+      "mtime": 1788335246.0
+    }
+  },
+  "097520_2024_governance_report": {
+    "source_file_hash": "885ce2df2d2099dca32d15852582813c",
+    "indexed_at": "2026-09-02T22:23:28.191162",
+    "source_file_stat": {
+      "size": 2714327,
+      "mtime": 1788335307.0
+    }
+  },
+  "097520_2024_sustainability_report": {
+    "source_file_hash": "fe347e70f608ae490724a6775bf342bf",
+    "indexed_at": "2026-09-02T22:23:49.439008",
+    "source_file_stat": {
+      "size": 17241910,
+      "mtime": 1788335418.0
+    }
+  },
+  "097520_2025_business_report": {
+    "source_file_hash": "670220f04b98af6e5f7696cbb31e6c2e",
+    "indexed_at": "2026-09-02T22:25:50.475467",
+    "source_file_stat": {
+      "size": 1437809,
+      "mtime": 1788335218.0
+    }
+  },
+  "097520_2025_governance_report": {
+    "source_file_hash": "f03e33b887b129cad7bdd35021d29792",
+    "indexed_at": "2026-09-02T22:27:15.547890",
+    "source_file_stat": {
+      "size": 3302338,
+      "mtime": 1788335295.0
+    }
+  },
+  "007660_2023_business_report": {
+    "source_file_hash": "cd744cfefb0189234cd42e1c7503aff1",
+    "indexed_at": "2026-09-02T22:28:21.347268",
+    "source_file_stat": {
+      "size": 1286323,
+      "mtime": 1788334065.0
+    }
+  },
+  "007660_2023_sustainability_report": {
+    "source_file_hash": "13a30fd2ec338e4c1e9090386c9985f3",
+    "indexed_at": "2026-09-02T22:31:21.572321",
+    "source_file_stat": {
+      "size": 112930179,
+      "mtime": 1788334224.0
+    }
+  },
+  "007660_2024_business_report": {
+    "source_file_hash": "db9da3fe765c047f25fcebfc9440a593",
+    "indexed_at": "2026-09-02T22:32:24.213954",
+    "source_file_stat": {
+      "size": 1516178,
+      "mtime": 1788334123.0
+    }
+  },
+  "007660_2024_governance_report": {
+    "source_file_hash": "380606b6d1d5f54c280fa1807a3b1324",
+    "indexed_at": "2026-09-02T22:33:33.589457",
+    "source_file_stat": {
+      "size": 2247026,
+      "mtime": 1788334005.0
+    }
+  },
+  "007660_2024_sustainability_report": {
+    "source_file_hash": "9d1f79a29165d4d59c9fc2d58b476abd",
+    "indexed_at": "2026-09-02T22:35:36.282178",
+    "source_file_stat": {
+      "size": 9815575,
+      "mtime": 1788334246.0
+    }
+  },
+  "007660_2025_business_report": {
+    "source_file_hash": "23e6358415fb1383aaf8d5191a90d32b",
+    "indexed_at": "2026-09-02T22:36:47.326868",
+    "source_file_stat": {
+      "size": 1760065,
+      "mtime": 1788334073.0
+    }
+  },
+  "007660_2025_governance_report": {
+    "source_file_hash": "0484c0433ee153d844396048584bc93a",
+    "indexed_at": "2026-09-02T22:38:07.381278",
+    "source_file_stat": {
+      "size": 2380022,
+      "mtime": 1788334027.0
+    }
+  },
+  "189300_2025_business_report": {
+    "source_file_hash": "cc87e56452ebecbb96cb72d6d4bfc385",
+    "indexed_at": "2026-09-02T22:40:32.853186",
+    "source_file_stat": {
+      "size": 1501097,
+      "mtime": 1788329401.0
+    }
+  },
+  "103590_2022_business_report": {
+    "source_file_hash": "87ef3eb410e764485cfa3d8fc2ffc0ac",
+    "indexed_at": "2026-09-02T22:41:49.475511",
+    "source_file_stat": {
+      "size": 1300522,
+      "mtime": 1788327788.0
+    }
+  },
+  "103590_2022_sustainability_report": {
+    "source_file_hash": "ac5729ca5223d7ca2b41dadaf18ec9e8",
+    "indexed_at": "2026-09-02T22:44:35.549945",
+    "source_file_stat": {
+      "size": 7119972,
+      "mtime": 1788327898.0
+    }
+  },
+  "103590_2023_business_report": {
+    "source_file_hash": "07cbd3e34c9b016767d3ae6c10292906",
+    "indexed_at": "2026-09-02T22:45:58.298067",
+    "source_file_stat": {
+      "size": 1130598,
+      "mtime": 1788327779.0
+    }
+  },
+  "103590_2023_sustainability_report": {
+    "source_file_hash": "cfc16453eb14bd93590722c72ceb1e5e",
+    "indexed_at": "2026-09-02T22:46:57.903795",
+    "source_file_stat": {
+      "size": 12622307,
+      "mtime": 1788327900.0
+    }
+  },
+  "103590_2024_business_report": {
+    "source_file_hash": "c97d0852c6fef6ceead8642ca660c960",
+    "indexed_at": "2026-09-02T22:49:12.001553",
+    "source_file_stat": {
+      "size": 1318671,
+      "mtime": 1788327770.0
+    }
+  },
+  "103590_2024_governance_report": {
+    "source_file_hash": "a1fe8205ca30d0b2bf86349d4da4857f",
+    "indexed_at": "2026-09-02T22:50:33.433359",
+    "source_file_stat": {
+      "size": 2779774,
+      "mtime": 1788327702.0
+    }
+  },
+  "103590_2024_sustainability_report": {
+    "source_file_hash": "881a875fe26bc4742b3232e1051e6ec3",
+    "indexed_at": "2026-09-02T22:50:55.845952",
+    "source_file_stat": {
+      "size": 27735807,
+      "mtime": 1788327901.0
+    }
+  },
+  "103590_2025_business_report": {
+    "source_file_hash": "f4be1dcbcd7e2ee5746e79fc330a2724",
+    "source_file_stat": {
+      "size": 1267645,
+      "mtime": 1788327760.0
+    },
+    "indexed_at": "2026-09-03T00:46:53.387703"
+  },
+  "103590_2025_governance_report": {
+    "source_file_hash": "5218d20fb3cf3b0772b830753bdff55b",
+    "source_file_stat": {
+      "size": 2707718,
+      "mtime": 1788327736.0
+    },
+    "indexed_at": "2026-09-03T00:48:28.479831"
+  },
+  "103590_2025_sustainability_report": {
+    "source_file_hash": "81f61adbacfdaf26db467d9349df9ecf",
+    "source_file_stat": {
+      "size": 13357452,
+      "mtime": 1788327900.0
+    },
+    "indexed_at": "2026-09-03T00:48:52.101580"
+  },
+  "033240_2024_business_report": {
+    "source_file_hash": "03dea812400d976b0b7a0ed6ffa208c4",
+    "source_file_stat": {
+      "size": 1010610,
+      "mtime": 1788328181.0
+    },
+    "indexed_at": "2026-09-03T00:52:00.764541"
+  },
+  "033240_2024_governance_report": {
+    "source_file_hash": "ddf4b72e42d6060759a64df309020bd6",
+    "source_file_stat": {
+      "size": 2491374,
+      "mtime": 1788328091.0
+    },
+    "indexed_at": "2026-09-03T00:52:56.526813"
+  },
+  "033240_2025_business_report": {
+    "source_file_hash": "48819f0f488f136e3b1cc4320e0789cf",
+    "source_file_stat": {
+      "size": 1258671,
+      "mtime": 1788328119.0
+    },
+    "indexed_at": "2026-09-03T00:54:06.528935"
+  },
+  "033240_2025_governance_report": {
+    "source_file_hash": "8f908964c09841945b94e61ea97db24b",
+    "source_file_stat": {
+      "size": 2601573,
+      "mtime": 1788328074.0
+    },
+    "indexed_at": "2026-09-03T00:56:42.785333"
+  },
+  "007810_2022_business_report": {
+    "source_file_hash": "a824b0b86f2a4b0f66be90834c692811",
+    "source_file_stat": {
+      "size": 1024881,
+      "mtime": 1788328953.0
+    },
+    "indexed_at": "2026-09-03T00:58:13.059522"
+  },
+  "007810_2022_governance_report": {
+    "source_file_hash": "3dcc7b7237e85e790ae3511ce8eeaf1e",
+    "source_file_stat": {
+      "size": 873123,
+      "mtime": 1788339055.0
+    },
+    "indexed_at": "2026-09-03T00:59:24.301546"
+  },
+  "007810_2023_business_report": {
+    "source_file_hash": "52b10eb3d072f82c0bc325144877341b",
+    "source_file_stat": {
+      "size": 1282025,
+      "mtime": 1788328711.0
+    },
+    "indexed_at": "2026-09-03T01:01:30.641468"
+  },
+  "007810_2023_governance_report": {
+    "source_file_hash": "58ba101f6d4da42244214e6f8c3b4535",
+    "source_file_stat": {
+      "size": 1492600,
+      "mtime": 1788339050.0
+    },
+    "indexed_at": "2026-09-03T01:03:17.235623"
+  },
+  "007810_2024_business_report": {
+    "source_file_hash": "f0a644ee49876a7b3b41741b9070d9fa",
+    "source_file_stat": {
+      "size": 1169587,
+      "mtime": 1788328703.0
+    },
+    "indexed_at": "2026-09-03T01:04:22.340752"
+  },
+  "007810_2024_governance_report": {
+    "source_file_hash": "8295e8ddb131bee6820a52fb342cb21a",
+    "source_file_stat": {
+      "size": 1795977,
+      "mtime": 1788339034.0
+    },
+    "indexed_at": "2026-09-03T01:06:59.881263"
+  },
+  "007810_2024_sustainability_report": {
+    "source_file_hash": "22ec9d6b8a02fb9ef1c395025021993b",
+    "source_file_stat": {
+      "size": 9413969,
+      "mtime": 1788328418.0
+    },
+    "indexed_at": "2026-09-08T16:35:22.286540"
+  },
+  "007810_2025_business_report": {
+    "source_file_hash": "5ff26136c9e0341bbcaa5b39ebd0e29d",
+    "source_file_stat": {
+      "size": 1128960,
+      "mtime": 1788328690.0
+    },
+    "indexed_at": "2026-09-03T01:10:06.388666"
+  },
+  "007810_2025_governance_report": {
+    "source_file_hash": "b4cee6521be0c1a6c39668638b5e99be",
+    "source_file_stat": {
+      "size": 2268607,
+      "mtime": 1788339006.0
+    },
+    "indexed_at": "2026-09-03T01:13:04.744020"
+  },
+  "007810_2025_sustainability_report": {
+    "source_file_hash": "2110e89d24c0a3a85d2cb87777f300ba",
+    "source_file_stat": {
+      "size": 35829465,
+      "mtime": 1788328404.0
+    },
+    "indexed_at": "2026-09-03T01:13:28.973475"
+  },
+  "019180_2025_business_report": {
+    "source_file_hash": "51d8784092d2e5e0e7a584dd407f7951",
+    "source_file_stat": {
+      "size": 1019494,
+      "mtime": 1788329051.0
+    },
+    "indexed_at": "2026-09-03T01:14:18.918869"
+  },
+  "019180_2025_governance_report": {
+    "source_file_hash": "4b1602b197a45314bdc6199c5359768a",
+    "source_file_stat": {
+      "size": 19670314,
+      "mtime": 1788329106.0
+    },
+    "indexed_at": "2026-09-03T01:17:10.706935"
+  },
+  "003670_2022_business_report": {
+    "source_file_hash": "db8f5ecff8332d4a21ae95906770f751",
+    "source_file_stat": {
+      "size": 1845766,
+      "mtime": 1788329699.0
+    },
+    "indexed_at": "2026-09-03T01:17:27.579469"
+  },
+  "003670_2022_governance_report": {
+    "source_file_hash": "2b5d22a355989182237de6dab0b23b7d",
+    "source_file_stat": {
+      "size": 975137,
+      "mtime": 1788329653.0
+    },
+    "indexed_at": "2026-09-03T01:19:38.496126"
+  },
+  "003670_2022_sustainability_report": {
+    "source_file_hash": "339a683e06f6270492810e6cece90e53",
+    "source_file_stat": {
+      "size": 14715243,
+      "mtime": 1788329820.0
+    },
+    "indexed_at": "2026-09-03T01:22:05.348473"
+  },
+  "003670_2023_business_report": {
+    "source_file_hash": "2d140499f61b9883a1a5c99d7298b0f5",
+    "source_file_stat": {
+      "size": 2123592,
+      "mtime": 1788329692.0
+    },
+    "indexed_at": "2026-09-03T01:24:59.752671"
+  },
+  "003670_2023_governance_report": {
+    "source_file_hash": "6ea44b47d96a47f74f64333f17ab3a7a",
+    "source_file_stat": {
+      "size": 1159895,
+      "mtime": 1788329603.0
+    },
+    "indexed_at": "2026-09-03T01:26:28.740307"
+  },
+  "003670_2023_sustainability_report": {
+    "source_file_hash": "1d21495ce8ce43fbfa02125207a0dd37",
+    "source_file_stat": {
+      "size": 26107589,
+      "mtime": 1788329807.0
+    },
+    "indexed_at": "2026-09-03T01:29:11.889388"
+  },
+  "003670_2024_business_report": {
+    "source_file_hash": "dd316ccd0263d5caa3e8bfc8e5850654",
+    "source_file_stat": {
+      "size": 1683974,
+      "mtime": 1788329681.0
+    },
+    "indexed_at": "2026-09-03T01:32:15.248011"
+  },
+  "003670_2024_governance_report": {
+    "source_file_hash": "884f688f2154cbf5c829f363068ff7c2",
+    "source_file_stat": {
+      "size": 2887040,
+      "mtime": 1788329595.0
+    },
+    "indexed_at": "2026-09-03T01:33:55.931614"
+  },
+  "003670_2024_sustainability_report": {
+    "source_file_hash": "26f43e6918b142871921bb0d1af3cc48",
+    "source_file_stat": {
+      "size": 7520653,
+      "mtime": 1788329797.0
+    },
+    "indexed_at": "2026-09-03T01:36:28.318743"
+  },
+  "003670_2025_business_report": {
+    "source_file_hash": "6c95b625a60abd1c8e9b37a45e7e74ec",
+    "source_file_stat": {
+      "size": 1275446,
+      "mtime": 1788329675.0
+    },
+    "indexed_at": "2026-09-03T01:38:42.525086"
+  },
+  "003670_2025_governance_report": {
+    "source_file_hash": "f9bdb56995c5f376030584c38ad313ac",
+    "source_file_stat": {
+      "size": 3190664,
+      "mtime": 1788329570.0
+    },
+    "indexed_at": "2026-09-03T01:40:21.949939"
+  },
+  "003670_2025_sustainability_report": {
+    "source_file_hash": "37739a2d6a06052a7b8fae40e35eca07",
+    "source_file_stat": {
+      "size": 16450201,
+      "mtime": 1788329761.0
+    },
+    "indexed_at": "2026-09-08T16:35:22.551534"
+  },
+  "067310_2023_business_report": {
+    "source_file_hash": "362f6843b953bc0152eee721b6752d91",
+    "source_file_stat": {
+      "size": 1123893,
+      "mtime": 1788330005.0
+    },
+    "indexed_at": "2026-09-03T01:44:17.506113"
+  },
+  "067310_2023_sustainability_report": {
+    "source_file_hash": "eb43f1bf8b4a911b74617bcbec4446d1",
+    "source_file_stat": {
+      "size": 8307849,
+      "mtime": 1788330099.0
+    },
+    "indexed_at": "2026-09-11T05:16:28.540005"
+  },
+  "067310_2024_business_report": {
+    "source_file_hash": "f3c1b4c119f4ff63d5d62345a7e85552",
+    "source_file_stat": {
+      "size": 1137544,
+      "mtime": 1788329997.0
+    },
+    "indexed_at": "2026-09-03T01:48:02.937913"
+  },
+  "067310_2024_sustainability_report": {
+    "source_file_hash": "54623eb1fdbfbd5e0d136c66b214f9b6",
+    "source_file_stat": {
+      "size": 8031309,
+      "mtime": 1788330092.0
+    },
+    "indexed_at": "2026-09-03T01:49:51.913712"
+  },
+  "067310_2025_business_report": {
+    "source_file_hash": "1d747ccc48f3a5600847de79cb25c8c7",
+    "source_file_stat": {
+      "size": 1459682,
+      "mtime": 1788329985.0
+    },
+    "indexed_at": "2026-09-03T01:50:17.521932"
+  },
+  "067310_2025_sustainability_report": {
+    "source_file_hash": "70204c572af209f482f2ebddbbe8d2e5",
+    "source_file_stat": {
+      "size": 21318098,
+      "mtime": 1788330087.0
+    },
+    "indexed_at": "2026-09-03T01:54:10.556124"
+  },
+  "166090_2023_business_report": {
+    "source_file_hash": "df8e4be855dee3bab135a880bd0e7b5d",
+    "source_file_stat": {
+      "size": 1034602,
+      "mtime": 1788330409.0
+    },
+    "indexed_at": "2026-09-03T01:56:05.647791"
+  },
+  "166090_2023_sustainability_report": {
+    "source_file_hash": "c04c42476f85bcd0726ba58bbcf7c251",
+    "source_file_stat": {
+      "size": 29620704,
+      "mtime": 1788330576.0
+    },
+    "indexed_at": "2026-09-03T01:56:42.963607"
+  },
+  "166090_2024_business_report": {
+    "source_file_hash": "91cc2cc1fd542d9fc0876eba4dc807d1",
+    "source_file_stat": {
+      "size": 1117384,
+      "mtime": 1788330404.0
+    },
+    "indexed_at": "2026-09-03T01:59:38.112120"
+  },
+  "166090_2024_sustainability_report": {
+    "source_file_hash": "2828aba04c4bb02ea1ef3da409632c77",
+    "source_file_stat": {
+      "size": 55246660,
+      "mtime": 1788330559.0
+    },
+    "indexed_at": "2026-09-03T02:00:53.715171"
+  },
+  "166090_2025_business_report": {
+    "source_file_hash": "f33689b8a276084da262083ef8c984b4",
+    "source_file_stat": {
+      "size": 1260639,
+      "mtime": 1788330399.0
+    },
+    "indexed_at": "2026-09-03T02:01:38.272699"
+  },
+  "166090_2025_sustainability_report": {
+    "source_file_hash": "27b092a75b10b585ce6d4310473d83bd",
+    "source_file_stat": {
+      "size": 9322041,
+      "mtime": 1788330532.0
+    },
+    "indexed_at": "2026-09-03T02:05:06.717246"
+  },
+  "025540_2022_business_report": {
+    "source_file_hash": "0699f61564e585b7cfbb17bdd0f2a587",
+    "source_file_stat": {
+      "size": 1086934,
+      "mtime": 1788331383.0
+    },
+    "indexed_at": "2026-09-03T02:06:42.337634"
+  },
+  "025540_2022_governance_report": {
+    "source_file_hash": "7b84ea3ca057e7a1be0cb63ca5cdbba4",
+    "source_file_stat": {
+      "size": 8459321,
+      "mtime": 1788331325.0
+    },
+    "indexed_at": "2026-09-03T02:07:32.988023"
+  },
+  "025540_2023_business_report": {
+    "source_file_hash": "a4f5af607771b64c26b684621f278f17",
+    "source_file_stat": {
+      "size": 1063890,
+      "mtime": 1788331376.0
+    },
+    "indexed_at": "2026-09-03T02:10:00.730076"
+  },
+  "025540_2023_governance_report": {
+    "source_file_hash": "c73480b1f4aa2493a6e19f2469d3b49c",
+    "source_file_stat": {
+      "size": 8475895,
+      "mtime": 1788331211.0
+    },
+    "indexed_at": "2026-09-03T02:11:14.526386"
+  },
+  "025540_2024_business_report": {
+    "source_file_hash": "d6519d1d8b51b27b1d366cb4a61c0d16",
+    "source_file_stat": {
+      "size": 1374048,
+      "mtime": 1788331370.0
+    },
+    "indexed_at": "2026-09-03T02:11:38.323375"
+  },
+  "025540_2024_governance_report": {
+    "source_file_hash": "9bea35d052cf64965bdba588521e722f",
+    "source_file_stat": {
+      "size": 2830948,
+      "mtime": 1788331186.0
+    },
+    "indexed_at": "2026-09-03T02:14:28.361021"
+  },
+  "025540_2024_sustainability_report": {
+    "source_file_hash": "31abecc5d278928b1f2eb77e6e643180",
+    "source_file_stat": {
+      "size": 24040605,
+      "mtime": 1788330828.0
+    },
+    "indexed_at": "2026-09-03T02:14:52.115474"
+  },
+  "025540_2025_business_report": {
+    "source_file_hash": "862c1774fb550eb3aabc5a68212616e4",
+    "source_file_stat": {
+      "size": 1327749,
+      "mtime": 1788331363.0
+    },
+    "indexed_at": "2026-09-03T02:17:20.684752"
+  },
+  "025540_2025_governance_report": {
+    "source_file_hash": "f86fe0793799d272b428be87e5d8a592",
+    "source_file_stat": {
+      "size": 2593823,
+      "mtime": 1788331034.0
+    },
+    "indexed_at": "2026-09-03T02:20:49.296283"
+  },
+  "025540_2025_sustainability_report": {
+    "source_file_hash": "f1450791ca9d35e878161af8b1f1ffe8",
+    "source_file_stat": {
+      "size": 37360301,
+      "mtime": 1788330801.0
+    },
+    "indexed_at": "2026-09-03T02:21:12.579773"
+  },
+  "004710_2023_business_report": {
+    "source_file_hash": "cfcd6175fca5c4044124022248ae07ee",
+    "source_file_stat": {
+      "size": 1532409,
+      "mtime": 1788333409.0
+    },
+    "indexed_at": "2026-09-03T02:27:25.023154"
+  },
+  "004710_2024_business_report": {
+    "source_file_hash": "4c3c5dfceef400a9dfceb3da43136228",
+    "source_file_stat": {
+      "size": 1688953,
+      "mtime": 1788333418.0
+    },
+    "indexed_at": "2026-09-03T02:33:01.172839"
+  },
+  "004710_2025_business_report": {
+    "source_file_hash": "7cd7e3fa7db7705837fed05f39bbd436",
+    "source_file_stat": {
+      "size": 1621954,
+      "mtime": 1788333424.0
+    },
+    "indexed_at": "2026-09-03T02:38:56.954244"
+  },
+  "272210_2024_business_report": {
+    "source_file_hash": "4bfba49ed933afe2c8f76a79fecc16f8",
+    "source_file_stat": {
+      "size": 1629199,
+      "mtime": 1788332954.0
+    },
+    "indexed_at": "2026-09-03T02:55:58.971437"
+  },
+  "272210_2024_governance_report": {
+    "source_file_hash": "7a8a17c48763ac1d2a7209d2b1ed1f51",
+    "source_file_stat": {
+      "size": 3863046,
+      "mtime": 1788332866.0
+    },
+    "indexed_at": "2026-09-03T02:58:21.760279"
+  },
+  "272210_2025_business_report": {
+    "source_file_hash": "f2ab97a855a8c2d1225162a9a02c74de",
+    "source_file_stat": {
+      "size": 1520407,
+      "mtime": 1788332948.0
+    },
+    "indexed_at": "2026-09-03T03:02:25.947104"
+  },
+  "272210_2025_governance_report": {
+    "source_file_hash": "52b84e27570b9145ec6e2bac5a8c2946",
+    "source_file_stat": {
+      "size": 4187671,
+      "mtime": 1788332849.0
+    },
+    "indexed_at": "2026-09-03T03:04:28.827119"
+  },
+  "272210_2025_sustainability_report": {
+    "source_file_hash": "b25d8a5d2dc4f3d0f6f001ba0f224cfc",
+    "source_file_stat": {
+      "size": 31465552,
+      "mtime": 1788333022.0
+    },
+    "indexed_at": "2026-09-03T03:05:11.966596"
+  },
+  "361610_2023_sustainability_report": {
+    "source_file_hash": "ad9396dcf6c5aa5524d55e103cea5fd6",
+    "indexed_at": "2026-09-03T04:43:39.639184",
+    "source_file_stat": {
+      "size": 22733392,
+      "mtime": 1788409320.0
+    }
+  },
+  "000660_2022_governance_report": {
+    "source_file_hash": "6e6cacbbbabc684e8702420d0550e49e",
+    "source_file_stat": {
+      "size": 2909347,
+      "mtime": 1788406251.0
+    },
+    "indexed_at": "2026-09-03T15:45:16.929577"
+  },
+  "000660_2023_governance_report": {
+    "source_file_hash": "b86ba57194815fa868c8b28976ca61ea",
+    "source_file_stat": {
+      "size": 3129840,
+      "mtime": 1788406246.0
+    },
+    "indexed_at": "2026-09-03T15:46:07.224114"
+  },
+  "004710_2023_governance_report": {
+    "source_file_hash": "8c7d16a33c1c0ae371b4048aff351129",
+    "source_file_stat": {
+      "size": 1573402,
+      "mtime": 1788333296.0
+    },
+    "indexed_at": "2026-09-03T15:46:53.665745"
+  },
+  "004710_2024_governance_report": {
+    "source_file_hash": "8c3ea6a8bd889c8faf794cf806f082c5",
+    "source_file_stat": {
+      "size": 2369751,
+      "mtime": 1788333354.0
+    },
+    "indexed_at": "2026-09-03T15:51:44.733748"
+  },
+  "004710_2025_governance_report": {
+    "source_file_hash": "0e103288be4e99cf76b04dc20ba8dac2",
+    "source_file_stat": {
+      "size": 2405841,
+      "mtime": 1788333384.0
+    },
+    "indexed_at": "2026-09-03T15:52:03.964578"
+  },
+  "272210_2022_governance_report": {
+    "source_file_hash": "0440ac8fdb97642717ad6ca50533c443",
+    "source_file_stat": {
+      "size": 2630674,
+      "mtime": 1788332897.0
+    },
+    "indexed_at": "2026-09-03T15:52:22.148889"
+  },
+  "272210_2023_governance_report": {
+    "source_file_hash": "038c28598ebf77cef64073c72e8e18dd",
+    "source_file_stat": {
+      "size": 2753455,
+      "mtime": 1788332885.0
+    },
+    "indexed_at": "2026-09-03T15:58:30.990215"
+  },
+  "195870_2024_governance_report": {
+    "source_file_hash": "a0df80a3331647f3c8aa40419f1ca981",
+    "source_file_stat": {
+      "size": 2916965,
+      "mtime": 1788332648.0
+    },
+    "indexed_at": "2026-09-03T15:59:03.802246"
+  },
+  "195870_2025_governance_report": {
+    "source_file_hash": "1e0129129320ed1c4185a671a8b58983",
+    "source_file_stat": {
+      "size": 3345705,
+      "mtime": 1788332670.0
+    },
+    "indexed_at": "2026-09-03T15:59:49.151929"
+  },
+  "298040_2022_governance_report": {
+    "source_file_hash": "85ba853a172b5a641ea2900a225ec5e8",
+    "source_file_stat": {
+      "size": 2655955,
+      "mtime": 1788327243.0
+    },
+    "indexed_at": "2026-09-03T16:05:24.905179"
+  },
+  "298040_2023_governance_report": {
+    "source_file_hash": "7188a3244f9fc7d6f7348ed40daebf98",
+    "source_file_stat": {
+      "size": 2760862,
+      "mtime": 1788327546.0
+    },
+    "indexed_at": "2026-09-03T16:06:27.453297"
+  },
+  "298040_2024_governance_report": {
+    "source_file_hash": "d8a15297231370ffc8e36ab37f95f0df",
+    "source_file_stat": {
+      "size": 3859517,
+      "mtime": 1788327041.0
+    },
+    "indexed_at": "2026-09-03T16:07:07.238556"
+  },
+  "298040_2025_governance_report": {
+    "source_file_hash": "1ba9a73a52c41d856047f54f7e0a20ae",
+    "source_file_stat": {
+      "size": 3916999,
+      "mtime": 1788327015.0
+    },
+    "indexed_at": "2026-09-03T16:12:53.277093"
+  },
+  "272210_2022_sustainability_report": {
+    "source_file_hash": "7aa0d6de91a1e9aa3a532f18a5792155",
+    "source_file_stat": {
+      "size": 56192594,
+      "mtime": 1788333035.0
+    },
+    "indexed_at": "2026-09-04T18:29:16.964173"
+  },
+  "195870_2025_sustainability_report": {
+    "source_file_hash": "2980cef49866ea37a5c81958e74f7e5b",
+    "source_file_stat": {
+      "size": 22086051,
+      "mtime": 1788332757.0
+    },
+    "indexed_at": "2026-09-08T16:35:22.973359"
+  },
+  "298040_2023_sustainability_report": {
+    "source_file_hash": "a6a2c6bc59e7572ee53cb91633e8d584",
+    "source_file_stat": {
+      "size": 27506258,
+      "mtime": 1788326795.0
+    },
+    "indexed_at": "2026-09-04T18:30:51.667796"
+  },
+  "298040_2025_sustainability_report": {
+    "source_file_hash": "4735a31b27f5f838e53e0586a113ac91",
+    "source_file_stat": {
+      "size": 13361637,
+      "mtime": 1788326776.0
+    },
+    "indexed_at": "2026-09-04T18:38:57.235699"
+  },
+  "004710_2023_sustainability_report": {
+    "source_file_hash": "6965e7aa1fa5203ae72f6a56fd096daf",
+    "source_file_stat": {
+      "size": 3041680,
+      "mtime": 1788333558.0
+    },
+    "indexed_at": "2026-09-04T19:42:27.353062"
+  },
+  "004710_2024_sustainability_report": {
+    "source_file_hash": "ada20516c5d365f3fc32510b4b77c60d",
+    "source_file_stat": {
+      "size": 12378384,
+      "mtime": 1788333605.0
+    },
+    "indexed_at": "2026-09-04T19:43:35.722634"
+  },
+  "004710_2025_sustainability_report": {
+    "source_file_hash": "7edd40cdc99af204fad80d429832c251",
+    "source_file_stat": {
+      "size": 10128121,
+      "mtime": 1788333623.0
+    },
+    "indexed_at": "2026-09-04T19:44:39.768237"
+  },
+  "272210_2023_sustainability_report": {
+    "source_file_hash": "1fba82b1f25fadf36bac24f4aeae530f",
+    "source_file_stat": {
+      "size": 23767193,
+      "mtime": 1788333033.0
+    },
+    "indexed_at": "2026-09-04T19:52:48.620251"
+  },
+  "272210_2024_sustainability_report": {
+    "source_file_hash": "061a4336a83220f75a4431096a924b7d",
+    "source_file_stat": {
+      "size": 20501403,
+      "mtime": 1788333031.0
+    },
+    "indexed_at": "2026-09-04T19:54:56.387078"
+  },
+  "195870_2024_sustainability_report": {
+    "source_file_hash": "eef544ca0e142b48c242482aef055179",
+    "source_file_stat": {
+      "size": 21865965,
+      "mtime": 1788332760.0
+    },
+    "indexed_at": "2026-09-04T19:55:47.225151"
+  },
+  "298040_2022_sustainability_report": {
+    "source_file_hash": "16af74c07c91a9619f7da1389642f92f",
+    "source_file_stat": {
+      "size": 73119011,
+      "mtime": 1788326804.0
+    },
+    "indexed_at": "2026-09-04T20:03:47.796392"
+  },
+  "298040_2024_sustainability_report": {
+    "source_file_hash": "e914b0dea0b5e340ec05a3706222db10",
+    "source_file_stat": {
+      "size": 26313870,
+      "mtime": 1788326786.0
+    },
+    "indexed_at": "2026-09-04T20:06:35.665654"
+  },
+  "267260_2022_sustainability_report": {
+    "source_file_hash": "13a6803e684eaeef752d1079517de0d0",
+    "source_file_stat": {
+      "size": 4770828,
+      "mtime": 1788704746.0
+    },
+    "indexed_at": "2026-09-06T14:34:17.130440"
+  },
+  "189300_2025_sustainability_report": {
+    "source_file_hash": "d863b4e8b5ae5b27368397704d4fbe2a",
+    "source_file_stat": {
+      "size": 9118297,
+      "mtime": 1788704465.0
+    },
+    "indexed_at": "2026-09-08T16:35:22.156164"
+  },
+  "272210_2022_business_report": {
+    "source_file_hash": "6b259317a53cc9064d6931bc8d1b98ea",
+    "source_file_stat": {
+      "size": 2776968,
+      "mtime": 1788332967.0
+    },
+    "indexed_at": "2026-09-06T14:39:17.720314"
+  },
+  "272210_2023_business_report": {
+    "source_file_hash": "498a894bbbf1ecbd0fa139f729138349",
+    "source_file_stat": {
+      "size": 1865709,
+      "mtime": 1788332961.0
+    },
+    "indexed_at": "2026-09-06T14:40:28.526130"
+  },
+  "078600_2024_business_report": {
+    "source_file_hash": "3ce460eab215fbbdf841095eaec47d11",
+    "source_file_stat": {
+      "size": 1322681,
+      "mtime": 1788752403.0
+    },
+    "indexed_at": "2026-09-07T04:01:33.154010"
+  },
+  "078600_2024_sustainability_report": {
+    "source_file_hash": "79e69be41916fc24446c86532bab20a3",
+    "source_file_stat": {
+      "size": 12651639,
+      "mtime": 1788746083.0
+    },
+    "indexed_at": "2026-09-07T04:02:30.612569"
+  },
+  "078600_2025_business_report": {
+    "source_file_hash": "082a0f44c867b1ca93080777c371bfa1",
+    "source_file_stat": {
+      "size": 1261424,
+      "mtime": 1788752392.0
+    },
+    "indexed_at": "2026-09-07T04:02:51.108738"
+  },
+  "078600_2025_sustainability_report": {
+    "source_file_hash": "9d53fb54c753d826e1205474c5a68a29",
+    "source_file_stat": {
+      "size": 25435552,
+      "mtime": 1788747032.0
+    },
+    "indexed_at": "2026-09-07T04:05:54.477763"
+  },
+  "060720_2024_sustainability_report": {
+    "source_file_hash": "45ae8f14d059e3baa6526aa656797124",
+    "source_file_stat": {
+      "size": 7197149,
+      "mtime": 1788329539.0
+    },
+    "indexed_at": "2026-09-07T06:09:05.181229"
+  },
+  "195870_2024_business_report": {
+    "source_file_hash": "4d01348f6a33aa75029e0184c8341262",
+    "source_file_stat": {
+      "size": 1161963,
+      "mtime": 1788332691.0
+    },
+    "indexed_at": "2026-09-07T16:23:16.471409"
+  },
+  "195870_2025_business_report": {
+    "source_file_hash": "712b92dbf46f1b372e1e17a51109cd3d",
+    "source_file_stat": {
+      "size": 1286814,
+      "mtime": 1788339099.0
+    },
+    "indexed_at": "2026-09-07T16:23:59.772823"
+  },
+  "298040_2022_business_report": {
+    "source_file_hash": "e068e1f63f2fe8611f7da4eeade04757",
+    "source_file_stat": {
+      "size": 1762529,
+      "mtime": 1788326417.0
+    },
+    "indexed_at": "2026-09-07T16:24:58.209975"
+  },
+  "298040_2023_business_report": {
+    "source_file_hash": "6c44845a556676e0554de1ec651cdcf5",
+    "source_file_stat": {
+      "size": 1597370,
+      "mtime": 1788326380.0
+    },
+    "indexed_at": "2026-09-07T16:28:34.850481"
+  },
+  "298040_2024_business_report": {
+    "source_file_hash": "0a37dad1285f1707c748adc0af94bd7f",
+    "source_file_stat": {
+      "size": 1862779,
+      "mtime": 1788326370.0
+    },
+    "indexed_at": "2026-09-07T16:30:04.746571"
+  },
+  "298040_2025_business_report": {
+    "source_file_hash": "cc2b468ec006fa0748ed515cb5f11fc3",
+    "source_file_stat": {
+      "size": 1917454,
+      "mtime": 1788326340.0
+    },
+    "indexed_at": "2026-09-07T16:32:06.732101"
+  },
+  "046890_2022_business_report": {
+    "source_file_hash": "f55c7e9f222e5211c96e46c752cc81ec",
+    "source_file_stat": {
+      "size": 1137722,
+      "mtime": 1788845238.0
+    },
+    "indexed_at": "2026-09-08T09:52:52.673504"
+  },
+  "046890_2023_business_report": {
+    "source_file_hash": "ca2043ae8c93d5f3c66d68c4302bd54c",
+    "source_file_stat": {
+      "size": 1163168,
+      "mtime": 1788845251.0
+    },
+    "indexed_at": "2026-09-08T09:56:18.933983"
+  },
+  "046890_2024_business_report": {
+    "source_file_hash": "63e6b0604cce5d6df5c6d18ca51f34f6",
+    "source_file_stat": {
+      "size": 944249,
+      "mtime": 1788845264.0
+    },
+    "indexed_at": "2026-09-08T09:57:17.613043"
+  },
+  "046890_2025_business_report": {
+    "source_file_hash": "06cb0d283c8939d85ab142990a908524",
+    "source_file_stat": {
+      "size": 981160,
+      "mtime": 1788845271.0
+    },
+    "indexed_at": "2026-09-08T09:58:24.115620"
+  }
+}

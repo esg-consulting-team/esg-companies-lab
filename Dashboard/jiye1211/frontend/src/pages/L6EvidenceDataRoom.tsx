@@ -3,6 +3,9 @@ import { api } from "../api/client";
 import { useFetch } from "../hooks/useFetch";
 import { EvidenceBadge, ExhibitCard, StateMessage, formatNum, formatPct } from "../components/common";
 
+const INVENTORY_FOOTNOTE =
+  "문서 목록·페이지 수: 파싱 파이프라인 실제 산출물 · 연결 항목 수: 근거 텍스트 키워드 매칭(근사치)";
+
 const FOOTNOTE =
   "문서명은 채점 근거 텍스트에서 키워드로 추출한 근사치이며, 자유서술 특성상 일부 항목은 인식되지 않아 '미분류'로 표시될 수 있습니다. 실제 원문 확인은 L3 항목 상세의 확인근거 텍스트를 참고하세요.";
 
@@ -11,11 +14,13 @@ export function L6EvidenceDataRoom() {
   const navigate = useNavigate();
   const coverage = useFetch(() => api.getEvidenceDocuments(company), [company]);
   const gaps = useFetch(() => api.getEvidenceGaps(company), [company]);
+  const inventory = useFetch(() => api.getEvidenceInventory(company), [company]);
 
   const goItem = (code: string) => navigate(`/companies/${encodeURIComponent(company)}/l3/${encodeURIComponent(code)}`);
 
-  if (coverage.loading || gaps.loading) return <StateMessage>불러오는 중…</StateMessage>;
+  if (coverage.loading || gaps.loading || inventory.loading) return <StateMessage>불러오는 중…</StateMessage>;
   if (coverage.error || !coverage.data) return <StateMessage error>{coverage.error ?? "데이터를 불러오지 못했습니다."}</StateMessage>;
+  if (inventory.error || !inventory.data) return <StateMessage error>{inventory.error ?? "데이터를 불러오지 못했습니다."}</StateMessage>;
   if (gaps.error || !gaps.data) return <StateMessage error>{gaps.error ?? "데이터를 불러오지 못했습니다."}</StateMessage>;
 
   const { documentCounts, totalItems, unclassifiedCount, unclassifiedRate } = coverage.data;
@@ -28,10 +33,10 @@ export function L6EvidenceDataRoom() {
         eyebrow="참고자료 현황"
         title="참고자료 유형별 연결 항목 수"
         subtitle="텍스트 마이닝 기반 근사치 — 한 항목이 여러 문서를 동시에 언급하면 각 문서에 중복 집계됩니다."
-        source="2026년 손채점·AI보조채점 메모 키워드 매칭"
+        source="근거페이지·확인근거 · 키워드 매칭"
       >
         {documentCounts.map((d) => (
-          <div className={`hbar-row ${d.label === "미분류" ? "hbar-row--muted" : ""}`} key={d.label}>
+          <div className={`hbar-row hbar-row--wide-label ${d.label === "미분류" ? "hbar-row--muted" : ""}`} key={d.label}>
             <span className="hbar-row__label">{d.label}</span>
             <div className="hbar-row__track">
               <div className="hbar-row__fill" style={{ width: `${(d.count / maxCount) * 100}%` }} />
@@ -51,7 +56,7 @@ export function L6EvidenceDataRoom() {
         number={2}
         eyebrow="데이터 갭 리스트"
         title={gaps.data.length ? "근거충분성이 불충분·부분인 항목" : "근거충분성 갭 항목 없음"}
-        source="2026년 손채점 메모 기준 근거충분성 판정"
+        source="근거충분성 파싱"
       >
         {gaps.data.length ? (
           <div className="table-scroll">
@@ -83,6 +88,50 @@ export function L6EvidenceDataRoom() {
         ) : (
           <StateMessage>불충분·부분 항목이 없습니다.</StateMessage>
         )}
+      </ExhibitCard>
+      <ExhibitCard
+        number={3}
+        eyebrow="문서 인벤토리"
+        title="적재 문서 목록 · 추출 현황"
+        subtitle="문서 유형별 연결 항목 수는 위 Exhibit 1의 값이며, 같은 유형의 연도별 문서에 동일하게 표시됩니다."
+      >
+        {inventory.data.length ? (
+          <div className="table-scroll">
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th>문서 유형</th>
+                  <th style={{ textAlign: "right" }}>연도</th>
+                  <th style={{ textAlign: "right" }}>총 페이지</th>
+                  <th style={{ textAlign: "right" }}>추출 실패 페이지</th>
+                  <th>파싱 완료 여부</th>
+                  <th style={{ textAlign: "right" }}>연결 항목</th>
+                </tr>
+              </thead>
+              <tbody>
+                {inventory.data.map((d) => (
+                  <tr key={d.docId}>
+                    <td>{d.docType}</td>
+                    <td className="num">{d.year}</td>
+                    <td className="num">{d.totalPages !== null ? `${formatNum(d.totalPages)}쪽` : "—"}</td>
+                    <td className="num" style={d.failedPages ? { color: "var(--crit)" } : undefined}>
+                      {d.failedPages !== null ? `${formatNum(d.failedPages)}쪽` : "—"}
+                    </td>
+                    <td style={{ color: d.parsed ? "var(--good)" : "var(--warn)", fontWeight: 700 }}>
+                      {d.parsed ? "완료" : "미완료"}
+                    </td>
+                    <td className="num">{d.linkedItems !== undefined ? `${formatNum(d.linkedItems)}건` : "—"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <StateMessage>적재된 문서 정보가 없습니다.</StateMessage>
+        )}
+        <p className="exhibit__source" style={{ marginTop: 8 }}>
+          {INVENTORY_FOOTNOTE}
+        </p>
       </ExhibitCard>
     </div>
   );
