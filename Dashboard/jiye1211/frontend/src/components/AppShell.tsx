@@ -105,7 +105,11 @@ export function AppShell() {
             <Outlet />
           </main>
 
+          {/* key={company}: 상단에서 회사를 바꾸면 ConsultPanel을 통째로 새로 마운트해 이전
+              대화(turns)를 비운다 — 그대로 두면 다른 회사에 대한 답변이 새 회사 질문의
+              [이전 대화] 맥락으로 섞여 들어간다. */}
           <ConsultPanel
+            key={company}
             open={consultOpen}
             onToggle={() => setConsultOpen((v) => !v)}
             contextLabel={`${currentScreen.toUpperCase()}${itemCode ? " · " + itemCode : ""} · 2026`}

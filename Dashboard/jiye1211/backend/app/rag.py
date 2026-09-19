@@ -378,7 +378,10 @@ _ROUTER_SYSTEM_PROMPT = """너는 K-ESG 진단 콘솔의 질문 라우터다. �
   사례)를 묻는 질문. 질문에 항목코드가 명시돼 있으면 itemCode에 넣고, 명시돼 있지 않지만
   [내부 채점 근거]로 현재 화면의 항목이 주어져 있다면 itemCode를 비운 채 호출해도 된다.
 - get_items_by_urgency: 시급성(즉시/중기/장기)별 과제 개수·목록을 묻는 질문.
-- get_roadmap_urgency_distribution: 로드맵 특정 단계(번호)의 시급성 분포·과제 구성을 묻는 질문.
+- get_roadmap_urgency_distribution: 로드맵 특정 연도(예: "2027년")의 시급성 분포·과제 구성을
+  묻는 질문. year에는 질문에 언급된 실제 서기 연도를 그대로 넣어라 — 몇 번째 단계인지 스스로
+  계산하려 하지 마라(회사마다 로드맵 시작 연도가 달라 틀리기 쉽다), 연도만 넘기면 정확한 단계를
+  알아서 찾는다.
 - get_report_insight: 컨설팅 보고서 고유 데이터(유사 선례, KCGS 등급 상관도, 3개년 연속 0점
   항목, 진단의 일반적 한계, 다음 진단 안내, 벤치마크 누락 영역, 그룹 점수 추이, 판정 확인 중
   항목 등)를 묻는 질문.
@@ -450,13 +453,16 @@ _FUNCTION_DECLARATIONS = [
     },
     {
         "name": "get_roadmap_urgency_distribution",
-        "description": "로드맵 특정 단계에 포함된 과제들의 관련 항목을 시급성별(즉시/중기/장기)로 집계한다.",
+        "description": "로드맵 특정 연도에 포함된 과제들의 관련 항목을 시급성별(즉시/중기/장기)로 집계한다.",
         "parameters": {
             "type": "OBJECT",
             "properties": {
-                "stageNo": {"type": "INTEGER", "description": "질문이 묻는 로드맵 단계 번호(1부터)."},
+                "year": {
+                    "type": "INTEGER",
+                    "description": "질문이 묻는 서기 연도(예: 2027). 몇 번째 단계인지는 계산하지 말고 연도 그대로 넣는다.",
+                },
             },
-            "required": ["stageNo"],
+            "required": ["year"],
         },
     },
     {
@@ -579,12 +585,12 @@ def _resolve_structured_call(
         )
     if name == "get_roadmap_urgency_distribution":
         try:
-            stage_no = int(args.get("stageNo"))
+            year = int(args.get("year"))
         except (TypeError, ValueError):
             return None
         return (
-            f"get_roadmap_urgency_distribution(stage {stage_no})",
-            supabase_lookup.get_roadmap_urgency_distribution(stage_no, company_code),
+            f"get_roadmap_urgency_distribution({year}년)",
+            supabase_lookup.get_roadmap_urgency_distribution(year, company_code),
         )
     if name == "get_report_insight":
         topic = args.get("topic")

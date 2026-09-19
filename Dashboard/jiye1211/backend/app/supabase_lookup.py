@@ -208,15 +208,36 @@ def get_items_by_urgency(company_code: str, urgency_level: str, full: bool = Fal
     }
 
 
-def get_roadmap_urgency_distribution(stage_no: int, company_code: str) -> dict[str, Any]:
-    """esg_roadmap_tasks.related_item_codes(배열)로 esg_diagnosis를 조인해 이 단계 과제들의
-    관련 항목을 즉시/중기/장기로 집계한다 (로드맵 화면의 단계 배지가 뭉개지는 문제 대응용)."""
+def get_roadmap_urgency_distribution(year: int, company_code: str) -> dict[str, Any]:
+    """esg_roadmap_tasks.related_item_codes(배열)로 esg_diagnosis를 조인해 이 연도(단계)
+    과제들의 관련 항목을 즉시/중기/장기로 집계한다 (로드맵 화면의 단계 배지가 뭉개지는 문제
+    대응용).
+
+    회사가 아니라 연도로 조회한다 — Gemini가 "2027년"을 몇 번째 단계(stage_no)인지 스스로
+    추측하게 하면(예: 1단계=2026년이라는 정보 없이) 엉뚱한 단계를 골라 다른 연도의 과제를
+    답하는 사고가 났다(실측 확인됨). esg_roadmap_stages에서 연도로 실제 stage_no를 먼저
+    찾아내므로, 회사마다 로드맵 시작 연도가 달라도 항상 정확하다."""
     company_id = _esg_company_id(company_code)
     if company_id is None:
         return {"found": False, "reason": f"'{company_code}'의 로드맵 데이터를 찾을 수 없습니다."}
 
-    tasks_cfg = TABLE_MAP["roadmap_tasks"]
     sb = get_supabase()
+    stages_cfg = TABLE_MAP["roadmap_stages"]
+    stage_rows = (
+        sb.table(stages_cfg["table"])
+        .select("*")
+        .eq(stages_cfg["company_id_col"], company_id)
+        .eq(stages_cfg["year_col"], year)
+        .execute()
+        .data
+        or []
+    )
+    if not stage_rows:
+        return {"found": False, "reason": f"{year}년에 해당하는 로드맵 단계가 없습니다."}
+    stage_no = stage_rows[0][stages_cfg["stage_no_col"]]
+    stage_name = stage_rows[0].get(stages_cfg["stage_name_col"])
+
+    tasks_cfg = TABLE_MAP["roadmap_tasks"]
     task_rows = (
         sb.table(tasks_cfg["table"])
         .select("*")
@@ -227,7 +248,7 @@ def get_roadmap_urgency_distribution(stage_no: int, company_code: str) -> dict[s
         or []
     )
     if not task_rows:
-        return {"found": False, "reason": f"{stage_no}단계에 등록된 로드맵 과제가 없습니다."}
+        return {"found": False, "reason": f"{year}년({stage_no}단계)에 등록된 로드맵 과제가 없습니다."}
 
     urgency_by_code: dict[str, Optional[str]] = {}
     company_name = _company_name(company_code)
@@ -258,7 +279,9 @@ def get_roadmap_urgency_distribution(stage_no: int, company_code: str) -> dict[s
     return {
         "found": True,
         "companyCode": company_code,
+        "year": year,
         "stageNo": stage_no,
+        "stageName": stage_name,
         "taskCount": len(task_rows),
         "taskNames": task_names,
         "urgencyDistribution": distribution,
