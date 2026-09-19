@@ -5,7 +5,7 @@ from .benchmark_config import BENCHMARK_MAP
 from .cache_utils import ttl_cache
 from .mock_data import INDUSTRY_NAMES, get_company_profile
 from .parsing import DOMAIN_BUCKETS, bucket_of, evidence_level, extract_evidence_sources, parse_scoring_note, parse_solution
-from .report_data import get_pending_item, get_report_comparison
+from .report_data import get_domain_benchmark_map, get_pending_item, get_report_comparison
 from .supabase_client import get_supabase
 
 ASSESSMENT_YEAR = 2026  # 원본 파일명 "...26년 현황..." 기준 단일 스냅샷
@@ -280,7 +280,10 @@ def normalize_item(row: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def build_domains(items: list[dict[str, Any]], profile: dict[str, Any]) -> list[dict[str, Any]]:
+def build_domains(items: list[dict[str, Any]], profile: dict[str, Any], company: str) -> list[dict[str, Any]]:
+    # 컨설팅 보고서가 실측 검증한 도메인별 벤치마킹 평균이 있으면 그걸 우선 쓰고, 없는 회사만
+    # mock_data.py의 참고용 샘플값으로 대체한다(report_data.get_domain_benchmark_map 참고).
+    report_bench = get_domain_benchmark_map(company)
     buckets: dict[str, dict[str, Any]] = {}
     for key, meta in DOMAIN_BUCKETS.items():
         buckets[key] = {
@@ -289,7 +292,7 @@ def build_domains(items: list[dict[str, Any]], profile: dict[str, Any]) -> list[
             "items": 0,
             "score": 0.0,
             "max": 0,
-            "benchmarkAvg": profile.get("benchmarkAvgByBucket", {}).get(key),
+            "benchmarkAvg": report_bench.get(key, profile.get("benchmarkAvgByBucket", {}).get(key)),
         }
     for it in items:
         b = buckets.get(it["domainBucket"])
@@ -309,7 +312,7 @@ def build_summary(company: str) -> dict[str, Any]:
     profile = get_company_profile(company)
     rows = fetch_rows(company)
     items = [normalize_item(r) for r in rows]
-    domains = build_domains(items, profile)
+    domains = build_domains(items, profile, company)
 
     applicable_items = [it for it in items if it["applicable"]]
     total_score = sum(it["score"] for it in applicable_items)

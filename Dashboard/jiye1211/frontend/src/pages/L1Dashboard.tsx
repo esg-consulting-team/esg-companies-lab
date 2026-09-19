@@ -228,25 +228,35 @@ export function L1Dashboard() {
           eyebrow="영역별 달성률"
           title="모든 영역 벤치마킹 대비 평균 미달"
           eyebrowRight={<span>적용 {assessment.totalItems}개 항목</span>}
-          source="esg_diagnosis (K-ESG v2.0) · 벤치마킹 평균은 샘플 값"
+          source="K-ESG v2.0 가이드라인 · 2026년 손채점 결과 · 벤치마킹 평균은 컨설팅보고서 실측치(일부 영역은 참고용 샘플값)"
         >
-          {domains.map((d) => (
-            <div key={d.key} className={`hbar-row ${d.rate === null ? "hbar-row--disabled" : ""}`}>
-              <span className="hbar-row__label">{d.label}</span>
-              <div className="hbar-row__track">
-                <div
-                  className="hbar-row__fill"
-                  style={{ width: `${(d.rate ?? 0) * 100}%`, background: DOMAIN_BAR_COLORS[d.key] }}
-                />
-                {d.benchmarkAvg !== null && (
-                  <div className="hbar-row__bench" style={{ left: `${d.benchmarkAvg * 100}%` }} />
-                )}
+          {domains.map((d) => {
+            // 자사 값 자체가 "해당 없음"(비적용 도메인)이면 벤치마킹 평균이 있어도 비교 대상이
+            // 없으므로 마커를 표시하지 않는다 — 없는 자사 막대 위에 벤치마킹 선만 뜨면 오해를 줄 수 있다.
+            const showBench = d.rate !== null && d.benchmarkAvg !== null;
+            return (
+              <div key={d.key} className={`hbar-row ${d.rate === null ? "hbar-row--disabled" : ""}`}>
+                <span className="hbar-row__label">{d.label}</span>
+                <div className="hbar-row__bar">
+                  <div className="hbar-row__track">
+                    <div
+                      className="hbar-row__fill"
+                      style={{ width: `${(d.rate ?? 0) * 100}%`, background: DOMAIN_BAR_COLORS[d.key] }}
+                    />
+                    {showBench && <div className="hbar-row__bench" style={{ left: `${d.benchmarkAvg! * 100}%` }} />}
+                  </div>
+                  {showBench && (
+                    <span className="hbar-row__bench-label" style={{ left: `${d.benchmarkAvg! * 100}%` }}>
+                      벤치마킹 평균 {formatPct(d.benchmarkAvg, 0)}
+                    </span>
+                  )}
+                </div>
+                <span className="hbar-row__meta">
+                  {d.rate === null ? "해당 없음" : `${formatPct(d.rate)} (${formatNum(d.score)}/${formatNum(d.max)})`}
+                </span>
               </div>
-              <span className="hbar-row__meta">
-                {d.rate === null ? "해당 없음" : `${formatPct(d.rate)} (${formatNum(d.score)}/${formatNum(d.max)})`}
-              </span>
-            </div>
-          ))}
+            );
+          })}
         </ExhibitCard>
 
         {/* Exhibit 2 */}
@@ -254,7 +264,7 @@ export function L1Dashboard() {
           number={2}
           eyebrow="3개년 KCGS 등급 추이"
           title={gradeTrendTitle(gradeHistory)}
-          source="company_esg_yearly · 한국ESG기준원(KCGS) 공식등급"
+          source="한국ESG기준원(KCGS) 공식등급 · 3개년 등급 이력"
         >
           {gradeHistory.length ? (
             <>
@@ -316,7 +326,7 @@ export function L1Dashboard() {
           number={3}
           eyebrow="손실점수 Top 5"
           title="만점 대비 미획득 점수가 가장 큰 항목"
-          source="esg_diagnosis · 항목당 100점 정규화 기준"
+          source="K-ESG v2.0 가이드라인 · 2026년 손채점 결과 · 항목당 100점 환산 기준"
         >
           <div className="table-scroll">
             <table className="data-table">
@@ -355,7 +365,7 @@ export function L1Dashboard() {
           number={4}
           eyebrow="시급성 · 시뮬레이션"
           title={`즉시 과제 ${immediateTasks.length}건으로 달성률 ${formatPct(simulation.rateTo)} 회복 가능`}
-          source="esg_diagnosis 기반 산출 · 예상치"
+          source="2026년 손채점 결과 기반 시뮬레이션 · 예상치"
         >
           <div className="urgency-lanes" style={{ marginBottom: 14 }}>
             {(["즉시", "중기", "장기"] as const).map((u) => (
@@ -391,7 +401,7 @@ export function L1Dashboard() {
         eyebrow="즉시 착수 과제"
         title={immediateTasks.length ? "가장 낮은 점수의 즉시 과제부터 착수" : "즉시 착수 과제 없음"}
         subtitle="예산·기간·담당 부서는 원본 데이터에 없어 컨설턴트 산정이 필요합니다."
-        source="esg_diagnosis · urgency=즉시 기준"
+        source="2026년 손채점 결과 · 시급성 '즉시' 항목 기준"
       >
         <div className="table-scroll">
           <table className="data-table">

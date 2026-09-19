@@ -17,6 +17,16 @@ _COMPANY_KEY_MAP = {
     "하나마이크론": "하나마이크론_ESG반도체특화",
 }
 
+# report_extracted_data.json domainScores의 도메인명(보고서 원문 표기) → DOMAIN_BUCKETS 키.
+# "반도체특화"/"업종특화"는 보고서마다 표기가 다를 뿐 같은 버킷(sector)이다.
+_DOMAIN_LABEL_TO_BUCKET = {
+    "정보공시": "disclosure",
+    "환경": "environment",
+    "지배구조": "governance",
+    "업종특화": "sector",
+    "반도체특화": "sector",
+}
+
 
 @lru_cache(maxsize=1)
 def _load() -> dict[str, Any]:
@@ -30,6 +40,22 @@ def get_report_comparison(company: str) -> Optional[dict[str, Any]]:
     if key is None:
         return None
     return _load().get("companies", {}).get(key)
+
+
+def get_domain_benchmark_map(company: str) -> dict[str, float]:
+    """L1 Exhibit1용 도메인별 벤치마킹 평균(0~1 비율) — 컨설팅 보고서가 domainScores를 실제로
+    검증해 둔 회사(현재는 하나마이크론)만 반환한다. 없으면 빈 dict — 호출부가 mock_data.py의
+    참고용 샘플값으로 대체한다."""
+    data = get_report_comparison(company)
+    if not data or "domainScores" not in data:
+        return {}
+    result: dict[str, float] = {}
+    for row in data["domainScores"]:
+        bucket = _DOMAIN_LABEL_TO_BUCKET.get(row.get("domain"))
+        avg = row.get("benchmarkAvg")
+        if bucket and avg is not None:
+            result[bucket] = avg / 100
+    return result
 
 
 def get_pending_item(company: str, item_code: str) -> Optional[dict[str, Any]]:

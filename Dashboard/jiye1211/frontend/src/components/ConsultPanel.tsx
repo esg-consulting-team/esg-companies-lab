@@ -14,10 +14,9 @@ interface ChatTurn {
 /**
  * AI 상담 패널 (F5).
  *
- * db/chroma_db_migrated에서 되살린 회사별 사업/지배구조/지속가능경영보고서 청크를
- * Gemini 임베딩으로 재색인(backend/scripts/build_rag_index.py)해두고, 질문이 오면
- * 코사인 유사도로 상위 문서를 찾아 그 내용만 근거로 Gemini가 답하게 한다
- * (근거 밖 내용은 단정하지 말라고 시스템 프롬프트에 명시 — F5-03).
+ * 문서 유사도 검색(자사 + 필요 시 벤치마킹 대상사, backend/app/rag.py)과 Supabase 정형 데이터
+ * 조회를 Gemini function calling으로 함께 라우팅해 답을 종합한다 — 현재 화면·항목 밖의 질문도
+ * 답할 수 있다. 근거 밖 내용은 단정하지 말라고 시스템 프롬프트에 명시돼 있다(F5-03).
  */
 export function ConsultPanel({
   open,
@@ -83,8 +82,8 @@ export function ConsultPanel({
         <div className="consult__messages" ref={messagesRef}>
           {turns.length === 0 && (
             <p className="consult__conclusion" style={{ color: "var(--ink-3)" }}>
-              이 화면·항목에 대해 궁금한 점을 물어보세요. 답변은 이 회사의 사업보고서·지배구조보고서·
-              지속가능경영보고서에서 찾은 내용에만 근거합니다.
+              궁금한 점을 자유롭게 물어보세요. 지금 보고 있는 화면·항목이 아니어도, 벤치마킹
+              대상사 비교처럼 다른 회사 문서가 필요한 질문도 답변합니다.
             </p>
           )}
 
@@ -107,7 +106,7 @@ export function ConsultPanel({
               {t.response && (
                 <>
                   <div>
-                    <div className="consult__block-label">결론</div>
+                    <div className="consult__block-label">요약</div>
                     <p className="consult__conclusion">
                       {t.response.conclusion}
                       {t.response.insufficientEvidence && (
@@ -120,7 +119,7 @@ export function ConsultPanel({
 
                   {t.response.citations.length > 0 && (
                     <div>
-                      <div className="consult__block-label">근거</div>
+                      <div className="consult__block-label">출처</div>
                       {t.response.citations.map((c) => (
                         <div className="citation-card" key={c.n}>
                           <div className="citation-card__source">
@@ -135,7 +134,7 @@ export function ConsultPanel({
 
                   {t.response.nextAction && (
                     <div>
-                      <div className="consult__block-label">다음 행동</div>
+                      <div className="consult__block-label">권장 액션</div>
                       <p className="consult__conclusion">{t.response.nextAction}</p>
                     </div>
                   )}
@@ -184,8 +183,9 @@ export function ConsultPanel({
         </form>
 
         <p className="consult__footer">
-          답변은 적재된 자사 문서에서만 생성됩니다. 근거를 찾지 못하면 추정하지 않고 필요한 증빙을
-          안내합니다.
+          답변은 적재된 문서(벤치마킹 대상사 포함)와 진단 데이터에 근거하며, 근거를 찾지 못하면
+          추정하지 않고 필요한 증빙을 안내합니다. 점수는 자체 모델이 평가한 결과로, 실제 공식
+          평가와 다를 수 있습니다.
         </p>
       </div>
     </aside>

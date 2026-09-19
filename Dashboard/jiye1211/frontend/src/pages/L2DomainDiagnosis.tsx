@@ -151,7 +151,7 @@ export function L2DomainDiagnosis() {
             eyebrow="항목 히트맵"
             title={`${data.label} — 득점률 · 근거충분성 매트릭스`}
             subtitle={`${filteredItems.length} / ${data.items.length}개 항목 표시 중`}
-            source="esg_diagnosis · 항목당 100점 정규화 기준"
+            source="K-ESG v2.0 가이드라인 · 2026년 손채점 결과 · 항목당 100점 환산 기준"
             style={
               domainColor
                 ? ({ "--domain-heading-color": domainColor, "--domain-color": domainColor } as CSSProperties)
@@ -195,7 +195,7 @@ export function L2DomainDiagnosis() {
               number={7}
               eyebrow="단계형 항목 진척"
               title="현재 단계와 만점 단계 사이 격차가 있는 항목"
-              source="esg_diagnosis · [입력]충족단계 / 최대단계수"
+              source="2026년 손채점 결과 · 단계형 항목 충족단계/최대단계 비교"
               style={domainColor ? ({ "--domain-color": domainColor } as CSSProperties) : undefined}
             >
               <div className="table-scroll">

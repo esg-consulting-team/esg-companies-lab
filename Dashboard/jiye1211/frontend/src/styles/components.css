@@ -369,12 +369,27 @@
   font-size: 12.5px;
   color: var(--ink-2);
 }
+/* 트랙(.hbar-row__track)은 막대가 넘치지 않도록 overflow:hidden이 필요하지만, 그 안에 두면
+   벤치마킹 라벨(트랙 아래쪽에 표시)까지 같이 잘려버린다 — 그래서 트랙과 라벨을 감싸는 별도
+   래퍼를 두고, 라벨은 이 래퍼 기준으로 위치를 잡는다. */
+.hbar-row__bar {
+  position: relative;
+}
 .hbar-row__track {
   position: relative;
   height: 14px;
   background: var(--navy-5);
   border-radius: var(--radius-sm);
   overflow: hidden;
+}
+.hbar-row__bench-label {
+  position: absolute;
+  top: 100%;
+  transform: translateX(-50%);
+  margin-top: 2px;
+  font-size: 10px;
+  color: var(--ink-3);
+  white-space: nowrap;
 }
 .hbar-row__fill {
   position: absolute;

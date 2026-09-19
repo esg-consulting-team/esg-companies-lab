@@ -8,9 +8,13 @@ search_documents를 함께 호출하도록 강제한다(_needs_doc_search_anyway
 결과를 _answer가 한 번에 종합해 답한다 — 정형 데이터가 질문의 일부만 답했다고 문서 검색을
 건너뛰지 않고, 두 출처를 함께 본 뒤에도 못 찾은 부분만 근거 부족으로 남긴다.
 
-문서 검색 경로는 `data/rag_index.sqlite3`(scripts/build_rag_index.py로 생성)에 저장된, 회사별
-문서 청크 임베딩(Gemini gemini-embedding-001, 768차원)을 메모리에 올려 코사인 유사도로 top-k를
-뽑는다.
+문서 검색 경로는 두 곳으로 나뉜다. 하나마이크론 + 벤치마킹 3사(milvus_client.
+MIGRATED_COMPANY_CODES)는 Zilliz Cloud(Milvus) 컬렉션 하나에 올라가 있고, company_code
+메타데이터 필드에 대한 필터 표현식(`company_code in [...]`)으로 회사를 구분해 검색한다.
+나머지 회사는 아직 이관 전이라 기존처럼 `data/rag_index.sqlite3`(scripts/build_rag_index.py로
+생성)의 임베딩(Gemini gemini-embedding-001, 768차원)을 메모리에 올려 코사인 유사도로 검색한다
+(CompanyIndex). 두 경로 모두 같은 COSINE 거리 스케일을 쓰므로 여러 회사를 함께 볼 때(벤치마킹
+질문 등) 두 경로의 결과를 점수 기준으로 그대로 섞어도 된다.
 
 인용은 모델이 지어내지 않도록, 실제로 검색된 청크만 citations로 내려준다
 (사양서 F5-03 "인용 강제 답변 — 근거 없으면 단정 금지"에 대응). 근거를 못 찾으면 웹검색으로
@@ -26,7 +30,7 @@ from typing import Any, Optional
 
 import numpy as np
 
-from . import supabase_lookup
+from . import milvus_client, supabase_lookup
 from .config import get_settings
 from .gemini_client import embed_query, generate_json, generate_with_functions
 from .repository import fetch_company_code
@@ -48,6 +52,7 @@ CODE_TO_COMPANY = {
     "000660": "SK하이닉스",
     "005930": "삼성전자",
 }
+COMPANY_TO_CODE = {name: code for code, name in CODE_TO_COMPANY.items()}
 
 
 class CompanyIndex:
@@ -133,8 +138,20 @@ def _load_index() -> dict[str, CompanyIndex]:
 
 
 def index_status() -> dict[str, int]:
-    """회사별 색인된 청크 수. 관리/디버깅용."""
-    return {company: len(idx.rows) for company, idx in _load_index().items()}
+    """회사별 색인된 청크 수. 관리/디버깅용.
+
+    Zilliz Cloud로 이관된 회사(milvus_client.MIGRATED_COMPANY_CODES)는 이제 그쪽이 실제 검색
+    경로이므로 로컬 sqlite 개수 대신 Milvus 적재 개수로 덮어써서 보여준다.
+    """
+    status = {company: len(idx.rows) for company, idx in _load_index().items()}
+    for code in milvus_client.MIGRATED_COMPANY_CODES:
+        name = CODE_TO_COMPANY.get(code)
+        if name:
+            try:
+                status[name] = milvus_client.count_rows(code)
+            except Exception:  # noqa: BLE001
+                pass
+    return status
 
 
 DOC_TYPE_LABEL = {
@@ -290,6 +307,28 @@ _SYSTEM_PROMPT = """너는 K-ESG(한국형 ESG 진단 가이드라인) 진단 �
    필요한데 깨진 텍스트만으로는 정확히 복원할 수 없다면, 무리하게 표를 재구성하거나 빈 칸을
    추측해 채우지 말고 conclusion에 "자세한 표는 [문서명] p.[페이지] 참고"라고만 안내하라.
 3. 표가 아닌 일반 산문 발췌는 이 원칙과 무관하게 지금처럼 자연스러운 문장으로 종합한다.
+
+[화면 안내 규칙 — 내부 용어를 그대로 노출하지 마라]
+컨텍스트에 보이는 "[정형 데이터 조회 결과: ...]", "[문서 발췌]" 같은 대괄호 라벨과 found·scope·
+items·solution·itemCode 같은 JSON 필드명, 함수 이름은 네가 컨텍스트 종류를 구분하기 위해
+내부적으로 쓰는 이름일 뿐이다 — 컨설턴트는 이 시스템의 내부 구조를 모르므로 conclusion·
+nextAction 어디에도 이런 이름을 그대로 옮겨 적지 마라(예: "정형 데이터 조회 결과의 'solution'
+항목을 참고하세요" 금지). 더 자세한 내용을 어디서 볼 수 있는지 안내할 때는 실제 화면 이름과
+Exhibit 번호로 말하라. 화면 구조는 다음과 같다:
+- L1 종합 현황 — Exhibit 1 영역별 달성률, Exhibit 2 3개년 KCGS 등급 추이, Exhibit 3 손실점수
+  Top5, Exhibit 4 시급성·시뮬레이션, Exhibit 5 즉시 착수 과제
+- L2 영역별 진단 — Exhibit 6 항목 히트맵, Exhibit 7 단계형 항목 진척, Exhibit 8 감점 이력
+  타임라인(환경 영역)
+- L3 항목 상세 — 항목 하나의 점검기준·판단근거·확인근거·해결방안(개선방향) 전체를 확인하는 화면
+  (항목코드로 조회). 항목별 상세 해결방안·후속조치를 안내할 때는 여기를 가리켜라.
+- L4 비교 분석 — Exhibit 9 그룹비교, Exhibit 11 선례 카드, Exhibit 12 자사 vs 벤치마킹군
+- L5 개선 로드맵 — Exhibit 1 4개년 실행 로드맵(연도별 단계·과제), Exhibit 2 시급성 판단 기준
+- L6 증빙 데이터룸 — Exhibit 1 참고자료 현황, Exhibit 2 데이터 갭 리스트
+- L7 리포트 — 위 내용을 모은 종합 리포트
+여러 항목(예: 시급성 '즉시' 26개)의 해결방안을 한꺼번에 묻는 질문이면, "각 항목의 해결방안은
+L3 항목 상세 화면에서 항목코드별로 확인하거나, L5 개선 로드맵에서 연도별 과제로 확인할 수
+있습니다"처럼 안내하고, 특정 항목 하나에 대한 질문이면 그 항목의 해결방안 내용 자체를
+conclusion에 직접 서술하라(내부 채점 근거에 이미 있으므로).
 
 [답변 원칙]
 1. relevantFacts에 먼저 컨텍스트에서 질문과 직접 관련된 사실만 뽑아 적어라. 이 단계에서 골라내지
@@ -588,19 +627,33 @@ def _route_calls(
     return routed.get("functionCalls") or []
 
 
-def _build_search_queries(question: str, item_context: Optional[dict[str, Any]]) -> list[str]:
-    """원 질문 + (있다면) 항목 용어로 보강한 질문, 두 갈래로 검색해 재현율을 높인다."""
+def _build_search_queries(
+    question: str,
+    item_context: Optional[dict[str, Any]],
+    extra_terms: Optional[list[str]] = None,
+) -> list[str]:
+    """원 질문 + (있다면) 항목 용어로 보강한 질문, 두 갈래로 검색해 재현율을 높인다.
+
+    extra_terms는 이번 라우팅에서 실제로 조회된 get_item_detail 결과의 itemName·점검기준이다 —
+    사용자가 L3 화면이 아니라 채팅창에서 곧장 항목코드를 언급한 경우(item_context가 비어 있음)
+    에도, 항목코드 문자열("G-3-2")만으로는 임베딩이 의미를 못 잡아 벤치마킹 문서 검색이 엉뚱한
+    결과만 찾게 되는 문제가 있었다 — 그 항목의 실제 이름·점검기준으로 검색어를 보강해야 한다.
+    """
     queries = [question]
+    terms: list[str] = []
     if item_context and item_context.get("code"):
-        terms = [item_context.get("name"), item_context.get("category")]
+        terms.extend([item_context.get("name"), item_context.get("category")])
         criteria = item_context.get("criteriaDetail")
         if criteria:
             terms.append(criteria[:300])
         data_source = item_context.get("dataSource")
         if data_source:
             terms.append(data_source[:150])
-        enriched = " ".join(t for t in terms if t) + " " + question
-        queries.append(enriched)
+    if extra_terms:
+        terms.extend(extra_terms)
+    terms = [t for t in terms if t]
+    if terms:
+        queries.append(" ".join(terms) + " " + question)
     return queries
 
 
@@ -658,6 +711,9 @@ def _answer(
     """
     structured_blocks: list[str] = []
     doc_queries: list[str] = []
+    # get_item_detail이 실제로 조회한 항목의 이름·점검기준 — item_context가 없어도(사용자가 L3
+    # 화면이 아니라 채팅에서 곧장 항목코드를 언급한 경우) 문서 검색어를 이걸로 보강한다.
+    routed_item_terms: list[str] = []
 
     for call in calls:
         name = call.get("name")
@@ -669,6 +725,12 @@ def _answer(
             if resolved is not None:
                 label, data = resolved
                 structured_blocks.append(f"[정형 데이터 조회 결과: {label}]\n{json.dumps(data, ensure_ascii=False)}")
+                if name == "get_item_detail" and isinstance(data, dict) and data.get("found"):
+                    diag = data.get("diagnosis") or {}
+                    if diag.get("itemName"):
+                        routed_item_terms.append(diag["itemName"])
+                    if diag.get("criteriaDetail"):
+                        routed_item_terms.append(diag["criteriaDetail"][:300])
             else:
                 # 회사코드 미상·필수 인자 누락 등으로 실행 못 했으면, 그 소주제라도
                 # 문서검색으로 커버되도록 원 질문을 검색어로 추가한다.
@@ -681,23 +743,41 @@ def _answer(
     if doc_queries:
         target_companies = _resolve_doc_search_companies(question, company, company_code)
         multi_company_search = len(target_companies) > 1
-        all_queries = list(dict.fromkeys(doc_queries + _build_search_queries(question, item_context)))
-        indexes = _load_index()
+        all_queries = list(
+            dict.fromkeys(doc_queries + _build_search_queries(question, item_context, routed_item_terms))
+        )
         with _lock:  # httpx 클라이언트를 스레드 간 안전하게
             q_vecs = [embed_query(q) for q in all_queries]
         # 회사를 여러 개 합쳐서 볼 때는 한쪽에 결과가 쏠리지 않도록 회사별로 상한을 나눠 갖는다
         # (자사 하나만 볼 때는 기존과 동일하게 top_k 전체를 쓴다).
         per_company_k = top_k if len(target_companies) == 1 else max(2, top_k // len(target_companies))
         any_index_found = False
-        for target in target_companies:
-            idx = indexes.get(target)
-            if idx is None or not idx.rows:
-                continue
-            any_index_found = True
-            for row in idx.search_many(q_vecs, top_k=per_company_k):
-                row = dict(row)
+
+        # 하나마이크론 + 벤치마킹 3사는 Zilliz Cloud로 이관됐다(milvus_client.MIGRATED_COMPANY_CODES)
+        # — 그 회사들만 Milvus를 타고, 아직 안 옮긴 나머지 회사는 기존 로컬 sqlite 인덱스를 그대로 쓴다.
+        milvus_targets = [t for t in target_companies if COMPANY_TO_CODE.get(t) in milvus_client.MIGRATED_COMPANY_CODES]
+        local_targets = [t for t in target_companies if t not in milvus_targets]
+
+        for target in milvus_targets:
+            code = COMPANY_TO_CODE[target]
+            rows = milvus_client.search_many(q_vecs, [code], top_k=per_company_k)
+            if rows:
+                any_index_found = True
+            for row in rows:
                 row["company"] = target
                 hits.append(row)
+
+        if local_targets:
+            indexes = _load_index()
+            for target in local_targets:
+                idx = indexes.get(target)
+                if idx is None or not idx.rows:
+                    continue
+                any_index_found = True
+                for row in idx.search_many(q_vecs, top_k=per_company_k):
+                    row = dict(row)
+                    row["company"] = target
+                    hits.append(row)
         idx_missing = not any_index_found
 
     if not structured_blocks and not hits:

@@ -6,3 +6,4 @@ pydantic
 httpx
 numpy
 cachetools
+pymilvus

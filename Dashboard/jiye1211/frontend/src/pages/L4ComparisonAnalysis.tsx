@@ -152,8 +152,8 @@ function SelfVsBenchmarkGroupExhibit({ company }: { company: string }) {
       number={12}
       eyebrow="자사 vs 벤치마킹군"
       title={hasData ? "벤치마킹군과 도메인별 채점값을 나란히 비교" : "벤치마킹 데이터 없음"}
-      subtitle="정보공시·환경·지배구조만 비교합니다 — company_esg_yearly에는 업종특화/반도체특화 도메인의 별도 채점 컬럼이 없어 항목 단위 비교와 함께 제외했습니다."
-      source="company_esg_yearly · 벤치마킹사 개별 채점값(팀 채점표 기준) · 벤치마킹사는 익명 처리됨"
+      subtitle="정보공시·환경·지배구조만 비교합니다 — 팀 채점표에는 업종특화/반도체특화 도메인의 별도 채점값이 없어 항목 단위 비교와 함께 제외했습니다."
+      source="벤치마킹사 개별 채점값(팀 채점표 기준) · 벤치마킹사는 익명 처리됨"
     >
       {loading && <StateMessage>불러오는 중…</StateMessage>}
       {error && <StateMessage error>{error}</StateMessage>}
@@ -229,7 +229,7 @@ function SelfVsBenchmarkGroupExhibit({ company }: { company: string }) {
             </tbody>
           </table>
           <p style={{ fontSize: 11, color: "var(--ink-3)", marginTop: 8 }}>
-            반도체특화 벤치마킹은 보고서 원문 자체의 익명 라벨(A/B/C)이며, 위 표의 A사/B사/C사(company_esg_yearly 기준
+            반도체특화 벤치마킹은 보고서 원문 자체의 익명 라벨(A/B/C)이며, 위 표의 A사/B사/C사(팀 채점표 기준
             익명 라벨)와 같은 글자를 쓰더라도 실제로 같은 대상인지 확인되지 않았으므로 별도로 표시함
           </p>
         </>
@@ -304,7 +304,7 @@ export function L4ComparisonAnalysis() {
         eyebrow="그룹비교"
         title="지속가능경영보고서 의존 여부에 따라 개선 속도가 갈린다"
         subtitle="보고서 의존 항목: 지속가능경영보고서 기재 수준에 좌우되는 항목 · 보고서 무관 항목: 그 외 항목"
-        source="report_extracted_data.json · groupedScoreTrend"
+        source="컨설팅보고서 3개년 분석"
       >
         <div className="grid-2">
           <div>
@@ -341,7 +341,7 @@ export function L4ComparisonAnalysis() {
             ? "격차가 큰 항목일수록 KCGS 등급과의 상관관계도 뚜렷하다"
             : "이 회사는 KCGS 등급 상관도 분석 데이터가 없음"
         }
-        source="report_extracted_data.json · kcgsCorrelation (Spearman ρ)"
+        source="컨설팅보고서 KCGS 등급 상관분석(Spearman ρ)"
       >
         {data.kcgsCorrelation ? (
           <div className="table-scroll">
@@ -389,7 +389,7 @@ export function L4ComparisonAnalysis() {
         eyebrow="선례 카드"
         title="벤치마킹 기업의 실제 도약 사례"
         subtitle="같은 항목에서 벤치마킹 기업이 점수를 끌어올린 방법과 소요 기간"
-        source="report_extracted_data.json · precedentCases"
+        source="컨설팅보고서 벤치마킹 기업 사례 분석"
       >
         {data.precedentCases.length ? (
           data.precedentCases.map((c, i) => <PrecedentCardView key={i} c={c} onGoItem={goItem} />)

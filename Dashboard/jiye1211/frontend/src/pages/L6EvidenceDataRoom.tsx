@@ -28,7 +28,7 @@ export function L6EvidenceDataRoom() {
         eyebrow="참고자료 현황"
         title="참고자료 유형별 연결 항목 수"
         subtitle="텍스트 마이닝 기반 근사치 — 한 항목이 여러 문서를 동시에 언급하면 각 문서에 중복 집계됩니다."
-        source="esg_diagnosis.note_scoring_model_25(근거페이지)/note_manual_ai_scoring_26(확인근거) · 키워드 매칭"
+        source="2026년 손채점·AI보조채점 메모 키워드 매칭"
       >
         {documentCounts.map((d) => (
           <div className={`hbar-row ${d.label === "미분류" ? "hbar-row--muted" : ""}`} key={d.label}>
@@ -51,7 +51,7 @@ export function L6EvidenceDataRoom() {
         number={2}
         eyebrow="데이터 갭 리스트"
         title={gaps.data.length ? "근거충분성이 불충분·부분인 항목" : "근거충분성 갭 항목 없음"}
-        source="esg_diagnosis.note_scoring_model_25 · 근거충분성 파싱"
+        source="2026년 손채점 메모 기준 근거충분성 판정"
       >
         {gaps.data.length ? (
           <div className="table-scroll">

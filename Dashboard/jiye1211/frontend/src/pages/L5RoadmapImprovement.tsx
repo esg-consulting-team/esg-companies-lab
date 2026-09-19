@@ -73,7 +73,7 @@ export function L5RoadmapImprovement() {
           {disclosureDeadline["공급망 요구"] && (
             <div className="roadmap-dday__note">공급망 요구 참고: {disclosureDeadline["공급망 요구"]}</div>
           )}
-          <div className="roadmap-dday__note">출처: esg_disclosure_deadline · 컨설팅 보고서 §08 최종 로드맵</div>
+          <div className="roadmap-dday__note">출처: 컨설팅보고서 §08 최종 로드맵 · 공시 의무화 일정</div>
         </section>
       )}
 
@@ -81,7 +81,7 @@ export function L5RoadmapImprovement() {
         number={1}
         eyebrow="4개년 실행 로드맵"
         title="연도별 단계 · 과제 · 관련 항목"
-        source="esg_roadmap_stages/esg_roadmap_tasks · 컨설팅 보고서 §08 최종 로드맵"
+        source="컨설팅보고서 §08 최종 로드맵"
       >
         <div className="roadmap-stages">
           {stages.map((stage) => (
@@ -115,7 +115,7 @@ export function L5RoadmapImprovement() {
           number={2}
           eyebrow="시급성 판단 기준"
           title="즉시 · 중기 · 장기 분류 기준"
-          source="esg_urgency_criteria · 컨설팅 보고서 §08 최종 로드맵"
+          source="컨설팅보고서 §08 최종 로드맵 · 시급성 분류 기준"
         >
           <div className="roadmap-criteria-grid">
             {urgencyCriteria.map((c) => (

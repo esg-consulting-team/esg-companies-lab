@@ -130,7 +130,7 @@ export function L7Report() {
       </section>
 
       {enabled.cover && (
-        <ExhibitCard number={1} eyebrow="표지" title={`${company} ESG 진단 리포트`} source="esg_company_profile">
+        <ExhibitCard number={1} eyebrow="표지" title={`${company} ESG 진단 리포트`} source="기업 개황 프로필">
           <div className="l7-cover">
             <div className="l7-cover__headline">
               {company} {companyMeta.sector && <span className="l7-cover__sector">· {companyMeta.sector}</span>}
@@ -178,7 +178,7 @@ export function L7Report() {
           number={2}
           eyebrow="종합진단 요약"
           title="가채점 총점 · KCGS 등급 · 영역별 달성률"
-          source="esg_diagnosis · company_esg_yearly"
+          source="K-ESG v2.0 가이드라인 · 2026년 손채점 결과 · KCGS 공식등급"
         >
           <div className="kpi-row">
             <div className="kpi-cell">
@@ -266,7 +266,7 @@ export function L7Report() {
           eyebrow="영역별 진단"
           title="영역별 근거충분성 요약"
           subtitle="항목 전체 목록이 아닌 영역별 집계만 표시합니다 — 상세는 L2를 참고하세요."
-          source="esg_diagnosis · normalize_item().applicable 기준"
+          source="2026년 손채점 결과 · 해당 항목 기준 집계"
         >
           <div className="table-scroll">
             <table className="data-table">
@@ -305,7 +305,7 @@ export function L7Report() {
           number={4}
           eyebrow="벤치마킹 비교"
           title="자사 vs 벤치마킹군 도메인별 채점값"
-          source="company_esg_yearly · backend/app/benchmark_config.py"
+          source="벤치마킹사 개별 채점값(팀 채점표 기준)"
         >
           {benchmark.self ? (
             <div className="table-scroll">
@@ -353,7 +353,7 @@ export function L7Report() {
           eyebrow="개선 로드맵"
           title="4개년 실행 로드맵 요약"
           subtitle="과제 전체 목록이 아닌 단계별 요약만 표시합니다 — 상세는 L5를 참고하세요."
-          source="esg_roadmap_stages/esg_roadmap_tasks"
+          source="컨설팅보고서 §08 최종 로드맵"
         >
           <div className="table-scroll">
             <table className="data-table">
@@ -389,7 +389,7 @@ export function L7Report() {
           number={6}
           eyebrow="평가방법론 및 한계"
           title="참고데이터 · 채점범위 · 사회(S) 제외 근거 · 진단의 한계"
-          source="report_extracted_data.json · 컨설팅 보고서"
+          source="컨설팅보고서 3개년 분석"
         >
           {reportComparison ? (
             <>
@@ -466,7 +466,7 @@ export function L7Report() {
           number={7}
           eyebrow="부록"
           title="참고자료 현황"
-          source="esg_diagnosis.note_scoring_model_25/note_manual_ai_scoring_26 · 키워드 매칭"
+          source="2026년 손채점·AI보조채점 메모 키워드 매칭"
         >
           {docs.documentCounts.map((d) => (
             <div className={`hbar-row ${d.label === "미분류" ? "hbar-row--muted" : ""}`} key={d.label}>
