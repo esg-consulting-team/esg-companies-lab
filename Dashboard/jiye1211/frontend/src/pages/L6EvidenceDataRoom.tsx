@@ -103,7 +103,6 @@ export function L6EvidenceDataRoom() {
                   <th>문서 유형</th>
                   <th style={{ textAlign: "right" }}>연도</th>
                   <th style={{ textAlign: "right" }}>총 페이지</th>
-                  <th style={{ textAlign: "right" }}>추출 실패 페이지</th>
                   <th>파싱 완료 여부</th>
                   <th style={{ textAlign: "right" }}>연결 항목</th>
                 </tr>
@@ -114,9 +113,6 @@ export function L6EvidenceDataRoom() {
                     <td>{d.docType}</td>
                     <td className="num">{d.year}</td>
                     <td className="num">{d.totalPages !== null ? `${formatNum(d.totalPages)}쪽` : "—"}</td>
-                    <td className="num" style={d.failedPages ? { color: "var(--crit)" } : undefined}>
-                      {d.failedPages !== null ? `${formatNum(d.failedPages)}쪽` : "—"}
-                    </td>
                     <td style={{ color: d.parsed ? "var(--good)" : "var(--warn)", fontWeight: 700 }}>
                       {d.parsed ? "완료" : "미완료"}
                     </td>
