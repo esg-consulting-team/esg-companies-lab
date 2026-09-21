@@ -265,16 +265,28 @@ def get_roadmap_urgency_distribution(year: int, company_code: str) -> dict[str, 
         urgency_by_code = {r[diag_cfg["item_code_col"]]: r.get(diag_cfg["urgency_col"]) for r in diag_rows}
 
     distribution = {"즉시": 0, "중기": 0, "장기": 0}
+    task_names_by_urgency: dict[str, list[str]] = {"즉시": [], "중기": [], "장기": []}
     task_names = []
     for row in task_rows:
-        task_names.append(row.get(tasks_cfg["task_name_col"]))
+        task_name = row.get(tasks_cfg["task_name_col"])
+        task_names.append(task_name)
         raw_codes = row.get(tasks_cfg["related_item_codes_col"]) or []
+        # 한 과제(task)에 항목코드가 여러 개(예: "이사회·감사기구 운영 수준 유지") 붙어 있으면
+        # 그중 시급성이 다른 코드가 섞여 있을 수 있으므로, 이 과제가 실제로 걸쳐 있는 시급성
+        # 등급을 전부 모아 두었다가 각 등급의 리스트에 한 번씩만 넣는다(set으로 중복 방지).
+        task_urgencies: set[str] = set()
         for chip in classify_related_codes(raw_codes):
             if chip["type"] != "item":
+                # "P 영역 전체"(domain) 같은 칩은 특정 진단 항목에 매인 게 아니라 시급성이
+                # 없다 — L5 화면에서도 "미분류"로 표시되는 부분이라 여기서 시급성으로
+                # 잘못 집계하면 안 된다(과거에 이 과제를 즉시로 잘못 답하는 사고가 있었다).
                 continue
             urgency = urgency_by_code.get(chip["code"])
             if urgency in distribution:
                 distribution[urgency] += 1
+                task_urgencies.add(urgency)
+        for urgency in task_urgencies:
+            task_names_by_urgency[urgency].append(task_name)
 
     return {
         "found": True,
@@ -285,6 +297,10 @@ def get_roadmap_urgency_distribution(year: int, company_code: str) -> dict[str, 
         "taskCount": len(task_rows),
         "taskNames": task_names,
         "urgencyDistribution": distribution,
+        # 답변 생성 단계가 "이 시급성 등급의 과제 이름이 뭐야?"류 질문에 taskNames(전체
+        # 목록)를 보고 추측하지 않도록, 등급별로 실제 매칭된 과제 이름만 미리 나눠 준다.
+        # (관련 항목이 domain/비채점과제뿐인 과제는 어느 등급에도 들어가지 않는다 — 그게 맞다.)
+        "taskNamesByUrgency": task_names_by_urgency,
     }
 
 
